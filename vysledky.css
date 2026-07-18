@@ -34,6 +34,7 @@
 .search-box { margin-bottom: 10px; }
 
 /* --- Tlačítka --- */
+#toggleCols { margin-bottom: 12px; }
 #export-buttons button,
 #toggleCols {
   margin: 5px;
@@ -84,19 +85,8 @@ th {
   vertical-align: middle;
   /* sticky hlavička (pod horní lištou) */
   position: sticky;
-  top: var(--vyska-listky, 0);
+  top: calc(var(--vyska-listky, 0px) - 2px);
   z-index: 2;
-}
-/* krycí pás nad záhlavím – zakrývá škvírku, ve které při rolování
-   problikává text řádků zajíždějících pod záhlaví */
-#resultsTable thead th::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100%;
-  height: 24px;
-  background: var(--papir, #F7F6F1);
 }
 td:nth-child(1), td:nth-child(5), td:nth-child(6), td:nth-child(7) { text-align: center; }
 td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
@@ -134,20 +124,31 @@ tbody tr:hover { background-color: var(--barva-radek-hover); }
   #resultsTable { min-width: auto; }
 
   /* Režim "Zobrazit všechny sloupce" */
+  /* Režim všech sloupců: tabulka se zhustí tak, aby se celá vešla
+     na displej – nic nepřetéká, stránka roluje jen svisle a přilepené
+     záhlaví funguje stejně spolehlivě jako ve skrytém režimu. */
   body.show-all-cols #resultsTable th,
   body.show-all-cols #resultsTable td { display: table-cell !important; }
-  body.show-all-cols #resultsTable { min-width: 680px; }
-  body.show-all-cols #resultsWrapper {
-    max-height: 75vh;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
+  body.show-all-cols #resultsWrapper { overflow: visible; }
+  body.show-all-cols #resultsTable {
+    width: 100%;
+    min-width: 0;
+    font-size: 11.5px;
   }
-  body.show-all-cols #resultsTable { border-collapse: separate; border-spacing: 0; }
-  body.show-all-cols #resultsTable thead th {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    background: var(--barva-hlavicka-tabulky);
+  body.show-all-cols #resultsTable th {
+    font-size: 10.5px;
+    letter-spacing: 0;
+    padding: 6px 3px;
   }
+  body.show-all-cols #resultsTable td {
+    padding: 5px 3px;
+    white-space: normal;      /* dlouhé názvy týmů se zalomí */
+    overflow-wrap: anywhere;
+  }
+  /* krátké hodnoty držet na jednom řádku */
+  body.show-all-cols #resultsTable td:nth-child(1),
+  body.show-all-cols #resultsTable td:nth-child(4),
+  body.show-all-cols #resultsTable td:nth-child(6),
+  body.show-all-cols #resultsTable td:nth-child(7) { white-space: nowrap; }
 }
 

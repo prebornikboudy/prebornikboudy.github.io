@@ -391,19 +391,8 @@ button.tl:disabled { opacity: .6; cursor: default; transform: none; box-shadow: 
   font-weight: 600;
   padding: 10px 12px;
   position: sticky;
-  top: var(--vyska-listky);  /* pod lištou */
+  top: calc(var(--vyska-listky) - 2px);  /* 2 px pod lištu, ať nevzniká škvírka */
   z-index: 5;
-}
-/* krycí pás v barvě pozadí nad záhlavím – zakrývá škvírku mezi lištou
-   a záhlavím, ve které jinak při rolování problikává text řádků */
-.zebricek thead th::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 100%;
-  height: 24px;
-  background: var(--papir);
 }
 .zebricek td {
   padding: 8px 12px;
@@ -560,7 +549,7 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
     bottom: auto;
     height: 14px;
   }
-  .zebricek thead th { top: var(--vyska-listky); font-size: .9rem; padding: 8px 8px; }
+  .zebricek thead th { top: calc(var(--vyska-listky) - 2px); font-size: .9rem; padding: 8px 8px; }
   .zebricek td { padding: 7px 8px; }
 }
 

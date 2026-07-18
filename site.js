@@ -17,19 +17,11 @@
       document.body.appendChild(btt);
 
       const SHOW_AFTER = 200;
-      const wrap = document.getElementById('resultsWrapper');
-      const mq = window.matchMedia('(max-width: 768px)');
-      const scroller = () =>
-        (mq.matches && document.body.classList.contains('show-all-cols') && wrap) ? wrap : window;
       const onScroll = () => {
-        const src = scroller();
-        const poz = (src === window) ? (window.scrollY || 0) : src.scrollTop;
-        btt.classList.toggle('show', poz > SHOW_AFTER);
+        btt.classList.toggle('show', (window.scrollY || 0) > SHOW_AFTER);
       };
       window.addEventListener('scroll', onScroll, { passive: true });
-      if (wrap) wrap.addEventListener('scroll', onScroll, { passive: true });
-      if (mq.addEventListener) mq.addEventListener('change', onScroll); else mq.addListener(onScroll);
-      btt.addEventListener('click', () => scroller().scrollTo({ top: 0, behavior: 'smooth' }));
+      btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       onScroll();
       window.__bttRefresh = onScroll;
     }
