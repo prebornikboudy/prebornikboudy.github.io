@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+
+  <title>Výsledky závodu – Přeborník Boudy</title>
+  <meta name="description"
+        content="Výsledky závodu Přeborník Boudy. Filtrování podle jména, kategorie, tratě a roku.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://prebornik.github.io/boudy/vysledky.html">
+
+  <meta property="og:title" content="Výsledky závodu – Přeborník Boudy">
+  <meta property="og:description"
+        content="Výsledky závodu Přeborník Boudy. Filtrování podle jména, kategorie, tratě a roku.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://prebornik.github.io/boudy/vysledky.html">
+  <meta property="og:image" content="https://prebornik.github.io/boudy/assets/og-image.jpg">
+
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Saira:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=1">
+  <link rel="stylesheet" href="vysledky.css?v=5">
+  <script src="site.js?v=1" defer></script>
+
+</head>
+
+<body>
+
+  <header class="listka">
+    <div class="listka-vnitrek">
+      <a class="listka-logo" href="index.html" aria-label="Úvodní stránka"><img src="logo.png" alt="O Přeborníka Boudy" height="52"></a>
+      <button class="nav-prepinac" type="button" aria-label="Menu" aria-expanded="false">☰</button>
+      <nav class="hlavni-nav" aria-label="Hlavní navigace">
+      <a href="index.html">Úvod</a>
+      <a href="ozavodu.html">O závodu</a>
+      <a href="https://www.sportchallenge.cz/cz/prebornikboudy/2023/registrace" class="ven" target="_blank" rel="noopener">Registrace</a>
+      <a href="https://www.sportchallenge.cz/cz/prebornikboudy/2023/startovka" class="ven" target="_blank" rel="noopener">Startovka</a>
+      <a href="propozice.html">Propozice</a>
+      <a href="rekordy.html">Rekordy</a>
+      <a href="vysledky.html" class="aktivni">Výsledky</a>
+      <a href="https://www.zonerama.com/OPrebornikaBoudy/624630" class="ven" target="_blank" rel="noopener">Fotky</a>
+      <a href="sponzori.html">Sponzoři</a>
+      <a href="kontakt.html">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+<main class="obal stred">
+<h1>Výsledky závodu</h1>
+
+<div id="filters">
+  <div class="filter-group">
+    <label for="category">Kategorie:</label>
+    <select id="category">
+      <option selected="selected" value="">Vše</option>
+      <option value="muži">muži</option>
+      <option value="muži 40+">muži 40+</option>
+      <option value="muži 50+">muži 50+</option>
+      <option value="muži 60+">muži 60+</option>
+      <option value="ženy">ženy</option>
+      <option value="ženy 40+">ženy 40+</option>
+      <option value="ženy 50+">ženy 50+</option>
+      <option value="žáci">žáci</option>
+      <option value="žákyně">žákyně</option>
+      <option value="dorostenci">dorostenci</option>
+      <option value="dorostenky">dorostenky</option>
+      <option value="juniorky">juniorky</option>
+      <option value="batolata-holky">batolata-holky</option>
+      <option value="batolata-kluci">batolata-kluci</option>
+      <option value="prťata-holky">prťata-holky</option>
+      <option value="prťata-kluci">prťata-kluci</option>
+      <option value="mlaďáci-holky">mlaďáci-holky</option>
+      <option value="mlaďáci-kluci">mlaďáci-kluci</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label for="track">Trať:</label>
+    <select id="track" name="trat">
+      <option selected="selected" value="">Vše</option>
+      <option value="3,9 km">3,9 km</option>
+      <option value="1,4 km">1,4 km</option>
+      <option value="700 m">700 m</option>
+      <option value="500 m">500 m</option>
+      <option value="300 m">300 m</option>
+      <option value="250 m">250 m</option>
+      <option value="200 m">200 m</option>
+      <option value="150 m">150 m</option>
+      <option value="100 m">100 m</option>
+      <option value="60 m">60 m</option>
+    </select>
+  </div>
+
+  <div class="filter-group filter-year">
+    <label for="year">Rok:</label>
+    <select id="year">
+      <option value="">Vše</option>
+      <option value="2025">2025</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+      <option value="2021">2021</option>
+      <option value="2019">2019</option>
+      <option value="2018">2018</option>
+      <option value="2017">2017</option>
+      <option value="2016">2016</option>
+      <option value="2015">2015</option>
+      <option value="2014">2014</option>
+      <option value="2013">2013</option>
+      <option value="2012">2012</option>
+      <option value="2011">2011</option>
+    </select>
+  </div>
+</div>
+
+<div class="search-box">
+<label for="searchName">Vyhledat jméno:</label>
+<input id="searchName" placeholder="Zadej jméno..." type="text"/>
+</div>
+
+<div id="export-buttons">
+  
+  <button id="exportBtn" type="button" class="export-btn" data-export-type="xlsx">
+    Export do Excelu
+  </button>
+  
+  <button id="exportPdfBtn" type="button" class="export-btn" data-export-type="pdf">
+    Export do PDF
+  </button>
+  
+</div>
+
+<button class="only-mobile" id="toggleCols" type="button">Zobrazit všechny sloupce</button>
+
+<div style="height:6px"></div>
+
+<div id="resultsWrapper">
+<table id="resultsTable">
+
+<thead>
+<tr>
+  <th>Pořadí</th>
+  <th>Jméno</th>
+  <th>Tým</th>
+  <th>Trať</th>
+  <th>Kategorie</th>
+  <th>Čas</th>
+  <th>Rok</th>
+</tr>
+</thead>
+<tbody>
+<tr><td></td><td>Dominika Cerna</td><td>Rychlostni Kanoistika Rk Jablonec</td><td>60 m</td><td>batolata-holky</td><td>0:11.5</td><td>2021</td></tr>
+<tr><td></td><td>Antonín Štekr</td><td>SWSL</td><td>60 m</td><td>batolata-kluci</td><td>0:12</td><td>2022</td></tr>
+<tr><td></td><td>Nina Podroužková</td><td>Zaběhu</td><td>60 m</td><td>batolata-holky</td><td>0:13</td><td>2022</td></tr>
+<tr><td></td><td>Šarlota Prášilová</td><td>JBCN</td><td>60 m</td><td>batolata-holky</td><td>0:15</td><td>2022</td></tr>
+<tr><td></td><td>Šimon Drhlík</td><td>Horobraní</td><td>60 m</td><td>batolata-kluci</td><td>0:17</td><td>2022</td></tr>
+<tr><td></td><td>Natálie Beníšková</td><td></td><td>60 m</td><td>batolata-holky</td><td>0:17.8</td><td>2021</td></tr>
+<tr><td></td><td>Kašše Tadeáš</td><td>SWSL</td><td>60 m</td><td>batolata-kluci</td><td>0:19</td><td>2022</td></tr>
+<tr><td></td><td>Lukáš Balatka</td><td>Rádlo</td><td>60 m</td><td>batolata-kluci</td><td>0:20</td><td>2022</td></tr>
+<tr><td></td><td>Šimon Drhlík</td><td></td><td>60 m</td><td>batolata-kluci</td><td>0:20.4</td><td>2021</td></tr>
+<tr><td></td><td>Johana Poláková</td><td>Náš</td><td>60 m</td><td>batolata-holky</td><td>0:21</td><td>2022</td></tr>
+<tr><td></td><td>Ina Málková</td><td>Jedemšrot!</td><td>60 m</td><td>batolata-holky</td><td>0:22</td><td>2022</td></tr>
+<tr><td></td><td>Michal Novotný</td><td>Pomalí Kluci Jr</td><td>60 m</td><td>batolata-kluci</td><td>0:23</td><td>2022</td></tr>
+<tr><td></td><td>Zuzana Pavlištová</td><td></td><td>60 m</td><td>batolata-holky</td><td>0:25</td><td>2022</td></tr>
+<tr><td></td><td>Adéla Beníšková</td><td></td><td>60 m</td><td>batolata-holky</td><td>0:25.3</td><td>2021</td></tr>
+<tr><td></td><td>Kira Lenkvíková</td><td>My Dva A Pes Z Pětipes</td><td>60 m</td><td>batolata-holky</td><td>0:26</td><td>2022</td></tr>
+<tr><td></td><td>Matěj Schulhof</td><td>Oob Tj Turnov</td><td>60 m</td><td>batolata-kluci</td><td>0:27</td><td>2022</td></tr>
+<tr><td></td><td>Alžbětka Štekrová</td><td>SWSL</td><td>60 m</td><td>batolata-holky</td><td>0:28</td><td>2022</td></tr>
+<tr><td></td><td>Čapek Jáchym</td><td></td><td>60 m</td><td>batolata-kluci</td><td>0:31</td><td>2022</td></tr>
+<tr><td></td><td>Adam Zarybnicky</td><td>Ski Janov Bedřichov</td><td>60 m</td><td>batolata-kluci</td><td>0:35.2</td><td>2021</td></tr>
+<tr><td></td><td>Tomáš Bogar</td><td></td><td>60 m</td><td>batolata-kluci</td><td>0:36</td><td>2022</td></tr>
+<tr><td></td><td>Adina Černá</td><td></td><td>60 m</td><td>batolata-holky</td><td>0:38.8</td><td>2021</td></tr>
+<tr><td></td><td>Matyáš Pazderský</td><td></td><td>60 m</td><td>batolata-kluci</td><td>0:40.1</td><td>2021</td></tr>
+<tr><td></td><td>Vojtěch Sedláček</td><td>Sk Svérak</td><td>60 m</td><td>batolata-kluci</td><td>0:41.5</td><td>2021</td></tr>
+<tr><td></td><td>Matěj Schulhof</td><td>Oob Tj Turnov</td><td>60 m</td><td>batolata-kluci</td><td>0:43.6</td><td>2021</td></tr>
+<tr><td></td><td>Matyáš Petržela</td><td>Citlivá Otázka</td><td>60 m</td><td>batolata-kluci</td><td>1:35</td><td>2022</td></tr>
+<tr><td></td><td>Emílie Staňková</td><td>Tj Sokol Ruprechtice</td><td>60 m</td><td>batolata-holky</td><td>1:38</td><td>2022</td></tr>
+<tr><td></td><td>Ina Málková</td><td>Liberec</td><td>100 m</td><td>batolata-holky</td><td>0:17</td><td>2023</td></tr>
+<tr><td></td><td>Sofie Povýšilová</td><td>Ac Slovan Liberec</td><td>100 m</td><td>batolata-holky</td><td>0:19</td><td>2023</td></tr>
+<tr><td></td><td>Tomáš Bogar</td><td>Liberec</td><td>100 m</td><td>batolata-kluci</td><td>0:19</td><td>2023</td></tr>
+<tr><td></td><td>Barnabáš Matzner</td><td>M Tým</td><td>100 m</td><td>batolata-kluci</td><td>0:22</td><td>2023</td></tr>
+<tr><td></td><td>Jakub Novotný</td><td>Pomalí Kluci</td><td>100 m</td><td>batolata-kluci</td><td>0:33</td><td>2023</td></tr>
+<tr><td></td><td>Ela Petrželová</td><td>Kitl s.r.o.</td><td>100 m</td><td>batolata-holky</td><td>0:34</td><td>2023</td></tr>
+<tr><td></td><td>Matyáš Petržela</td><td>Severka Šumperk</td><td>100 m</td><td>batolata-kluci</td><td>0:36</td><td>2023</td></tr>
+<tr><td></td><td>Štěpánka Kočí</td><td>Bez</td><td>100 m</td><td>batolata-holky</td><td>0:43</td><td>2023</td></tr>
+<tr><td></td><td>Beatrice Lajtkep</td><td></td><td>100 m</td><td>batolata-holky</td><td>0:48</td><td>2019</td></tr>
+<tr><td></td><td>Tomáš Honzík</td><td>Sk Běžím S Dádou</td><td>100 m</td><td>batolata-kluci</td><td>0:51</td><td>2019</td></tr>
+<tr><td></td><td>Zoubek Tadeáš</td><td>Tesařství Tz</td><td>100 m</td><td>batolata-kluci</td><td>0:52</td><td>2019</td></tr>
+<tr><td></td><td>Amálie Štekrová</td><td></td><td>100 m</td><td>batolata-holky</td><td>0:53</td><td>2019</td></tr>
+<tr><td></td><td>František Polák</td><td>Prostě Dobrej Oddíl</td><td>100 m</td><td>batolata-kluci</td><td>0:55</td><td>2019</td></tr>
+<tr><td></td><td>Beatka Rozsypalová</td><td>Liberec</td><td>100 m</td><td>batolata-holky</td><td>1:00</td><td>2019</td></tr>
+<tr><td></td><td>Lukáš Balatka</td><td>Rádlo</td><td>100 m</td><td>batolata-kluci</td><td>1:00</td><td>2023</td></tr>
+<tr><td></td><td>Sára Drhlíková</td><td>Ac Slovan Liberec</td><td>100 m</td><td>batolata-holky</td><td>1:02</td><td>2019</td></tr>
+<tr><td></td><td>Zora Řeřichová</td><td></td><td>100 m</td><td>batolata-holky</td><td>1:03</td><td>2019</td></tr>
+<tr><td></td><td>František Polák</td><td>Dobrej</td><td>100 m</td><td>batolata-kluci</td><td>1:07</td><td>2018</td></tr>
+<tr><td></td><td>Matyáš Šonský</td><td>Fk Neratovice</td><td>100 m</td><td>batolata-kluci</td><td>1:09</td><td>2023</td></tr>
+<tr><td></td><td>Nella Jurisová</td><td>Bitters Superior Cyklofit Team</td><td>100 m</td><td>batolata-holky</td><td>1:11</td><td>2018</td></tr>
+<tr><td></td><td>Jáchym Škoda</td><td>Za Orgáč</td><td>100 m</td><td>batolata-kluci</td><td>1:13</td><td>2023</td></tr>
+<tr><td></td><td>Emílie Staňková</td><td>Tj Sokol Liberec</td><td>100 m</td><td>batolata-holky</td><td>1:23</td><td>2023</td></tr>
+<tr><td></td><td>Kateřina Bobková</td><td>Liberec</td><td>100 m</td><td>batolata-holky</td><td>1:28</td><td>2018</td></tr>
+<tr><td></td><td>Kryštof Schulhof</td><td>Tj Daliměřice</td><td>100 m</td><td>batolata-kluci</td><td>1:28</td><td>2023</td></tr>
+<tr><td></td><td>Matěj Schulhof</td><td>Tj Daliměřice</td><td>100 m</td><td>batolata-kluci</td><td>1:34</td><td>2023</td></tr>
+<tr><td></td><td>Břetislav Kuc</td><td>Ac Slovan Liberec</td><td>100 m</td><td>batolata-kluci</td><td>1:44</td><td>2023</td></tr>
+<tr><td></td><td>Jan Urbánek</td><td>Pomalí Kluci</td><td>100 m</td><td>batolata-kluci</td><td>1:48</td><td>2019</td></tr>
+<tr><td></td><td>Stefi Pretorius</td><td></td><td>100 m</td><td>batolata-kluci</td><td>1:48</td><td>2019</td></tr>
+<tr><td></td><td>Jan Uhlíř</td><td>Sk Maxtri Liberec</td><td>100 m</td><td>batolata-kluci</td><td>1:56</td><td>2019</td></tr>
+<tr><td></td><td>Jonťák Málků</td><td>Eleven Team Příchovice</td><td>100 m</td><td>batolata-kluci</td><td>2:06</td><td>2018</td></tr>
+<tr><td></td><td>Sára Drhlíková</td><td>Ještědská Střela</td><td>100 m</td><td>batolata-holky</td><td>3:04</td><td>2018</td></tr>
+<tr><td></td><td>Ondřej Mládek</td><td>Biatlon Liberec</td><td>150 m</td><td>prťata-kluci</td><td>0:36</td><td>2022</td></tr>
+<tr><td></td><td>Veronika Pušová</td><td>Swsl Lučany Nad Nisou</td><td>150 m</td><td>prťata-holky</td><td>0:37</td><td>2022</td></tr>
+<tr><td></td><td>Anežka Štekrová</td><td>SWSL</td><td>150 m</td><td>prťata-holky</td><td>0:39</td><td>2022</td></tr>
+<tr><td></td><td>Zoubek Tadeáš</td><td></td><td>150 m</td><td>prťata-kluci</td><td>0:41</td><td>2022</td></tr>
+<tr><td></td><td>Žabka Vrátík</td><td></td><td>150 m</td><td>prťata-kluci</td><td>0:43</td><td>2022</td></tr>
+<tr><td></td><td>Jiří Žabka</td><td></td><td>150 m</td><td>prťata-kluci</td><td>0:44</td><td>2022</td></tr>
+<tr><td></td><td>Amálka Štekrová</td><td>SWSL</td><td>150 m</td><td>prťata-holky</td><td>0:45</td><td>2022</td></tr>
+<tr><td></td><td>Beatka Rozsypalová</td><td>Sk Ještěd</td><td>150 m</td><td>prťata-holky</td><td>0:46</td><td>2022</td></tr>
+<tr><td></td><td>Jessica Balatková</td><td>Rádlo</td><td>150 m</td><td>prťata-holky</td><td>0:46</td><td>2022</td></tr>
+<tr><td></td><td>František Polák</td><td>Náš</td><td>150 m</td><td>prťata-kluci</td><td>0:47</td><td>2022</td></tr>
+<tr><td></td><td>Johana Drozdová</td><td>Lokomoriva Liberec Čekatel</td><td>150 m</td><td>prťata-holky</td><td>0:48</td><td>2022</td></tr>
+<tr><td></td><td>Kašše Ella</td><td>SWSL</td><td>150 m</td><td>prťata-holky</td><td>0:48</td><td>2022</td></tr>
+<tr><td></td><td>Annežka Mládková</td><td>Biatlon Liberec</td><td>150 m</td><td>prťata-holky</td><td>0:49</td><td>2022</td></tr>
+<tr><td></td><td>Honzík Urbánek</td><td>Ac Slovan Liberec</td><td>150 m</td><td>prťata-kluci</td><td>0:50</td><td>2022</td></tr>
+<tr><td></td><td>Jonatan Málek</td><td>Jedemšrot!</td><td>150 m</td><td>prťata-kluci</td><td>0:51</td><td>2022</td></tr>
+<tr><td></td><td>Kryštof Čapek</td><td></td><td>150 m</td><td>prťata-kluci</td><td>0:52</td><td>2022</td></tr>
+<tr><td></td><td>Sára Drhlíková</td><td>Horobraní</td><td>150 m</td><td>prťata-holky</td><td>0:53</td><td>2022</td></tr>
+<tr><td></td><td>Sára Pavlištová</td><td></td><td>150 m</td><td>prťata-holky</td><td>0:54</td><td>2022</td></tr>
+<tr><td></td><td>Ondřej Pus</td><td>Swsl Lučany Nad Nisou</td><td>200 m</td><td>prťata-kluci</td><td>0:40.8</td><td>2021</td></tr>
+<tr><td></td><td>Eliška Černá</td><td>Rychlostní Kanoistika Rk Jablonec</td><td>200 m</td><td>prťata-holky</td><td>0:46.9</td><td>2021</td></tr>
+<tr><td></td><td>Jan Zárybnický</td><td>Ski Janov Bedřichov</td><td>200 m</td><td>prťata-kluci</td><td>0:47.4</td><td>2021</td></tr>
+<tr><td></td><td>Róza Marková</td><td></td><td>200 m</td><td>prťata-holky</td><td>0:50.4</td><td>2021</td></tr>
+<tr><td></td><td>Ema Zavadilova</td><td></td><td>200 m</td><td>prťata-holky</td><td>0:53.9</td><td>2021</td></tr>
+<tr><td></td><td>Michal Němec</td><td>Runbo Team Liberec</td><td>200 m</td><td>prťata-kluci</td><td>0:56.6</td><td>2021</td></tr>
+<tr><td></td><td>Veronika Pušová</td><td>Swsl Lucany Nad Nisou</td><td>200 m</td><td>prťata-holky</td><td>0:58.1</td><td>2021</td></tr>
+<tr><td></td><td>Beata Rozsypalová</td><td></td><td>200 m</td><td>prťata-holky</td><td>1:05.1</td><td>2021</td></tr>
+<tr><td></td><td>Václav Zavadil</td><td></td><td>200 m</td><td>prťata-kluci</td><td>1:08.9</td><td>2021</td></tr>
+<tr><td></td><td>Alice Černá</td><td></td><td>200 m</td><td>prťata-holky</td><td>1:09.2</td><td>2021</td></tr>
+<tr><td></td><td>Jonatan Malek</td><td></td><td>200 m</td><td>prťata-kluci</td><td>1:13.9</td><td>2021</td></tr>
+<tr><td></td><td>Tonička Znojemská</td><td></td><td>200 m</td><td>prťata-holky</td><td>1:14.4</td><td>2021</td></tr>
+<tr><td></td><td>Sára Drhlíková</td><td></td><td>200 m</td><td>prťata-holky</td><td>1:24.4</td><td>2021</td></tr>
+<tr><td></td><td>Šimon Bumbálek</td><td></td><td>250 m</td><td>mlaďáci-kluci</td><td>0:37.7</td><td>2013</td></tr>
+<tr><td></td><td>Zuzana Zelenková</td><td>Cyklofit MTB Liberec - přišla</td><td>250 m</td><td>mlaďáci-holky</td><td>0:40.7</td><td>2013</td></tr>
+<tr><td></td><td>Zuzana Zelenková</td><td></td><td>250 m</td><td>prťata-holky</td><td>0:45.7</td><td>2012</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Bóžovic Klan</td><td>250 m</td><td>prťata-holky</td><td>0:47</td><td>2013</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Bóžovic Klan</td><td>250 m</td><td>prťata-kluci</td><td>0:51.3</td><td>2013</td></tr>
+<tr><td></td><td>Tereza Zelenková</td><td>Cyklofit MTB Liberec - přišla</td><td>250 m</td><td>prťata-holky</td><td>0:51.3</td><td>2013</td></tr>
+<tr><td></td><td>Tereza Zelenková</td><td></td><td>250 m</td><td>batolata-holky</td><td>0:55.3</td><td>2012</td></tr>
+<tr><td></td><td>Marek Škorpil</td><td>Sjc Jičín</td><td>250 m</td><td>prťata-kluci</td><td>0:58.3</td><td>2013</td></tr>
+<tr><td></td><td>Kristián Lajtkep</td><td>Bóžovic Klan</td><td>250 m</td><td>batolata-kluci</td><td>1:22.7</td><td>2013</td></tr>
+<tr><td></td><td>Vojtěch Jelínek</td><td>Liaz Jablonec</td><td>300 m</td><td>prťata-kluci</td><td>0:54</td><td>2023</td></tr>
+<tr><td></td><td>Jessica Balatková</td><td>Liaz Jablonec</td><td>300 m</td><td>prťata-holky</td><td>0:56</td><td>2023</td></tr>
+<tr><td></td><td>Veronika Pušová</td><td>SWSL Lučany n.N.</td><td>300 m</td><td>prťata-holky</td><td>1:00</td><td>2023</td></tr>
+<tr><td></td><td>Antonie Znojemská</td><td>Raf Tým</td><td>300 m</td><td>prťata-holky</td><td>1:01</td><td>2023</td></tr>
+<tr><td></td><td>Jindřich Sršeň</td><td>Multisport Team</td><td>300 m</td><td>prťata-kluci</td><td>1:02</td><td>2018</td></tr>
+<tr><td></td><td>Ondřej Dumek</td><td>Bitters Superior Cyklofit Team</td><td>300 m</td><td>prťata-kluci</td><td>1:04</td><td>2018</td></tr>
+<tr><td></td><td>Vratislav Žabka</td><td>HKNMPSM</td><td>300 m</td><td>prťata-kluci</td><td>1:05</td><td>2023</td></tr>
+<tr><td></td><td>Michael Kohout</td><td>Ac Slovan Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:06</td><td>2018</td></tr>
+<tr><td></td><td>Linda Rozsypalová</td><td>Bt Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:08</td><td>2019</td></tr>
+<tr><td></td><td>Jiří Žabka</td><td>HKNMPSM</td><td>300 m</td><td>prťata-kluci</td><td>1:09</td><td>2023</td></tr>
+<tr><td></td><td>Linda Rozsypalová</td><td></td><td>300 m</td><td>prťata-holky</td><td>1:09</td><td>2018</td></tr>
+<tr><td></td><td>Matyáš Kudrna</td><td>Bitters Superior Cyklofit Team</td><td>300 m</td><td>prťata-kluci</td><td>1:10</td><td>2018</td></tr>
+<tr><td></td><td>Kaia Bícová</td><td>Bedřichov</td><td>300 m</td><td>prťata-holky</td><td>1:11</td><td>2023</td></tr>
+<tr><td></td><td>Madlen Klabanová</td><td>Klabani</td><td>300 m</td><td>prťata-holky</td><td>1:11</td><td>2019</td></tr>
+<tr><td></td><td>Madlen Klabanová</td><td>Sama</td><td>300 m</td><td>prťata-holky</td><td>1:13</td><td>2018</td></tr>
+<tr><td></td><td>Johana Drozdová</td><td>Lokomotiva Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:14</td><td>2023</td></tr>
+<tr><td></td><td>Vít Grebík</td><td>Běhám Od Zítra</td><td>300 m</td><td>prťata-kluci</td><td>1:17</td><td>2018</td></tr>
+<tr><td></td><td>Jonatan Málek</td><td>Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:18</td><td>2023</td></tr>
+<tr><td></td><td>Vašík Műller</td><td>VKVS</td><td>300 m</td><td>prťata-kluci</td><td>1:20</td><td>2019</td></tr>
+<tr><td></td><td>Jakub Vácha</td><td>Ac Slovan Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:22</td><td>2023</td></tr>
+<tr><td></td><td>František Polák</td><td>Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:24</td><td>2023</td></tr>
+<tr><td></td><td>Jonáš Helmich</td><td>Dukla Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:26</td><td>2014</td></tr>
+<tr><td></td><td>Lili Lhotová</td><td>Jablonec Nad Nisou</td><td>300 m</td><td>prťata-holky</td><td>1:26</td><td>2023</td></tr>
+<tr><td></td><td>Jakub Šalovský</td><td>Tj Spartak Chrastava</td><td>300 m</td><td>prťata-kluci</td><td>1:27</td><td>2023</td></tr>
+<tr><td></td><td>Oliver Sochor</td><td>Ac Špindl</td><td>300 m</td><td>prťata-kluci</td><td>1:29</td><td>2019</td></tr>
+<tr><td></td><td>Šimon Juris</td><td>Bitters Superior Cyklofit Team</td><td>300 m</td><td>prťata-kluci</td><td>1:29</td><td>2018</td></tr>
+<tr><td></td><td>Tereza Mošnová</td><td>Swsl Lučany</td><td>300 m</td><td>prťata-holky</td><td>1:29</td><td>2023</td></tr>
+<tr><td></td><td>Mireček Zelinka</td><td>Bojovníci</td><td>300 m</td><td>prťata-kluci</td><td>1:30</td><td>2019</td></tr>
+<tr><td></td><td>Sára Drhlíková</td><td>Horobraní</td><td>300 m</td><td>prťata-holky</td><td>1:30</td><td>2023</td></tr>
+<tr><td></td><td>Anna Horáková</td><td>Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:32</td><td>2023</td></tr>
+<tr><td></td><td>Tereza Michálková</td><td>Vratislavice Nad Nisou</td><td>300 m</td><td>prťata-holky</td><td>1:32</td><td>2019</td></tr>
+<tr><td></td><td>Linda Janďurová</td><td>Ac Slovan Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:34</td><td>2014</td></tr>
+<tr><td></td><td>Šimon Drhlík</td><td>Horobraní</td><td>300 m</td><td>prťata-kluci</td><td>1:34</td><td>2023</td></tr>
+<tr><td></td><td>Michal Novotný</td><td>Pomalí Kluci</td><td>300 m</td><td>prťata-kluci</td><td>1:35</td><td>2023</td></tr>
+<tr><td></td><td>Zoska Cikacz</td><td>Bratkow</td><td>300 m</td><td>prťata-holky</td><td>1:35</td><td>2019</td></tr>
+<tr><td></td><td>Beata Rozsypalová</td><td>Sk Ještěd</td><td>300 m</td><td>prťata-holky</td><td>1:36</td><td>2023</td></tr>
+<tr><td></td><td>Isabelka Pirochová</td><td></td><td>300 m</td><td>prťata-holky</td><td>1:38</td><td>2019</td></tr>
+<tr><td></td><td>Jonáš Bogar</td><td>Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:38</td><td>2023</td></tr>
+<tr><td></td><td>Jakub Uhlíř</td><td>Maxtri</td><td>300 m</td><td>prťata-kluci</td><td>1:39</td><td>2019</td></tr>
+<tr><td></td><td>Johanka Poláková</td><td>Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:40</td><td>2023</td></tr>
+<tr><td></td><td>Magdaléna Němečková</td><td>Vratislavice</td><td>300 m</td><td>prťata-holky</td><td>1:40</td><td>2014</td></tr>
+<tr><td></td><td>Tomáš Samuel Jäger</td><td>Ed Systém Silvini Team</td><td>300 m</td><td>prťata-kluci</td><td>1:41</td><td>2023</td></tr>
+<tr><td></td><td>Julka Cikacz</td><td>Bratkow</td><td>300 m</td><td>prťata-kluci</td><td>1:43</td><td>2019</td></tr>
+<tr><td></td><td>Kira Lenkvíková</td><td>Kvíčecí Paradaja</td><td>300 m</td><td>prťata-holky</td><td>1:44</td><td>2023</td></tr>
+<tr><td></td><td>Nicolas Flemr</td><td>Bez Oddílu</td><td>300 m</td><td>prťata-kluci</td><td>1:47</td><td>2014</td></tr>
+<tr><td></td><td>Anežka Štekrová</td><td></td><td>300 m</td><td>prťata-holky</td><td>1:48</td><td>2019</td></tr>
+<tr><td></td><td>Gréta Kubištová</td><td>Biatlon Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:50</td><td>2023</td></tr>
+<tr><td></td><td>Adam Pejchal</td><td>Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:53</td><td>2019</td></tr>
+<tr><td></td><td>Eliška Knesplová</td><td>zlobidla</td><td>300 m</td><td>prťata-holky</td><td>1:55</td><td>2019</td></tr>
+<tr><td></td><td>Anička Petrová</td><td></td><td>300 m</td><td>prťata-holky</td><td>1:57</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Šebelka</td><td>Ac Slovan Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:58</td><td>2014</td></tr>
+<tr><td></td><td>Sára Pavlištová</td><td>Nestihla start batolat, jela a dělala smyky</td><td>300 m</td><td>prťata-holky</td><td>2:16</td><td>2018</td></tr>
+<tr><td></td><td>Jindřich Řeřicha</td><td>Sk Ještěd</td><td>300 m</td><td>prťata-kluci</td><td>2:19</td><td>2019</td></tr>
+<tr><td></td><td>Jana Machová</td><td>Ski Klub Jablonec</td><td>300 m</td><td>batolata-holky</td><td>2:42</td><td>2014</td></tr>
+<tr><td></td><td>Jakub Šebelka</td><td>Ac Slovan Liberec</td><td>300 m</td><td>batolata-kluci</td><td>2:58</td><td>2014</td></tr>
+<tr><td></td><td>Kristýnka Svobodová</td><td>Ralsko 696</td><td>300 m</td><td>prťata-holky</td><td>4:21</td><td>2018</td></tr>
+<tr><td></td><td>Isabela Pirochová</td><td></td><td>300 m</td><td>prťata-holky</td><td>4:52</td><td>2018</td></tr>
+<tr><td></td><td>Vladimír Zelinka</td><td>Zelinci</td><td>300 m</td><td>prťata-kluci</td><td>5:01</td><td>2018</td></tr>
+<tr><td></td><td>Vojtěch Pitař</td><td>Ac Slovan Liberec</td><td>300 m</td><td>batolata-kluci</td><td>5:06</td><td>2014</td></tr>
+<tr><td></td><td>Ondra Dumek</td><td>Tj Dukla Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:31</td><td>2022</td></tr>
+<tr><td></td><td>Ondřej Zhorela</td><td>Nad Nisou</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:33</td><td>2019</td></tr>
+<tr><td></td><td>Roman Tomeš</td><td>SWSL</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:33</td><td>2022</td></tr>
+<tr><td></td><td>Ondřej Puš</td><td>Swsl Lučany Nad Nisou</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:36</td><td>2022</td></tr>
+<tr><td></td><td>Marek Gregor</td><td>Kotlářka</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:38</td><td>2019</td></tr>
+<tr><td></td><td>Marie Dubcová</td><td>Ski Klub Jablonec</td><td>500 m</td><td>mlaďáci-holky</td><td>2:39</td><td>2022</td></tr>
+<tr><td></td><td>Rozálie Pospíšilová</td><td>Kanoistika Jablonec</td><td>500 m</td><td>mlaďáci-holky</td><td>2:39</td><td>2019</td></tr>
+<tr><td></td><td>Anton Kubišta</td><td>Biatlon Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:42</td><td>2022</td></tr>
+<tr><td></td><td>Tereza Farská</td><td>Kb Liberec</td><td>500 m</td><td>mlaďáci-holky</td><td>2:43</td><td>2019</td></tr>
+<tr><td></td><td>Dora Klabanová</td><td>Klabani</td><td>500 m</td><td>mlaďáci-holky</td><td>2:46</td><td>2019</td></tr>
+<tr><td></td><td>Linda Rozsypalová</td><td>Sk Ještěd</td><td>500 m</td><td>mlaďáci-holky</td><td>2:55</td><td>2022</td></tr>
+<tr><td></td><td>Vavro Kubišta</td><td>Biatlon Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>2:58</td><td>2022</td></tr>
+<tr><td></td><td>Ella Týfová</td><td>Biatlon Liberec</td><td>500 m</td><td>mlaďáci-holky</td><td>2:59</td><td>2022</td></tr>
+<tr><td></td><td>Julie Wieserová</td><td>Nadšenců</td><td>500 m</td><td>mlaďáci-holky</td><td>2:59</td><td>2019</td></tr>
+<tr><td></td><td>Štěpán Bondy</td><td>Czech Multisport Coaching</td><td>500 m</td><td>mlaďáci-kluci</td><td>3:00</td><td>2022</td></tr>
+<tr><td></td><td>David Jakimič</td><td></td><td>500 m</td><td>mlaďáci-kluci</td><td>3:05</td><td>2019</td></tr>
+<tr><td></td><td>Frantisek Morava</td><td>Biatlon Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>3:07</td><td>2022</td></tr>
+<tr><td></td><td>Lucie Janoušková</td><td>Kb Liberec</td><td>500 m</td><td>mlaďáci-holky</td><td>3:08</td><td>2019</td></tr>
+<tr><td></td><td>Lili Maršíková</td><td>Runbo Team Liberec</td><td>500 m</td><td>mlaďáci-holky</td><td>3:09</td><td>2019</td></tr>
+<tr><td></td><td>Tina Balatková</td><td>Liaz Jablonec</td><td>500 m</td><td>mlaďáci-holky</td><td>3:09</td><td>2022</td></tr>
+<tr><td></td><td>Jan Chocholoušek</td><td>Dukla Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>3:11</td><td>2022</td></tr>
+<tr><td></td><td>Anna Ráchel Breňová</td><td>Jablonec Nad Nisou</td><td>500 m</td><td>mlaďáci-holky</td><td>3:17</td><td>2019</td></tr>
+<tr><td></td><td>Vojta Fiala</td><td>Dukla Liberec</td><td>500 m</td><td>mlaďáci-kluci</td><td>3:57</td><td>2022</td></tr>
+<tr><td></td><td>Radim Rozsypal</td><td>Bt Liberec</td><td>600 m</td><td>mlaďáci-kluci</td><td>3:18</td><td>2021</td></tr>
+<tr><td></td><td>Eva Trollerova</td><td>Ac Liaz</td><td>600 m</td><td>mlaďáci-holky</td><td>3:23</td><td>2021</td></tr>
+<tr><td></td><td>Michael Kohout</td><td></td><td>600 m</td><td>mlaďáci-kluci</td><td>3:24.5</td><td>2021</td></tr>
+<tr><td></td><td>Linda Rozsypalova</td><td>Sk Ještěd</td><td>600 m</td><td>mlaďáci-holky</td><td>3:26.9</td><td>2021</td></tr>
+<tr><td></td><td>Edita Kohoutova</td><td></td><td>600 m</td><td>mlaďáci-holky</td><td>3:56.1</td><td>2021</td></tr>
+<tr><td></td><td>Aneta Černá</td><td>Rychlostni Kanoistika Rk Jablonec</td><td>600 m</td><td>mlaďáci-holky</td><td>4:00.8</td><td>2021</td></tr>
+<tr><td></td><td>Nela Huková</td><td></td><td>600 m</td><td>mlaďáci-holky</td><td>4:09.3</td><td>2021</td></tr>
+<tr><td></td><td>Barbora Slezakova</td><td>Swsl Lučany Nad Nisou</td><td>600 m</td><td>mlaďáci-holky</td><td>4:34.1</td><td>2021</td></tr>
+<tr><td></td><td>Ondřej Puš</td><td>Lučany Nad Nisou 830</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:50</td><td>2023</td></tr>
+<tr><td></td><td>Marek Gregor</td><td>Sk Chotěboř</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:03</td><td>2018</td></tr>
+<tr><td></td><td>Marie Pechová</td><td>Slavia Liberec Orienteering</td><td>700 m</td><td>mlaďáci-holky</td><td>3:04</td><td>2018</td></tr>
+<tr><td></td><td>Dora Klabanová</td><td>Sama</td><td>700 m</td><td>mlaďáci-holky</td><td>3:05</td><td>2018</td></tr>
+<tr><td></td><td>Aneta Závacká</td><td>Biatlon Liberec</td><td>700 m</td><td>mlaďáci-holky</td><td>3:15</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Kudrna</td><td>Bitters Superior Cyklofit Team</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:15</td><td>2018</td></tr>
+<tr><td></td><td>Petr Štalzer</td><td>Tj Dukla Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:16</td><td>2023</td></tr>
+<tr><td></td><td>Jonáš Dlouhý</td><td>Fc Slovan Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:17</td><td>2018</td></tr>
+<tr><td></td><td>Míša Patzáková</td><td>Biatlon Liberec</td><td>700 m</td><td>mlaďáci-holky</td><td>3:17</td><td>2018</td></tr>
+<tr><td></td><td>Jakub Jelínek</td><td>Liaz Jablonec</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:18</td><td>2023</td></tr>
+<tr><td></td><td>Kryštof Stebel</td><td>Janov Nad Nisou</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:25</td><td>2023</td></tr>
+<tr><td></td><td>Lucie Dentonová</td><td>Lukov</td><td>700 m</td><td>prťata-holky</td><td>3:31</td><td>2017</td></tr>
+<tr><td></td><td>Tina Balatková</td><td>Liaz Jablonec</td><td>700 m</td><td>mlaďáci-holky</td><td>3:32</td><td>2023</td></tr>
+<tr><td></td><td>Matouš Dlouhý</td><td>Bitters Superior Cyklofit Team Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:33</td><td>2018</td></tr>
+<tr><td></td><td>Magdalena Gregorová</td><td>Sk Chotěboř</td><td>700 m</td><td>mlaďáci-holky</td><td>3:34</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Šťastný</td><td>Ekopark Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>3:41</td><td>2018</td></tr>
+<tr><td></td><td>Štěpánka Lili</td><td></td><td>700 m</td><td>mlaďáci-holky</td><td>3:48</td><td>2018</td></tr>
+<tr><td></td><td>Edita Kohoutá</td><td>Ac Slovan Liberec</td><td>700 m</td><td>mlaďáci-holky</td><td>3:53</td><td>2018</td></tr>
+<tr><td></td><td>Lena Daďourková</td><td></td><td>700 m</td><td>mlaďáci-holky</td><td>4:00</td><td>2018</td></tr>
+<tr><td></td><td>Jana Dentonová</td><td>Lukov</td><td>700 m</td><td>prťata-holky</td><td>4:04</td><td>2017</td></tr>
+<tr><td></td><td>Eliška Cvejnová</td><td>Mš Září</td><td>700 m</td><td>prťata-holky</td><td>4:07</td><td>2017</td></tr>
+<tr><td></td><td>Nela Daďourková</td><td></td><td>700 m</td><td>mlaďáci-holky</td><td>4:08</td><td>2018</td></tr>
+<tr><td></td><td>Amalie Jarošová</td><td>Hradec Králové</td><td>700 m</td><td>mlaďáci-holky</td><td>4:21</td><td>2023</td></tr>
+<tr><td></td><td>David Vácha</td><td>Sdh Vratislavice</td><td>700 m</td><td>mlaďáci-kluci</td><td>4:26</td><td>2023</td></tr>
+<tr><td></td><td>Linda Rozsypalová</td><td>Sk Ještěd</td><td>700 m</td><td>mlaďáci-holky</td><td>4:36</td><td>2023</td></tr>
+<tr><td></td><td>Alžbeta Kubištová</td><td>Biatlon Liberec</td><td>700 m</td><td>mlaďáci-holky</td><td>5:32</td><td>2023</td></tr>
+<tr><td></td><td>Emička Dentonová</td><td>Lukov</td><td>700 m</td><td>prťata-holky</td><td>5:52</td><td>2017</td></tr>
+<tr><td></td><td>Linda Rozsypalová</td><td>Bt Liberec</td><td>700 m</td><td>prťata-holky</td><td>6:12</td><td>2017</td></tr>
+<tr><td></td><td>Evička Dentová</td><td>Lukov</td><td>700 m</td><td>prťata-holky</td><td>7:39</td><td>2017</td></tr>
+<tr><td></td><td>Matěj Šebelka</td><td>Ac Slovan Liberec</td><td>1,4 km</td><td>mlaďáci-kluci</td><td>5:12</td><td>2017</td></tr>
+<tr><td></td><td>Jakub Šebelka</td><td>Ac Slovan Liberec</td><td>1,4 km</td><td>mlaďáci-kluci</td><td>5:53</td><td>2017</td></tr>
+<tr><td></td><td>Martin Vencl</td><td>Liberec</td><td>1,4 km</td><td>mlaďáci-kluci</td><td>5:54</td><td>2017</td></tr>
+<tr><td></td><td>Lucie Venclová</td><td>Liberec</td><td>1,4 km</td><td>mlaďáci-holky</td><td>7:50</td><td>2017</td></tr>
+<tr><td></td><td>David Kučera</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:16</td><td>2014</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>12:17</td><td>2013</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Bouda Residents</td><td>3,9 km</td><td>muži</td><td>12:18</td><td>2018</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:22</td><td>2022</td></tr>
+<tr><td></td><td>David Kučera</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:25</td><td>2012</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>12:27</td><td>2023</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:27</td><td>2011</td></tr>
+<tr><td></td><td>David Kučera</td><td>Sk Habena</td><td>3,9 km</td><td>muži</td><td>12:29</td><td>2019</td></tr>
+<tr><td></td><td>David Šlapák</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>12:34</td><td>2019</td></tr>
+<tr><td></td><td>David Kučera</td><td>Abk Liberec</td><td>3,9 km</td><td>muži</td><td>12:39</td><td>2011</td></tr>
+<tr><td></td><td>Vojtěch Král</td><td>Sk Severka Šumperk</td><td>3,9 km</td><td>muži</td><td>12:40</td><td>2023</td></tr>
+<tr><td></td><td>David Kučera</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:42</td><td>2018</td></tr>
+<tr><td></td><td>Jan Petržela</td><td>OK 99 Hradec Králové</td><td>3,9 km</td><td>muži</td><td>12:44</td><td>2022</td></tr>
+<tr><td></td><td>Ondřej Volák</td><td>Běžecký Klub Náchod</td><td>3,9 km</td><td>muži</td><td>12:45</td><td>2022</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>12:46</td><td>2015</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:50</td><td>2022</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:51</td><td>2018</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:55</td><td>2011</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ksm Hrádek</td><td>3,9 km</td><td>muži</td><td>12:56</td><td>2018</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:57</td><td>2019</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Dřeváci</td><td>3,9 km</td><td>muži</td><td>12:58</td><td>2021</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>12:59</td><td>2021</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:00</td><td>2012</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>junioři</td><td>13:01</td><td>2018</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>13:02</td><td>2016</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:04</td><td>2013</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:04</td><td>2017</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ksm Hrádek</td><td>3,9 km</td><td>muži</td><td>13:06</td><td>2017</td></tr>
+<tr><td></td><td>Dušan Podroužek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:10</td><td>2012</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:13</td><td>2021</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:15</td><td>2017</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ksm Hrádek</td><td>3,9 km</td><td>muži</td><td>13:16</td><td>2019</td></tr>
+<tr><td></td><td>Jakub Gräf</td><td>Dukla Liberec</td><td>3,9 km</td><td>muži</td><td>13:17</td><td>2018</td></tr>
+<tr><td></td><td>Pavel Hradec</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>muži</td><td>13:17</td><td>2013</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:20</td><td>2019</td></tr>
+<tr><td></td><td>Pavel Hradec</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>muži</td><td>13:23</td><td>2018</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:26</td><td>2014</td></tr>
+<tr><td></td><td>Martin Semerád</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:27</td><td>2014</td></tr>
+<tr><td></td><td>Zbyšek Lhota</td><td>Eleven Run Team</td><td>3,9 km</td><td>muži</td><td>13:27</td><td>2022</td></tr>
+<tr><td></td><td>Jakub Gräf</td><td>Dukla Liberec</td><td>3,9 km</td><td>muži</td><td>13:31</td><td>2021</td></tr>
+<tr><td></td><td>Jiří Vavruška</td><td>Skp Jablonec</td><td>3,9 km</td><td>muži</td><td>13:32</td><td>2011</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:40</td><td>2015</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:42</td><td>2012</td></tr>
+<tr><td></td><td>Vojtěch Prášil</td><td>Janči Ski Team</td><td>3,9 km</td><td>muži</td><td>13:42</td><td>2019</td></tr>
+<tr><td></td><td>Roman Svatoš</td><td>Loko Liberec Kajak</td><td>3,9 km</td><td>muži 40+</td><td>13:45</td><td>2022</td></tr>
+<tr><td></td><td>Oliver Krákora</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:47</td><td>2015</td></tr>
+<tr><td></td><td>Dušan Podroužek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>13:49</td><td>2019</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:50</td><td>2011</td></tr>
+<tr><td></td><td>Václav Havel</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:50</td><td>2012</td></tr>
+<tr><td></td><td>Michael Smutný</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>junioři</td><td>13:52</td><td>2018</td></tr>
+<tr><td></td><td>Vojtěch Prášil</td><td>Jablonec</td><td>3,9 km</td><td>muži</td><td>13:55</td><td>2018</td></tr>
+<tr><td></td><td>Roman Svatoš</td><td>Fyzio Sport Therapy Run Team</td><td>3,9 km</td><td>muži 40+</td><td>13:56</td><td>2021</td></tr>
+<tr><td></td><td>Jan Čížek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:57</td><td>2022</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:57</td><td>2011</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>13:57</td><td>2014</td></tr>
+<tr><td></td><td>Michal Jedlička</td><td>Silvini Ski Trab Team</td><td>3,9 km</td><td>muži</td><td>13:58</td><td>2012</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži 40+</td><td>13:58</td><td>2015</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:58</td><td>2016</td></tr>
+<tr><td></td><td>Jan Titěra</td><td>Jablonec Nad Nisou</td><td>3,9 km</td><td>muži</td><td>13:59</td><td>2019</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:59</td><td>2017</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>13:59</td><td>2014</td></tr>
+<tr><td></td><td>Vojtěch Málek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:01</td><td>2017</td></tr>
+<tr><td></td><td>Dušan Kožíšek</td><td>WSM</td><td>3,9 km</td><td>muži</td><td>14:03</td><td>2014</td></tr>
+<tr><td></td><td>Jakub Škoda</td><td>Slavia Liberec orienteering #zaorgáč</td><td>3,9 km</td><td>muži</td><td>14:04</td><td>2018</td></tr>
+<tr><td></td><td>Zbyšek Lhota</td><td>Eleven Run Team</td><td>3,9 km</td><td>muži</td><td>14:05</td><td>2023</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži 40+</td><td>14:06</td><td>2018</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži 40+</td><td>14:07</td><td>2013</td></tr>
+<tr><td></td><td>Zbyšek Lhota</td><td>Eleven Run Team</td><td>3,9 km</td><td>muži</td><td>14:08</td><td>2021</td></tr>
+<tr><td></td><td>David Zeman</td><td>BEKO Bike & Ski Racing Team</td><td>3,9 km</td><td>muži</td><td>14:09</td><td>2018</td></tr>
+<tr><td></td><td>Oliver Krákora</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:11</td><td>2014</td></tr>
+<tr><td></td><td>Oliver Krákora</td><td>Pomalí Kluci</td><td>3,9 km</td><td>dorostenci</td><td>14:11</td><td>2013</td></tr>
+<tr><td></td><td>Kryštof Karatsiolis</td><td>Czech Treimtex Team</td><td>3,9 km</td><td>muži</td><td>14:12</td><td>2019</td></tr>
+<tr><td></td><td>Petr Berka</td><td>Liaz Jablonec</td><td>3,9 km</td><td>muži</td><td>14:12</td><td>2014</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:12</td><td>2012</td></tr>
+<tr><td></td><td>Dušan Podroužek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>14:14</td><td>2021</td></tr>
+<tr><td></td><td>Michal Jedlička</td><td>Silvini Ski Trap Team</td><td>3,9 km</td><td>muži</td><td>14:14</td><td>2013</td></tr>
+<tr><td></td><td>Jan Sedláček</td><td>Sk Svěrák</td><td>3,9 km</td><td>muži</td><td>14:15</td><td>2017</td></tr>
+<tr><td></td><td>Vojtěch Galáč</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:16</td><td>2015</td></tr>
+<tr><td></td><td>Radim Třešňák</td><td></td><td>3,9 km</td><td>muži</td><td>14:17</td><td>2018</td></tr>
+<tr><td></td><td>Oliver Krákora</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:18</td><td>2016</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:19</td><td>2011</td></tr>
+<tr><td></td><td>Vašek Barák</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:19</td><td>2019</td></tr>
+<tr><td></td><td>Milan Kohout</td><td>Silvini Madshus Team</td><td>3,9 km</td><td>muži</td><td>14:21</td><td>2018</td></tr>
+<tr><td></td><td>Karel Sejkora</td><td>Atletika Polička</td><td>3,9 km</td><td>muži</td><td>14:22</td><td>2013</td></tr>
+<tr><td></td><td>Jan Čížek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:23</td><td>2023</td></tr>
+<tr><td></td><td>Michal Smutný</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:23</td><td>2015</td></tr>
+<tr><td></td><td>Pavel Schejbal</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:23</td><td>2019</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:24</td><td>2013</td></tr>
+<tr><td></td><td>Vojtěch Málek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:26</td><td>2015</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:28</td><td>2018</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>14:29</td><td>2019</td></tr>
+<tr><td></td><td>Oliver Krákora</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:30</td><td>2012</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:31</td><td>2017</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:31</td><td>2012</td></tr>
+<tr><td></td><td>Ondřej Petiška</td><td></td><td>3,9 km</td><td>muži</td><td>14:32</td><td>2021</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:32</td><td>2018</td></tr>
+<tr><td></td><td>Filip Wolf</td><td>Tj Sokol Frýdštejn</td><td>3,9 km</td><td>muži</td><td>14:33</td><td>2017</td></tr>
+<tr><td></td><td>Martin Šrámek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:33</td><td>2014</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:33</td><td>2015</td></tr>
+<tr><td></td><td>Michal Kubíček</td><td>Nmnichovo Hradiště</td><td>3,9 km</td><td>muži</td><td>14:33</td><td>2022</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:34</td><td>2016</td></tr>
+<tr><td></td><td>Martin Hauzner</td><td>Dukla Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:35</td><td>2017</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:35</td><td>2019</td></tr>
+<tr><td></td><td>Martin Rexa</td><td>Kerda Sport</td><td>3,9 km</td><td>muži 40+</td><td>14:36</td><td>2022</td></tr>
+<tr><td></td><td>Petr Pušman</td><td>Zpcyklo Proofy Corratec Team</td><td>3,9 km</td><td>muži</td><td>14:36</td><td>2018</td></tr>
+<tr><td></td><td>Kamila Gregorová</td><td>Nový traťový rekord | SK Chotěboř</td><td>3,9 km</td><td>ženy</td><td>14:37</td><td>2018</td></tr>
+<tr><td></td><td>Jiří Fiala</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:38</td><td>2017</td></tr>
+<tr><td></td><td>Miroslav Balatka</td><td>Rádlo</td><td>3,9 km</td><td>muži</td><td>14:38</td><td>2022</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:38</td><td>2013</td></tr>
+<tr><td></td><td>Jakub Farský</td><td>Klub Biatlonu Liberec</td><td>3,9 km</td><td>dorostenci</td><td>14:39</td><td>2022</td></tr>
+<tr><td></td><td>Karel Sejkora</td><td>Atletika Polička</td><td>3,9 km</td><td>muži</td><td>14:39</td><td>2012</td></tr>
+<tr><td></td><td>Martin Šrámek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:41</td><td>2012</td></tr>
+<tr><td></td><td>Bára Jíšová</td><td>PerňaSystém</td><td>3,9 km</td><td>ženy</td><td>14:42</td><td>2014</td></tr>
+<tr><td></td><td>Barbora Jíšová</td><td>Eleven Run Team</td><td>3,9 km</td><td>ženy</td><td>14:42</td><td>2017</td></tr>
+<tr><td></td><td>Martin Šrámek</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:42</td><td>2015</td></tr>
+<tr><td></td><td>Ondřej Petiška</td><td></td><td>3,9 km</td><td>muži</td><td>14:42</td><td>2022</td></tr>
+<tr><td></td><td>Sebastian Kaloš</td><td>Silviny Madshus</td><td>3,9 km</td><td>muži</td><td>14:43</td><td>2015</td></tr>
+<tr><td></td><td>Stanislav Kindl</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:43</td><td>2012</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:44</td><td>2023</td></tr>
+<tr><td></td><td>Ondřej Bek</td><td>Ok Chrastava</td><td>3,9 km</td><td>dorostenci</td><td>14:45</td><td>2016</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:45</td><td>2022</td></tr>
+<tr><td></td><td>Tomáš Kořínek</td><td>Sk Beryho Hoši</td><td>3,9 km</td><td>muži</td><td>14:46</td><td>2012</td></tr>
+<tr><td></td><td>Dominik Šonský</td><td>Fk Neratovice</td><td>3,9 km</td><td>muži</td><td>14:47</td><td>2023</td></tr>
+<tr><td></td><td>Jan Čížek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:47</td><td>2019</td></tr>
+<tr><td></td><td>Jan Sedláček</td><td>Sk Svěrák</td><td>3,9 km</td><td>muži</td><td>14:47</td><td>2021</td></tr>
+<tr><td></td><td>Štěpán Kaliba</td><td>Dukla Liberec</td><td>3,9 km</td><td>muži</td><td>14:47</td><td>2018</td></tr>
+<tr><td></td><td>Jan Němec</td><td>Ok Chrastava</td><td>3,9 km</td><td>muži</td><td>14:48</td><td>2012</td></tr>
+<tr><td></td><td>Emma Horáčková</td><td>Dřeváci</td><td>3,9 km</td><td>ženy</td><td>14:49</td><td>2021</td></tr>
+<tr><td></td><td>Jakub Šiarnik</td><td>Sk Žiarská Dolina</td><td>3,9 km</td><td>muži</td><td>14:49</td><td>2015</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:49</td><td>2011</td></tr>
+<tr><td></td><td>Stanislav Mayer</td><td></td><td>3,9 km</td><td>muži</td><td>14:50</td><td>2018</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:50</td><td>2011</td></tr>
+<tr><td></td><td>Vojtěch Málek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:50</td><td>2014</td></tr>
+<tr><td></td><td>Dušan Podroužek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>14:52</td><td>2022</td></tr>
+<tr><td></td><td>Martin Rexa</td><td></td><td>3,9 km</td><td>muži 40+</td><td>14:54</td><td>2021</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>14:54</td><td>2018</td></tr>
+<tr><td></td><td>Miloslav Petrášek</td><td>Ac Rumburk</td><td>3,9 km</td><td>muži 40+</td><td>14:54</td><td>2023</td></tr>
+<tr><td></td><td>Stanislav Kindl</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>14:57</td><td>2013</td></tr>
+<tr><td></td><td>Stěpán Kaliba</td><td></td><td>3,9 km</td><td>muži</td><td>14:57</td><td>2021</td></tr>
+<tr><td></td><td>Václav Puš</td><td>Lean Cat</td><td>3,9 km</td><td>muži 40+</td><td>14:58</td><td>2023</td></tr>
+<tr><td></td><td>Pavel Schejbal</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>15:00</td><td>2018</td></tr>
+<tr><td></td><td>Petr Kadavý</td><td>Ok Chrastava</td><td>3,9 km</td><td>muži</td><td>15:01</td><td>2013</td></tr>
+<tr><td></td><td>Stanislav Kindl</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:02</td><td>2015</td></tr>
+<tr><td></td><td>Filip Wolf</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>muži</td><td>15:03</td><td>2013</td></tr>
+<tr><td></td><td>Jiří Znojemský</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:03</td><td>2011</td></tr>
+<tr><td></td><td>Standa Kindl</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:03</td><td>2014</td></tr>
+<tr><td></td><td>Michal Jedlička</td><td>Silvini Madshus Team</td><td>3,9 km</td><td>muži</td><td>15:05</td><td>2019</td></tr>
+<tr><td></td><td>Vojtěch Podhorný</td><td>netsystemas.com</td><td>3,9 km</td><td>muži 40+</td><td>15:05</td><td>2018</td></tr>
+<tr><td></td><td>Daniel Kvasnička</td><td>HKNMPSM</td><td>3,9 km</td><td>muži</td><td>15:08</td><td>2018</td></tr>
+<tr><td></td><td>Lucie Pavlištová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>15:08</td><td>2022</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>15:09</td><td>2015</td></tr>
+<tr><td></td><td>Lucie Pavlištová</td><td>Pomalí Kluci</td><td>3,9 km</td><td>ženy</td><td>15:10</td><td>2023</td></tr>
+<tr><td></td><td>Martin Matzner</td><td>Sk Roupy</td><td>3,9 km</td><td>muži</td><td>15:11</td><td>2013</td></tr>
+<tr><td></td><td>Michal Roštejnský</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:11</td><td>2013</td></tr>
+<tr><td></td><td>Jan Titěra</td><td>Tíťa</td><td>3,9 km</td><td>muži</td><td>15:13</td><td>2018</td></tr>
+<tr><td></td><td>Pavel Pachner</td><td>Slavia Lbc Orienteering</td><td>3,9 km</td><td>muži</td><td>15:13</td><td>2011</td></tr>
+<tr><td></td><td>Stanislav Šourek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:14</td><td>2011</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:14</td><td>2016</td></tr>
+<tr><td></td><td>Jiří Kalivoda</td><td>Varnsdorf</td><td>3,9 km</td><td>muži</td><td>15:15</td><td>2014</td></tr>
+<tr><td></td><td>Jan Kubeš</td><td>Sport Future Team</td><td>3,9 km</td><td>muži</td><td>15:16</td><td>2018</td></tr>
+<tr><td></td><td>Jan Svoboda</td><td>Ralsko 696</td><td>3,9 km</td><td>muži</td><td>15:16</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>15:16</td><td>2019</td></tr>
+<tr><td></td><td>Jiří Krejčík</td><td>Smaženky A Machři</td><td>3,9 km</td><td>muži</td><td>15:17</td><td>2023</td></tr>
+<tr><td></td><td>Jaroslav Všetička</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>15:18</td><td>2015</td></tr>
+<tr><td></td><td>Martin Polesný</td><td>TRI-SPACE</td><td>3,9 km</td><td>muži</td><td>15:18</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Kobr</td><td>#ZaOrgáč</td><td>3,9 km</td><td>muži</td><td>15:18</td><td>2018</td></tr>
+<tr><td></td><td>Marek Uhlíř</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:19</td><td>2014</td></tr>
+<tr><td></td><td>Jakub Mládek</td><td>Biatlon Lberec</td><td>3,9 km</td><td>muži 40+</td><td>15:20</td><td>2022</td></tr>
+<tr><td></td><td>Ondřej Ulihrach</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:21</td><td>2014</td></tr>
+<tr><td></td><td>Martin Hauzner</td><td>Ac Slovan</td><td>3,9 km</td><td>junioři</td><td>15:22</td><td>2018</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Jiskra Vratislavice</td><td>3,9 km</td><td>muži</td><td>15:22</td><td>2016</td></tr>
+<tr><td></td><td>Vojta Málek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>15:23</td><td>2013</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:24</td><td>2019</td></tr>
+<tr><td></td><td>Jan Kocián</td><td></td><td>3,9 km</td><td>muži</td><td>15:25</td><td>2016</td></tr>
+<tr><td></td><td>Lucie Vavrušková</td><td>Jablonec</td><td>3,9 km</td><td>ženy</td><td>15:25</td><td>2011</td></tr>
+<tr><td></td><td>Vít Zakouřil</td><td>Achtung Achtung Der Bulldozer</td><td>3,9 km</td><td>muži</td><td>15:26</td><td>2018</td></tr>
+<tr><td></td><td>Jiří Znojemský</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:28</td><td>2013</td></tr>
+<tr><td></td><td>Martin Kočí</td><td>Bez</td><td>3,9 km</td><td>muži</td><td>15:28</td><td>2023</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>15:29</td><td>2022</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:29</td><td>2021</td></tr>
+<tr><td></td><td>Michal Roštejnský</td><td></td><td>3,9 km</td><td>muži 40+</td><td>15:30</td><td>2019</td></tr>
+<tr><td></td><td>Bára Jíšová</td><td>Ac Turnov</td><td>3,9 km</td><td>ženy</td><td>15:31</td><td>2012</td></tr>
+<tr><td></td><td>Vít Zakouřil</td><td>Uwaga Bulldozer</td><td>3,9 km</td><td>muži</td><td>15:32</td><td>2019</td></tr>
+<tr><td></td><td>Ondra Hoffmann</td><td>CMC</td><td>3,9 km</td><td>žáci</td><td>15:33</td><td>2022</td></tr>
+<tr><td></td><td>Barbora Jíšová</td><td>Eleven Run Team</td><td>3,9 km</td><td>ženy</td><td>15:34</td><td>2023</td></tr>
+<tr><td></td><td>Martin Hauzner</td><td>Dukla Liberec</td><td>3,9 km</td><td>dorostenci</td><td>15:34</td><td>2016</td></tr>
+<tr><td></td><td>Jakub Hrdina</td><td>Věznice Stráž Pod Ralskem</td><td>3,9 km</td><td>muži</td><td>15:35</td><td>2012</td></tr>
+<tr><td></td><td>Standa Šourek</td><td>Slovaaaaaan</td><td>3,9 km</td><td>muži</td><td>15:36</td><td>2018</td></tr>
+<tr><td></td><td>Miloslav Heller</td><td>Neregistrovaní</td><td>3,9 km</td><td>muži</td><td>15:38</td><td>2011</td></tr>
+<tr><td></td><td>Jan Kubišta</td><td>Mercedes - Benz Salomon Team</td><td>3,9 km</td><td>muži</td><td>15:39</td><td>2016</td></tr>
+<tr><td></td><td>Petr Huk</td><td></td><td>3,9 km</td><td>muži 40+</td><td>15:39</td><td>2021</td></tr>
+<tr><td></td><td>Marek Brož</td><td>Ok Turnov</td><td>3,9 km</td><td>muži</td><td>15:40</td><td>2015</td></tr>
+<tr><td></td><td>Martin Kočí</td><td>Zpcyklo Proofy Corratec Team</td><td>3,9 km</td><td>muži</td><td>15:40</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>15:40</td><td>2023</td></tr>
+<tr><td></td><td>Adéla Bogarová</td><td>Sk Praga</td><td>3,9 km</td><td>ženy</td><td>15:41</td><td>2022</td></tr>
+<tr><td></td><td>Jan Kubišta</td><td>Salomon Skigo Team</td><td>3,9 km</td><td>muži</td><td>15:41</td><td>2015</td></tr>
+<tr><td></td><td>Petr Schejbal</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži 40+</td><td>15:42</td><td>2019</td></tr>
+<tr><td></td><td>Martin Staněk</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>15:44</td><td>2014</td></tr>
+<tr><td></td><td>Petr Josef</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:44</td><td>2012</td></tr>
+<tr><td></td><td>Šíma Hoffmann</td><td>CMC</td><td>3,9 km</td><td>žáci</td><td>15:45</td><td>2022</td></tr>
+<tr><td></td><td>Jan Svoboda</td><td></td><td>3,9 km</td><td>muži</td><td>15:46</td><td>2013</td></tr>
+<tr><td></td><td>Marek Brož</td><td>Tj Sokol Topstar</td><td>3,9 km</td><td>muži</td><td>15:46</td><td>2016</td></tr>
+<tr><td></td><td>Tomáš Michálek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:47</td><td>2018</td></tr>
+<tr><td></td><td>Štěpán Dlabaja</td><td>Team Jizerky</td><td>3,9 km</td><td>muži</td><td>15:48</td><td>2022</td></tr>
+<tr><td></td><td>Petr Henych</td><td>Slavia Liberec</td><td>3,9 km</td><td>muži</td><td>15:49</td><td>2014</td></tr>
+<tr><td></td><td>Jakub Farský</td><td>Kb Liberec</td><td>3,9 km</td><td>žáci</td><td>15:50</td><td>2019</td></tr>
+<tr><td></td><td>Lukáš Resl</td><td>Ac Ostošest Liberec</td><td>3,9 km</td><td>muži 40+</td><td>15:50</td><td>2019</td></tr>
+<tr><td></td><td>Petr Vlasák</td><td>Ho Pfuk Praha</td><td>3,9 km</td><td>muži</td><td>15:50</td><td>2011</td></tr>
+<tr><td></td><td>Jan Kubišta</td><td>Sk Roupy</td><td>3,9 km</td><td>muži</td><td>15:51</td><td>2013</td></tr>
+<tr><td></td><td>Matyáš Pávek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>15:52</td><td>2017</td></tr>
+<tr><td></td><td>Tomáš Valoušek</td><td>Dukla Liberec</td><td>3,9 km</td><td>muži</td><td>15:52</td><td>2014</td></tr>
+<tr><td></td><td>Václav Havel</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:52</td><td>2011</td></tr>
+<tr><td></td><td>Václav Havel</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:54</td><td>2014</td></tr>
+<tr><td></td><td>Zuzana Kocumová</td><td>Ed Systém Silvini Team</td><td>3,9 km</td><td>ženy 40+</td><td>15:54</td><td>2023</td></tr>
+<tr><td></td><td>Ruan Pretorius</td><td></td><td>3,9 km</td><td>muži</td><td>15:55</td><td>2019</td></tr>
+<tr><td></td><td>Petr Schejbal</td><td>Ruprechtice</td><td>3,9 km</td><td>muži 40+</td><td>15:56</td><td>2015</td></tr>
+<tr><td></td><td>Vladislav Rozsypal</td><td>Sts Chvojkovice Brod</td><td>3,9 km</td><td>muži 40+</td><td>15:56</td><td>2022</td></tr>
+<tr><td></td><td>Martin Matzner</td><td>Dukla Liberec</td><td>3,9 km</td><td>muži</td><td>15:58</td><td>2021</td></tr>
+<tr><td></td><td>Matouš Karvánek</td><td>Sk Beryho Hoši</td><td>3,9 km</td><td>muži</td><td>15:59</td><td>2012</td></tr>
+<tr><td></td><td>Michaela Pušová</td><td>Swsl Lucany Nad Nisou</td><td>3,9 km</td><td>ženy</td><td>16:01</td><td>2021</td></tr>
+<tr><td></td><td>Lucie Müllerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>16:02</td><td>2013</td></tr>
+<tr><td></td><td>Martin Matzner</td><td>Mercedes - Benz Salomon Team</td><td>3,9 km</td><td>muži</td><td>16:02</td><td>2016</td></tr>
+<tr><td></td><td>Petr Kovář</td><td>Silvini Madshus Team</td><td>3,9 km</td><td>muži 40+</td><td>16:03</td><td>2018</td></tr>
+<tr><td></td><td>Rostislav Závacký</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>16:03</td><td>2023</td></tr>
+<tr><td></td><td>Jan Schejbal</td><td>Ruprechtice</td><td>3,9 km</td><td>dorostenci</td><td>16:04</td><td>2017</td></tr>
+<tr><td></td><td>Jakub Podzimek</td><td>Hrádek Nad Nisou</td><td>3,9 km</td><td>muži</td><td>16:06</td><td>2014</td></tr>
+<tr><td></td><td>Michaela Pušová</td><td>Swsl Lučany Nad Nisou</td><td>3,9 km</td><td>ženy</td><td>16:06</td><td>2022</td></tr>
+<tr><td></td><td>Michal Jedlička</td><td>Silviny Madshus</td><td>3,9 km</td><td>muži</td><td>16:06</td><td>2015</td></tr>
+<tr><td></td><td>Petr Škoda</td><td>Pomalí Kluci</td><td>3,9 km</td><td>dorostenci</td><td>16:06</td><td>2013</td></tr>
+<tr><td></td><td>Petr Škoda</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>16:07</td><td>2018</td></tr>
+<tr><td></td><td>Michaela Pušová</td><td>SWSL Lučany n.N.</td><td>3,9 km</td><td>ženy</td><td>16:08</td><td>2023</td></tr>
+<tr><td></td><td>Ondřej Šenk</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:08</td><td>2021</td></tr>
+<tr><td></td><td>František Ptáček</td><td>Mercedes - Benz Salomon Team</td><td>3,9 km</td><td>muži 40+</td><td>16:09</td><td>2016</td></tr>
+<tr><td></td><td>Jana Lenčová</td><td></td><td>3,9 km</td><td>ženy</td><td>16:09</td><td>2021</td></tr>
+<tr><td></td><td>Kamila Gregorová</td><td>Sk Chotěboř</td><td>3,9 km</td><td>ženy</td><td>16:09</td><td>2019</td></tr>
+<tr><td></td><td>Zdeněk Kubíček</td><td>Cyklolive</td><td>3,9 km</td><td>muži 40+</td><td>16:10</td><td>2022</td></tr>
+<tr><td></td><td>Martin Šrámek</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>16:11</td><td>2023</td></tr>
+<tr><td></td><td>Miška Omová</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>ženy</td><td>16:11</td><td>2018</td></tr>
+<tr><td></td><td>Roman Horáček</td><td>Ergo Liberec</td><td>3,9 km</td><td>muži</td><td>16:11</td><td>2011</td></tr>
+<tr><td></td><td>Václav Novotný</td><td>Atletika Jihlava</td><td>3,9 km</td><td>muži</td><td>16:11</td><td>2011</td></tr>
+<tr><td></td><td>Petr Patzák</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>16:12</td><td>2018</td></tr>
+<tr><td></td><td>Hynek Drozda</td><td>Tj Lokomotiva Liberec</td><td>3,9 km</td><td>žáci</td><td>16:13</td><td>2023</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>Ak Tašky</td><td>3,9 km</td><td>muži</td><td>16:14</td><td>2016</td></tr>
+<tr><td></td><td>Vít Zakouřil</td><td>Achtung Achtung Der Bulldozer</td><td>3,9 km</td><td>muži</td><td>16:14</td><td>2017</td></tr>
+<tr><td></td><td>Daniel Týfa</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>16:15</td><td>2022</td></tr>
+<tr><td></td><td>Matyáš Ebel</td><td>Fn Motol</td><td>3,9 km</td><td>muži</td><td>16:15</td><td>2023</td></tr>
+<tr><td></td><td>Petr Flemr</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži</td><td>16:15</td><td>2014</td></tr>
+<tr><td></td><td>Václav Hnilička</td><td>Ac Hranolkáči</td><td>3,9 km</td><td>muži</td><td>16:16</td><td>2015</td></tr>
+<tr><td></td><td>Anna Fürstová</td><td>Severka Šumperk</td><td>3,9 km</td><td>ženy</td><td>16:18</td><td>2023</td></tr>
+<tr><td></td><td>Petr Schejbal</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži</td><td>16:18</td><td>2014</td></tr>
+<tr><td></td><td>Miška Omová</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>ženy 40+</td><td>16:22</td><td>2021</td></tr>
+<tr><td></td><td>Jan Šustr</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>16:23</td><td>2014</td></tr>
+<tr><td></td><td>Martin Matzner</td><td>Fc Jablonec Je Nejhorší</td><td>3,9 km</td><td>muži</td><td>16:23</td><td>2019</td></tr>
+<tr><td></td><td>Marek Dolejš</td><td>Green Ways</td><td>3,9 km</td><td>muži 40+</td><td>16:24</td><td>2019</td></tr>
+<tr><td></td><td>Iva Pátková</td><td>Hvězda Pardubice</td><td>3,9 km</td><td>ženy</td><td>16:26</td><td>2011</td></tr>
+<tr><td></td><td>Jan Schejbal</td><td>Dukla Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:26</td><td>2016</td></tr>
+<tr><td></td><td>Lukáš Urban</td><td>Tj Sokol Ruprechtice</td><td>3,9 km</td><td>muži</td><td>16:26</td><td>2013</td></tr>
+<tr><td></td><td>Simona Jiřičková</td><td>Rádlo</td><td>3,9 km</td><td>ženy</td><td>16:26</td><td>2022</td></tr>
+<tr><td></td><td>Vojta Vencl</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži</td><td>16:26</td><td>2014</td></tr>
+<tr><td></td><td>Markéta Poloprutská</td><td>Liberec/Turnov</td><td>3,9 km</td><td>ženy</td><td>16:27</td><td>2019</td></tr>
+<tr><td></td><td>Martin Nypl</td><td>Ac Tonga</td><td>3,9 km</td><td>muži 50+</td><td>16:27</td><td>2019</td></tr>
+<tr><td></td><td>Zdeněk Kubíček</td><td>Silvini Ski Trab Team</td><td>3,9 km</td><td>muži</td><td>16:28</td><td>2012</td></tr>
+<tr><td></td><td>Adam Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži</td><td>16:29</td><td>2022</td></tr>
+<tr><td></td><td>Tomáš Daněk</td><td>Čudla</td><td>3,9 km</td><td>muži</td><td>16:30</td><td>2014</td></tr>
+<tr><td></td><td>Ifka Novotná</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>16:31</td><td>2013</td></tr>
+<tr><td></td><td>Michaela Vojteková</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>ženy</td><td>16:31</td><td>2019</td></tr>
+<tr><td></td><td>Tomáš Regner</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>16:32</td><td>2018</td></tr>
+<tr><td></td><td>Jana Pekařová</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>dorostenky</td><td>16:33</td><td>2016</td></tr>
+<tr><td></td><td>David Urbanec</td><td>Eleven Test Team</td><td>3,9 km</td><td>muži</td><td>16:34</td><td>2012</td></tr>
+<tr><td></td><td>Petr Schejbal</td><td>Ruprechtice</td><td>3,9 km</td><td>muži 40+</td><td>16:34</td><td>2017</td></tr>
+<tr><td></td><td>Roman Horáček</td><td>Cyklofit Liberec</td><td>3,9 km</td><td>muži</td><td>16:34</td><td>2012</td></tr>
+<tr><td></td><td>Vladislav Rozsypal</td><td>Sts Chvojkovice Brod</td><td>3,9 km</td><td>muži 40+</td><td>16:34</td><td>2019</td></tr>
+<tr><td></td><td>Lenka Petrželová</td><td>Severka Šumperk</td><td>3,9 km</td><td>ženy</td><td>16:35</td><td>2023</td></tr>
+<tr><td></td><td>Patrik Drhlík</td><td>Stará Boleslav</td><td>3,9 km</td><td>muži</td><td>16:35</td><td>2011</td></tr>
+<tr><td></td><td>Marek Brož</td><td>A-net</td><td>3,9 km</td><td>muži</td><td>16:36</td><td>2017</td></tr>
+<tr><td></td><td>Jáchym Strašlipka</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>16:37</td><td>2022</td></tr>
+<tr><td></td><td>Marek Brož</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>muži</td><td>16:37</td><td>2018</td></tr>
+<tr><td></td><td>Tucan Ecuador</td><td>Krakonošův Výprask</td><td>3,9 km</td><td>muži</td><td>16:37</td><td>2017</td></tr>
+<tr><td></td><td>Vašek Novotný</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>16:38</td><td>2013</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>dorostenky</td><td>16:40</td><td>2023</td></tr>
+<tr><td></td><td>Jéňa Skrbek</td><td>Bemaniax Madbike</td><td>3,9 km</td><td>dorostenci</td><td>16:40</td><td>2017</td></tr>
+<tr><td></td><td>Matěj Ptáček</td><td>Ski Klub Jablonec</td><td>3,9 km</td><td>žáci</td><td>16:40</td><td>2016</td></tr>
+<tr><td></td><td>Tomáš Regner</td><td>Biatlon Ruprechtice</td><td>3,9 km</td><td>muži 40+</td><td>16:41</td><td>2016</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>16:42</td><td>2021</td></tr>
+<tr><td></td><td>Marek Dolejš</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>16:42</td><td>2023</td></tr>
+<tr><td></td><td>Zdeněk Kubíček</td><td>Eleven Head Cst Cyklolive</td><td>3,9 km</td><td>muži 40+</td><td>16:43</td><td>2023</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>dorostenky</td><td>16:44</td><td>2022</td></tr>
+<tr><td></td><td>Zdeněk Kubíček</td><td></td><td>3,9 km</td><td>muži 40+</td><td>16:45</td><td>2021</td></tr>
+<tr><td></td><td>Vojtěch Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>16:46</td><td>2018</td></tr>
+<tr><td></td><td>Jan Šustr</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:47</td><td>2013</td></tr>
+<tr><td></td><td>Kateřina Zarybnicka</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>16:47</td><td>2021</td></tr>
+<tr><td></td><td>Lucie Samlerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>16:48</td><td>2016</td></tr>
+<tr><td></td><td>Lucie Samlerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>16:50</td><td>2014</td></tr>
+<tr><td></td><td>Rostislav Závacký</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>16:50</td><td>2022</td></tr>
+<tr><td></td><td>Martin Řezáč</td><td>Triatlon Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:51</td><td>2015</td></tr>
+<tr><td></td><td>Petr Patzák</td><td>Kb Liberec</td><td>3,9 km</td><td>žáci</td><td>16:51</td><td>2019</td></tr>
+<tr><td></td><td>Jiří Znojemský</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>16:54</td><td>2012</td></tr>
+<tr><td></td><td>Pavel Schejbal</td><td>Sokol Ruprechtice</td><td>3,9 km</td><td>dorostenci</td><td>16:54</td><td>2016</td></tr>
+<tr><td></td><td>František Strážovský</td><td>Lokomotiva Liberec</td><td>3,9 km</td><td>žáci</td><td>16:55</td><td>2023</td></tr>
+<tr><td></td><td>Jiří Ježek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>16:55</td><td>2015</td></tr>
+<tr><td></td><td>Tomáš Svoboda</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži</td><td>16:55</td><td>2023</td></tr>
+<tr><td></td><td>Jan Honzík</td><td>Bootcamp Team</td><td>3,9 km</td><td>muži 40+</td><td>16:57</td><td>2015</td></tr>
+<tr><td></td><td>Ondřej Jiránek</td><td>Biatlon Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:57</td><td>2018</td></tr>
+<tr><td></td><td>Radim Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:57</td><td>2017</td></tr>
+<tr><td></td><td>Václav Novotný</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>16:57</td><td>2022</td></tr>
+<tr><td></td><td>Stanislav Šourek</td><td>TrafoStanice</td><td>3,9 km</td><td>muži</td><td>16:58</td><td>2019</td></tr>
+<tr><td></td><td>Lenka Schlechterová</td><td>Skp Ústí Nad Labem</td><td>3,9 km</td><td>ženy</td><td>16:59</td><td>2021</td></tr>
+<tr><td></td><td>Pokorný Vítězslov</td><td>Jeřáb</td><td>3,9 km</td><td>muži</td><td>17:00</td><td>2015</td></tr>
+<tr><td></td><td>Adam Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži</td><td>17:01</td><td>2023</td></tr>
+<tr><td></td><td>Jiří Zelenka</td><td>Cyklofit Mtb Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:01</td><td>2013</td></tr>
+<tr><td></td><td>Rostislav Závacký</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:01</td><td>2021</td></tr>
+<tr><td></td><td>Vojta Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:01</td><td>2015</td></tr>
+<tr><td></td><td>Anna Mládková</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>17:02</td><td>2022</td></tr>
+<tr><td></td><td>Jan Šlégl</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži</td><td>17:02</td><td>2018</td></tr>
+<tr><td></td><td>Jan Valášek</td><td>Spartak Praha 4</td><td>3,9 km</td><td>muži</td><td>17:03</td><td>2014</td></tr>
+<tr><td></td><td>Norika Nebusová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>17:03</td><td>2022</td></tr>
+<tr><td></td><td>Barbora Janisová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>17:04</td><td>2013</td></tr>
+<tr><td></td><td>Tomas Morava</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:04</td><td>2022</td></tr>
+<tr><td></td><td>Vilém Wolf</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenci</td><td>17:04</td><td>2013</td></tr>
+<tr><td></td><td>Jiří Blažek</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:05</td><td>2021</td></tr>
+<tr><td></td><td>Radim Fiala</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:05</td><td>2022</td></tr>
+<tr><td></td><td>Jiří Zelenka</td><td></td><td>3,9 km</td><td>muži</td><td>17:06</td><td>2012</td></tr>
+<tr><td></td><td>Matouš Tišer</td><td>Krakonošův Výprask</td><td>3,9 km</td><td>muži</td><td>17:07</td><td>2015</td></tr>
+<tr><td></td><td>Vojtěch Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:08</td><td>2019</td></tr>
+<tr><td></td><td>Standa Šourek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:09</td><td>2021</td></tr>
+<tr><td></td><td>Tomáš Regner</td><td>Biatlon Ruprechtice</td><td>3,9 km</td><td>muži 40+</td><td>17:09</td><td>2015</td></tr>
+<tr><td></td><td>Jiří Blažek</td><td></td><td>3,9 km</td><td>muži</td><td>17:10</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:10</td><td>2012</td></tr>
+<tr><td></td><td>Vítězslav Pokorný</td><td>Teplice</td><td>3,9 km</td><td>muži</td><td>17:10</td><td>2018</td></tr>
+<tr><td></td><td>Petr Schejbal</td><td>Javory Turnov</td><td>3,9 km</td><td>muži 40+</td><td>17:11</td><td>2016</td></tr>
+<tr><td></td><td>Jiří Blažek</td><td>Jablonecké Mattonky</td><td>3,9 km</td><td>muži 40+</td><td>17:12</td><td>2022</td></tr>
+<tr><td></td><td>Pavel Bednář</td><td>Šneci Na Max</td><td>3,9 km</td><td>muži</td><td>17:14</td><td>2013</td></tr>
+<tr><td></td><td>Vojta Kysela</td><td>Tj Rob Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:14</td><td>2022</td></tr>
+<tr><td></td><td>Lucie Müllerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>17:15</td><td>2015</td></tr>
+<tr><td></td><td>Gábi Tišerová</td><td>Wolkerovka Team Liberec</td><td>3,9 km</td><td>ženy</td><td>17:16</td><td>2019</td></tr>
+<tr><td></td><td>Gabriela Grulichová</td><td>Česká Lípa</td><td>3,9 km</td><td>ženy</td><td>17:16</td><td>2012</td></tr>
+<tr><td></td><td>Jan Schejbal</td><td>Dukla Liberec</td><td>3,9 km</td><td>dorostenci</td><td>17:16</td><td>2015</td></tr>
+<tr><td></td><td>Jiří Blažek</td><td>Jablonecké Mattonky</td><td>3,9 km</td><td>muži 40+</td><td>17:16</td><td>2023</td></tr>
+<tr><td></td><td>Tomáš Málek</td><td>Beko Racing Team</td><td>3,9 km</td><td>muži</td><td>17:16</td><td>2017</td></tr>
+<tr><td></td><td>Vojta Kysela</td><td>Tj Rob Liberec</td><td>3,9 km</td><td>muži</td><td>17:17</td><td>2018</td></tr>
+<tr><td></td><td>Marek Dolejš</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:18</td><td>2021</td></tr>
+<tr><td></td><td>Tomáš Málek</td><td>Eleven Team Příchovice</td><td>3,9 km</td><td>muži</td><td>17:18</td><td>2016</td></tr>
+<tr><td></td><td>Jan Šlégl</td><td></td><td>3,9 km</td><td>muži</td><td>17:19</td><td>2015</td></tr>
+<tr><td></td><td>Štěpán Mašík</td><td>Lokomotiva Liberec Kajak</td><td>3,9 km</td><td>žáci</td><td>17:19</td><td>2022</td></tr>
+<tr><td></td><td>Kateřina Matějů</td><td>Slavia Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>17:20</td><td>2019</td></tr>
+<tr><td></td><td>Jan Šlégl</td><td>Be Unstoppable</td><td>3,9 km</td><td>muži</td><td>17:22</td><td>2016</td></tr>
+<tr><td></td><td>Ondřej Puš</td><td>Lučany Nad Nisou 830</td><td>3,9 km</td><td>žáci</td><td>17:22</td><td>2023</td></tr>
+<tr><td></td><td>Štěpán Pulda</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:22</td><td>2018</td></tr>
+<tr><td></td><td>Jaroslav Beneš</td><td>Kruháče Sokol Janov</td><td>3,9 km</td><td>muži</td><td>17:24</td><td>2023</td></tr>
+<tr><td></td><td>Miroslav Kocum</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>17:25</td><td>2011</td></tr>
+<tr><td></td><td>Monika Kapletová</td><td>Rohozec Amulet</td><td>3,9 km</td><td>ženy 40+</td><td>17:25</td><td>2022</td></tr>
+<tr><td></td><td>Roman Horáček</td><td>Cyklofit Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:26</td><td>2013</td></tr>
+<tr><td></td><td>Tomáš Daněk</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>17:26</td><td>2018</td></tr>
+<tr><td></td><td>Robert Tišer</td><td>Wolkerova ul.</td><td>3,9 km</td><td>muži 50+</td><td>17:27</td><td>2018</td></tr>
+<tr><td></td><td>Karolína Bícová</td><td>Bedřichov</td><td>3,9 km</td><td>ženy 40+</td><td>17:29</td><td>2023</td></tr>
+<tr><td></td><td>Vojtěch Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:30</td><td>2016</td></tr>
+<tr><td></td><td>Jakub Farský</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>17:31</td><td>2018</td></tr>
+<tr><td></td><td>Jiří Spudich</td><td></td><td>3,9 km</td><td>muži</td><td>17:31</td><td>2013</td></tr>
+<tr><td></td><td>Ondřej Šenk</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žáci</td><td>17:32</td><td>2019</td></tr>
+<tr><td></td><td>Radim Fiala</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:32</td><td>2011</td></tr>
+<tr><td></td><td>Petr Hostaš</td><td>Tj Turnov Top Team</td><td>3,9 km</td><td>muži</td><td>17:33</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Svoboda</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži</td><td>17:34</td><td>2019</td></tr>
+<tr><td></td><td>Vojta Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:34</td><td>2021</td></tr>
+<tr><td></td><td>Martin Matzner</td><td>Dukla Masters</td><td>3,9 km</td><td>muži</td><td>17:36</td><td>2023</td></tr>
+<tr><td></td><td>Pavel Farský</td><td>Kb Liberec</td><td>3,9 km</td><td>muži 40+</td><td>17:36</td><td>2019</td></tr>
+<tr><td></td><td>Jan Skrbek</td><td>Bemaniax Madbike</td><td>3,9 km</td><td>dorostenci</td><td>17:37</td><td>2016</td></tr>
+<tr><td></td><td>Jana Málková</td><td>Beko Bike</td><td>3,9 km</td><td>ženy</td><td>17:38</td><td>2018</td></tr>
+<tr><td></td><td>Ruslan Miekhtiiev</td><td>Lokomotiva Liberec</td><td>3,9 km</td><td>žáci</td><td>17:38</td><td>2023</td></tr>
+<tr><td></td><td>Ema Pradeová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>17:40</td><td>2023</td></tr>
+<tr><td></td><td>Hynek Drozda</td><td>Lokomotova Liberec</td><td>3,9 km</td><td>žáci</td><td>17:42</td><td>2022</td></tr>
+<tr><td></td><td>Adam Smejkal</td><td></td><td>3,9 km</td><td>žáci</td><td>17:43</td><td>2018</td></tr>
+<tr><td></td><td>Libuše Blahoutová</td><td>Klub Českého Horského Psa</td><td>3,9 km</td><td>ženy 40+</td><td>17:45</td><td>2023</td></tr>
+<tr><td></td><td>Lukáš Honzík</td><td>Kanoistika Liberec</td><td>3,9 km</td><td>žáci</td><td>17:45</td><td>2019</td></tr>
+<tr><td></td><td>Monika Kapletová</td><td>Rohozecamix Team</td><td>3,9 km</td><td>ženy 40+</td><td>17:45</td><td>2023</td></tr>
+<tr><td></td><td>Tereza Blahoutová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>17:45</td><td>2023</td></tr>
+<tr><td></td><td>Vojtěch Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:47</td><td>2013</td></tr>
+<tr><td></td><td>Roman Horáček</td><td>Cyklofit Liberec</td><td>3,9 km</td><td>muži</td><td>17:48</td><td>2014</td></tr>
+<tr><td></td><td>Jiří Novák</td><td>Koberovy</td><td>3,9 km</td><td>muži</td><td>17:49</td><td>2012</td></tr>
+<tr><td></td><td>Zdeněk Ihring</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:49</td><td>2018</td></tr>
+<tr><td></td><td>Startovní číslo 151</td><td></td><td>3,9 km</td><td>muži</td><td>17:50</td><td>2021</td></tr>
+<tr><td></td><td>Zdeněk Ihring</td><td>Restaurace Na Cvičáku</td><td>3,9 km</td><td>muži 40+</td><td>17:51</td><td>2019</td></tr>
+<tr><td></td><td>Ivana Tišerová</td><td>Liberec</td><td>3,9 km</td><td>ženy 50+</td><td>17:53</td><td>2015</td></tr>
+<tr><td></td><td>Jana Málková</td><td>Eleven Team Příchovice</td><td>3,9 km</td><td>ženy</td><td>17:53</td><td>2016</td></tr>
+<tr><td></td><td>Jiří Vencl</td><td>Nac Liberec Konrád</td><td>3,9 km</td><td>muži 40+</td><td>17:53</td><td>2018</td></tr>
+<tr><td></td><td>Jolana Závacká</td><td>Jola Team</td><td>3,9 km</td><td>žákyně</td><td>17:53</td><td>2022</td></tr>
+<tr><td></td><td>Petr Škoda</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:54</td><td>2012</td></tr>
+<tr><td></td><td>David Albrecht</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:56</td><td>2021</td></tr>
+<tr><td></td><td>Denisa Skrbková</td><td>Ac Zanz</td><td>3,9 km</td><td>ženy</td><td>17:56</td><td>2018</td></tr>
+<tr><td></td><td>Jan Vomáčka</td><td></td><td>3,9 km</td><td>muži</td><td>17:56</td><td>2015</td></tr>
+<tr><td></td><td>Adéla Hanzlová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenky</td><td>17:58</td><td>2015</td></tr>
+<tr><td></td><td>Helena Daďourková</td><td></td><td>3,9 km</td><td>ženy</td><td>17:58</td><td>2018</td></tr>
+<tr><td></td><td>Martin Spudich</td><td></td><td>3,9 km</td><td>muži</td><td>17:58</td><td>2013</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>17:58</td><td>2014</td></tr>
+<tr><td></td><td>Štěpán Kuřák</td><td>Kb Liberec</td><td>3,9 km</td><td>žáci</td><td>17:58</td><td>2019</td></tr>
+<tr><td></td><td>Jiří Znojemský</td><td>Raf Tým</td><td>3,9 km</td><td>muži 40+</td><td>17:59</td><td>2023</td></tr>
+<tr><td></td><td>Johnny Kosek</td><td>Tennis Rychnov</td><td>3,9 km</td><td>žáci</td><td>17:59</td><td>2018</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:01</td><td>2019</td></tr>
+<tr><td></td><td>Štěpánka Šebelková</td><td>Ac Česká Lípa</td><td>3,9 km</td><td>ženy</td><td>18:01</td><td>2011</td></tr>
+<tr><td></td><td>Radek Šťastný</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>18:02</td><td>2022</td></tr>
+<tr><td></td><td>Jan Bicek</td><td>Kb Liberec</td><td>3,9 km</td><td>žáci</td><td>18:03</td><td>2019</td></tr>
+<tr><td></td><td>Jan Schejbal</td><td></td><td>3,9 km</td><td>muži</td><td>18:03</td><td>2018</td></tr>
+<tr><td></td><td>Rostislav Závacký</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:03</td><td>2019</td></tr>
+<tr><td></td><td>Vojtěch Černý</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:03</td><td>2022</td></tr>
+<tr><td></td><td>Filip Adamec</td><td>Kanoistika Jablonec nad Nisou</td><td>3,9 km</td><td>dorostenci</td><td>18:04</td><td>2023</td></tr>
+<tr><td></td><td>Jiří Zuzánek</td><td>Pohoda</td><td>3,9 km</td><td>muži</td><td>18:04</td><td>2018</td></tr>
+<tr><td></td><td>Barbora Ansorge</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>juniorky</td><td>18:06</td><td>2018</td></tr>
+<tr><td></td><td>Jan Pačovský</td><td>Ac Hranolkáči</td><td>3,9 km</td><td>muži</td><td>18:06</td><td>2015</td></tr>
+<tr><td></td><td>Marek Jiřík</td><td>Rozběháme Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:07</td><td>2022</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:08</td><td>2017</td></tr>
+<tr><td></td><td>Štěpán Kuřák</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>18:08</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:09</td><td>2016</td></tr>
+<tr><td></td><td>Jan Skrbek</td><td>Bitters Superior Cyklofit Team</td><td>3,9 km</td><td>dorostenci</td><td>18:10</td><td>2018</td></tr>
+<tr><td></td><td>Jan Schejbal</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži</td><td>18:11</td><td>2014</td></tr>
+<tr><td></td><td>Kristýna Janecká</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>juniorky</td><td>18:11</td><td>2022</td></tr>
+<tr><td></td><td>Tereza Martincová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenky</td><td>18:12</td><td>2018</td></tr>
+<tr><td></td><td>Tomáš Málek</td><td>BEKO</td><td>3,9 km</td><td>muži</td><td>18:12</td><td>2018</td></tr>
+<tr><td></td><td>Lenka Dembická</td><td>Frýdlant</td><td>3,9 km</td><td>ženy</td><td>18:14</td><td>2023</td></tr>
+<tr><td></td><td>Tomáš Morava</td><td>Wolkerovka</td><td>3,9 km</td><td>muži</td><td>18:14</td><td>2017</td></tr>
+<tr><td></td><td>Václav Novotný</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži 40+</td><td>18:14</td><td>2023</td></tr>
+<tr><td></td><td>Jan Smejkal</td><td></td><td>3,9 km</td><td>muži 40+</td><td>18:15</td><td>2018</td></tr>
+<tr><td></td><td>Robert Tišer</td><td>Wolkerovka</td><td>3,9 km</td><td>muži 50+</td><td>18:15</td><td>2017</td></tr>
+<tr><td></td><td>Adam Stebel</td><td>Janov Nad Nisou</td><td>3,9 km</td><td>žáci</td><td>18:16</td><td>2023</td></tr>
+<tr><td></td><td>Jolana Závacká</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:17</td><td>2019</td></tr>
+<tr><td></td><td>Pavel Farský</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:17</td><td>2018</td></tr>
+<tr><td></td><td>Adam Nikl</td><td>Tj Lokomotiva Liberec</td><td>3,9 km</td><td>žáci</td><td>18:18</td><td>2023</td></tr>
+<tr><td></td><td>Gabriela Tišerová</td><td>Ac Zanz</td><td>3,9 km</td><td>ženy</td><td>18:18</td><td>2018</td></tr>
+<tr><td></td><td>Gabriela Tišerová</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>18:19</td><td>2015</td></tr>
+<tr><td></td><td>Monika Kapletová</td><td>RohozecAmulet</td><td>3,9 km</td><td>ženy 40+</td><td>18:20</td><td>2018</td></tr>
+<tr><td></td><td>Tereza Rožcová</td><td></td><td>3,9 km</td><td>ženy</td><td>18:20</td><td>2019</td></tr>
+<tr><td></td><td>Gabriela Tišerová</td><td>Ac Zanz</td><td>3,9 km</td><td>ženy</td><td>18:21</td><td>2014</td></tr>
+<tr><td></td><td>Lucie Müllerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:22</td><td>2012</td></tr>
+<tr><td></td><td>Robert Kuchciak</td><td>Sieniawka</td><td>3,9 km</td><td>muži 40+</td><td>18:22</td><td>2019</td></tr>
+<tr><td></td><td>Alice Gregorová</td><td>Kotlářka</td><td>3,9 km</td><td>žákyně</td><td>18:24</td><td>2019</td></tr>
+<tr><td></td><td>Barbora Hynková</td><td>Běhám Od Zítra</td><td>3,9 km</td><td>ženy</td><td>18:24</td><td>2018</td></tr>
+<tr><td></td><td>Denda Skrbková</td><td>Beko Bsrt</td><td>3,9 km</td><td>ženy</td><td>18:24</td><td>2019</td></tr>
+<tr><td></td><td>Pavel Kovařík</td><td></td><td>3,9 km</td><td>žáci</td><td>18:24</td><td>2022</td></tr>
+<tr><td></td><td>Adam Berta</td><td>Já to běžet nechtěl :D</td><td>3,9 km</td><td>dorostenci</td><td>18:27</td><td>2023</td></tr>
+<tr><td></td><td>Martina Gräfová</td><td>Běh Na Českou Chalupu</td><td>3,9 km</td><td>ženy</td><td>18:27</td><td>2018</td></tr>
+<tr><td></td><td>Denisa Skrbková</td><td>Ac Zanz</td><td>3,9 km</td><td>ženy</td><td>18:28</td><td>2014</td></tr>
+<tr><td></td><td>Jana Škorpilová</td><td>Sjc Jičín</td><td>3,9 km</td><td>ženy</td><td>18:28</td><td>2013</td></tr>
+<tr><td></td><td>Tomáš Málek</td><td></td><td>3,9 km</td><td>muži 40+</td><td>18:29</td><td>2021</td></tr>
+<tr><td></td><td>Marie Venclová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>juniorky</td><td>18:31</td><td>2023</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:31</td><td>2021</td></tr>
+<tr><td></td><td>Karel Link</td><td>Lukov</td><td>3,9 km</td><td>muži</td><td>18:32</td><td>2017</td></tr>
+<tr><td></td><td>Robert Tišer</td><td>Wolkerova Team Liberec</td><td>3,9 km</td><td>muži 50+</td><td>18:32</td><td>2019</td></tr>
+<tr><td></td><td>Václav Novotný</td><td>Pomalí Kluci</td><td>3,9 km</td><td>muži</td><td>18:32</td><td>2019</td></tr>
+<tr><td></td><td>Dalibor Novotný</td><td></td><td>3,9 km</td><td>žáci</td><td>18:33</td><td>2021</td></tr>
+<tr><td></td><td>Honza Brzek</td><td>Lukov</td><td>3,9 km</td><td>muži</td><td>18:33</td><td>2017</td></tr>
+<tr><td></td><td>Jakub Čížek</td><td>Atletika Stará Boleslav</td><td>3,9 km</td><td>muži</td><td>18:33</td><td>2018</td></tr>
+<tr><td></td><td>Berenika Lajtkepová</td><td>Bk Liberec</td><td>3,9 km</td><td>dorostenky</td><td>18:34</td><td>2018</td></tr>
+<tr><td></td><td>Mariusz Žurek</td><td>Runbo Team</td><td>3,9 km</td><td>muži 40+</td><td>18:35</td><td>2019</td></tr>
+<tr><td></td><td>Amelia Dahmani</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:36</td><td>2023</td></tr>
+<tr><td></td><td>Bára Matošková</td><td>Biatlon Liberec</td><td>3,9 km</td><td>dorostenky</td><td>18:36</td><td>2018</td></tr>
+<tr><td></td><td>Mariusz Žurek</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:36</td><td>2021</td></tr>
+<tr><td></td><td>Vladimír Zelinka</td><td>Zelinci</td><td>3,9 km</td><td>muži</td><td>18:36</td><td>2018</td></tr>
+<tr><td></td><td>Radim Fiala</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:39</td><td>2015</td></tr>
+<tr><td></td><td>Robert Tišer</td><td>Wolkerovka</td><td>3,9 km</td><td>muži 50+</td><td>18:39</td><td>2016</td></tr>
+<tr><td></td><td>Jakub Habel</td><td>Rob Liberec</td><td>3,9 km</td><td>dorostenci</td><td>18:40</td><td>2023</td></tr>
+<tr><td></td><td>Mariusz Roman Žurek</td><td>Tl Pogon Ruda Slaska</td><td>3,9 km</td><td>muži 40+</td><td>18:41</td><td>2018</td></tr>
+<tr><td></td><td>Ondřej Voldřich</td><td>Predator Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:42</td><td>2018</td></tr>
+<tr><td></td><td>Zdeněk Ihring</td><td></td><td>3,9 km</td><td>muži 40+</td><td>18:42</td><td>2022</td></tr>
+<tr><td></td><td>Martina Gräfová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:45</td><td>2017</td></tr>
+<tr><td></td><td>Jolana Zavacka</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:46</td><td>2021</td></tr>
+<tr><td></td><td>Marie Venclová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenky</td><td>18:47</td><td>2018</td></tr>
+<tr><td></td><td>Veronika Šípková</td><td>Biatlon Liberec</td><td>3,9 km</td><td>dorostenky</td><td>18:47</td><td>2022</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:48</td><td>2015</td></tr>
+<tr><td></td><td>Denisa Skrbková</td><td>Bemaniax Madbike</td><td>3,9 km</td><td>ženy</td><td>18:49</td><td>2016</td></tr>
+<tr><td></td><td>Marie Janatová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:49</td><td>2015</td></tr>
+<tr><td></td><td>Zdeněk Ihring</td><td></td><td>3,9 km</td><td>muži 40+</td><td>18:49</td><td>2021</td></tr>
+<tr><td></td><td>Stanislav Šťastný</td><td>První Volnočasový Ekopark Liberec</td><td>3,9 km</td><td>muži 40+</td><td>18:50</td><td>2018</td></tr>
+<tr><td></td><td>Štěpánka Šebelková</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:51</td><td>2013</td></tr>
+<tr><td></td><td>Adéla Hanzlová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:52</td><td>2014</td></tr>
+<tr><td></td><td>Jana Farská</td><td>Klub Biatlonu Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>18:54</td><td>2022</td></tr>
+<tr><td></td><td>Martina Netolická</td><td>Ak Olymp Praha</td><td>3,9 km</td><td>ženy</td><td>18:55</td><td>2012</td></tr>
+<tr><td></td><td>Hanka Kotlářová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:57</td><td>2014</td></tr>
+<tr><td></td><td>Šárka Schveigerová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:57</td><td>2023</td></tr>
+<tr><td></td><td>Filip Svatoš</td><td>Tj Lokomotiva Liberec</td><td>3,9 km</td><td>žáci</td><td>18:58</td><td>2023</td></tr>
+<tr><td></td><td>Martina Netolická</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>18:58</td><td>2013</td></tr>
+<tr><td></td><td>Jiří Charuza</td><td>KCL Kooperativa-Svijany</td><td>3,9 km</td><td>muži 50+</td><td>18:59</td><td>2019</td></tr>
+<tr><td></td><td>Vera Kvapilova</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>ženy 40+</td><td>18:59</td><td>2018</td></tr>
+<tr><td></td><td>Anton Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>19:03</td><td>2023</td></tr>
+<tr><td></td><td>Gábi Tišerová</td><td>Rudá Hvězda Zanzibar</td><td>3,9 km</td><td>ženy</td><td>19:04</td><td>2016</td></tr>
+<tr><td></td><td>Veronika Šípková</td><td>Kb Liberec</td><td>3,9 km</td><td>žákyně</td><td>19:04</td><td>2019</td></tr>
+<tr><td></td><td>Michal Zavadil</td><td></td><td>3,9 km</td><td>muži 40+</td><td>19:05</td><td>2021</td></tr>
+<tr><td></td><td>Jirka Znojemský</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>19:06</td><td>2021</td></tr>
+<tr><td></td><td>Zuzana Uhlířová</td><td>Sk Maxtri Liberec</td><td>3,9 km</td><td>ženy</td><td>19:08</td><td>2019</td></tr>
+<tr><td></td><td>Romana Škodová</td><td>Za Orgáč</td><td>3,9 km</td><td>ženy</td><td>19:10</td><td>2023</td></tr>
+<tr><td></td><td>Marie Dubcová</td><td>Ski Klub Jablonec Nad Nisou</td><td>3,9 km</td><td>žákyně</td><td>19:11</td><td>2023</td></tr>
+<tr><td></td><td>Mirza Selimovič</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>19:11</td><td>2013</td></tr>
+<tr><td></td><td>Radka Houserová</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>19:11</td><td>2019</td></tr>
+<tr><td></td><td>Veronika Michálková</td><td>Vratislavice Nad Nisou</td><td>3,9 km</td><td>ženy</td><td>19:11</td><td>2019</td></tr>
+<tr><td></td><td>Denisa Skrbková</td><td>Beko Bsrt</td><td>3,9 km</td><td>ženy</td><td>19:14</td><td>2023</td></tr>
+<tr><td></td><td>Eva Markova</td><td>Vsk Elektro Cvut Praha</td><td>3,9 km</td><td>ženy</td><td>19:15</td><td>2021</td></tr>
+<tr><td></td><td>Patrik Drhlík</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>19:17</td><td>2016</td></tr>
+<tr><td></td><td>Václav Loudát</td><td></td><td>3,9 km</td><td>muži</td><td>19:17</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Sykora</td><td>Rychlostní Kanoistika Rk Jablonec</td><td>3,9 km</td><td>žáci</td><td>19:18</td><td>2021</td></tr>
+<tr><td></td><td>Stanislav Jelínek</td><td>Rob Liberec</td><td>3,9 km</td><td>muži</td><td>19:21</td><td>2011</td></tr>
+<tr><td></td><td>Věra Dubcová</td><td>Jablonec Nad Nisou</td><td>3,9 km</td><td>ženy 40+</td><td>19:22</td><td>2023</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>19:25</td><td>2022</td></tr>
+<tr><td></td><td>Lucie Němečková</td><td>Vratislavice</td><td>3,9 km</td><td>ženy</td><td>19:26</td><td>2016</td></tr>
+<tr><td></td><td>Jiří Vencl</td><td>Kc Pivovar Vratislavice</td><td>3,9 km</td><td>muži 40+</td><td>19:29</td><td>2023</td></tr>
+<tr><td></td><td>Gabriela Kovaříková</td><td>Tj Sokol Maxičky</td><td>3,9 km</td><td>juniorky</td><td>19:30</td><td>2022</td></tr>
+<tr><td></td><td>Monika Kapletová</td><td>RohozecAmulet</td><td>3,9 km</td><td>ženy 40+</td><td>19:30</td><td>2019</td></tr>
+<tr><td></td><td>Věrka Dráhová Urbánková</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>19:30</td><td>2013</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>19:32</td><td>2023</td></tr>
+<tr><td></td><td>Jana Gittlerová</td><td>Biatlon Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>19:37</td><td>2018</td></tr>
+<tr><td></td><td>Jana Hakenová</td><td>Runboteam Liberec</td><td>3,9 km</td><td>ženy</td><td>19:37</td><td>2019</td></tr>
+<tr><td></td><td>Martina Lajtkepová</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>19:39</td><td>2016</td></tr>
+<tr><td></td><td>Ivan Dumek</td><td>Severní Větry</td><td>3,9 km</td><td>muži</td><td>19:40</td><td>2018</td></tr>
+<tr><td></td><td>Vítek Schveiger</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žáci</td><td>19:42</td><td>2023</td></tr>
+<tr><td></td><td>Kryštof Bliml</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>19:46</td><td>2022</td></tr>
+<tr><td></td><td>Klára Zrůstová</td><td></td><td>3,9 km</td><td>ženy</td><td>19:51</td><td>2016</td></tr>
+<tr><td></td><td>Martyna Soroka</td><td>Uwaga Bulldozer</td><td>3,9 km</td><td>ženy</td><td>19:51</td><td>2019</td></tr>
+<tr><td></td><td>František Landa</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>19:54</td><td>2016</td></tr>
+<tr><td></td><td>Jáchym Strašlipka</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>19:55</td><td>2018</td></tr>
+<tr><td></td><td>Jáchym Strašlipka</td><td></td><td>3,9 km</td><td>žáci</td><td>19:57</td><td>2019</td></tr>
+<tr><td></td><td>Kristián Lajtkep</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>žáci</td><td>19:57</td><td>2019</td></tr>
+<tr><td></td><td>Lucie Němečková</td><td>Vratislavice</td><td>3,9 km</td><td>ženy</td><td>19:57</td><td>2018</td></tr>
+<tr><td></td><td>Filip Adamec</td><td>Rychlostní Kanoistika Rk Jablonec</td><td>3,9 km</td><td>žáci</td><td>19:58</td><td>2021</td></tr>
+<tr><td></td><td>Hanka Kotlářová</td><td>Pomalí Kluci</td><td>3,9 km</td><td>ženy</td><td>19:59</td><td>2012</td></tr>
+<tr><td></td><td>Samuel Baier</td><td>Tj Loko Liberec</td><td>3,9 km</td><td>žáci</td><td>20:00</td><td>2023</td></tr>
+<tr><td></td><td>David Vítek</td><td></td><td>3,9 km</td><td>muži 40+</td><td>20:04</td><td>2019</td></tr>
+<tr><td></td><td>Jana Gittlerová</td><td>Bk Manušice</td><td>3,9 km</td><td>ženy 40+</td><td>20:04</td><td>2016</td></tr>
+<tr><td></td><td>Lenka Balogová</td><td>Baloga Team</td><td>3,9 km</td><td>ženy</td><td>20:05</td><td>2015</td></tr>
+<tr><td></td><td>Radek Šťastný</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>20:05</td><td>2021</td></tr>
+<tr><td></td><td>Martina Netolická</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>20:06</td><td>2014</td></tr>
+<tr><td></td><td>Máša Ruslan</td><td>Loko Liberec Kajak</td><td>3,9 km</td><td>žáci</td><td>20:10</td><td>2022</td></tr>
+<tr><td></td><td>Věrka Urbánková</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>20:10</td><td>2012</td></tr>
+<tr><td></td><td>Jáchym Strašlipka</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>20:11</td><td>2021</td></tr>
+<tr><td></td><td>Barbora Svatošová</td><td>Tj Lokomotiva Liberec</td><td>3,9 km</td><td>žákyně</td><td>20:12</td><td>2023</td></tr>
+<tr><td></td><td>Douvbravka Dostálová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>dorostenky</td><td>20:12</td><td>2022</td></tr>
+<tr><td></td><td>Karel Bradáč</td><td>Bez Oddílu</td><td>3,9 km</td><td>muži</td><td>20:12</td><td>2014</td></tr>
+<tr><td></td><td>Aneta Závacká</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>20:14</td><td>2021</td></tr>
+<tr><td></td><td>Tereza Farská</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>20:14</td><td>2021</td></tr>
+<tr><td></td><td>Jaroslav Brückler</td><td>Rugby Club Liberec</td><td>3,9 km</td><td>muži</td><td>20:15</td><td>2018</td></tr>
+<tr><td></td><td>Martina Lajtkepová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>20:19</td><td>2015</td></tr>
+<tr><td></td><td>Rozárie Pospíšilová</td><td></td><td>3,9 km</td><td>žákyně</td><td>20:19</td><td>2021</td></tr>
+<tr><td></td><td>Leona Voldánová</td><td>Ac Jablonec</td><td>3,9 km</td><td>žákyně</td><td>20:21</td><td>2021</td></tr>
+<tr><td></td><td>Jitka Gittlerová</td><td>Bk Manušice</td><td>3,9 km</td><td>dorostenky</td><td>20:29</td><td>2016</td></tr>
+<tr><td></td><td>Vavro Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>20:30</td><td>2023</td></tr>
+<tr><td></td><td>Martin Lenz</td><td>Ck Harmonie</td><td>3,9 km</td><td>muži</td><td>20:32</td><td>2023</td></tr>
+<tr><td></td><td>Stanislav Šourek</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>20:35</td><td>2023</td></tr>
+<tr><td></td><td>Tereza Farská</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>20:35</td><td>2018</td></tr>
+<tr><td></td><td>Martin Lenz</td><td></td><td>3,9 km</td><td>muži</td><td>20:37</td><td>2021</td></tr>
+<tr><td></td><td>Věra Drhlíková</td><td>Horobraní</td><td>3,9 km</td><td>ženy</td><td>20:39</td><td>2023</td></tr>
+<tr><td></td><td>Lukáš Svoboda</td><td></td><td>3,9 km</td><td>muži</td><td>20:41</td><td>2018</td></tr>
+<tr><td></td><td>Martin Krčmář</td><td>Vratislavice</td><td>3,9 km</td><td>muži</td><td>20:44</td><td>2016</td></tr>
+<tr><td></td><td>Věra Dubcová</td><td></td><td>3,9 km</td><td>ženy 40+</td><td>20:45</td><td>2022</td></tr>
+<tr><td></td><td>Věra Drhlíková</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>20:48</td><td>2018</td></tr>
+<tr><td></td><td>Tatiana Lekhanová</td><td></td><td>3,9 km</td><td>ženy</td><td>20:50</td><td>2012</td></tr>
+<tr><td></td><td>Filip Haken</td><td>Runboteam Liberec</td><td>3,9 km</td><td>žáci</td><td>20:52</td><td>2019</td></tr>
+<tr><td></td><td>Sylwia Paulusova</td><td></td><td>3,9 km</td><td>ženy</td><td>20:54</td><td>2016</td></tr>
+<tr><td></td><td>Veronika Andrýsková</td><td>Nadšenců</td><td>3,9 km</td><td>ženy 40+</td><td>20:55</td><td>2019</td></tr>
+<tr><td></td><td>Irena Steblová</td><td>Janov Nad Nisou</td><td>3,9 km</td><td>ženy 40+</td><td>20:57</td><td>2023</td></tr>
+<tr><td></td><td>Tereza Farská</td><td>Klub Biatlonu Liberec</td><td>3,9 km</td><td>žákyně</td><td>21:03</td><td>2022</td></tr>
+<tr><td></td><td>Adéla Králová</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>21:08</td><td>2023</td></tr>
+<tr><td></td><td>Tomáš Vencl</td><td></td><td>3,9 km</td><td>muži 40+</td><td>21:08</td><td>2018</td></tr>
+<tr><td></td><td>František Rambousek</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>21:10</td><td>2011</td></tr>
+<tr><td></td><td>Miloš Hanďák</td><td></td><td>3,9 km</td><td>muži</td><td>21:14</td><td>2022</td></tr>
+<tr><td></td><td>Stanislav Vašátko</td><td></td><td>3,9 km</td><td>muži</td><td>21:16</td><td>2021</td></tr>
+<tr><td></td><td>Věra Drhlíková</td><td>Horobraní</td><td>3,9 km</td><td>ženy</td><td>21:17</td><td>2021</td></tr>
+<tr><td></td><td>Jolana Závacká</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>21:24</td><td>2018</td></tr>
+<tr><td></td><td>Lucie Janouskova</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žákyně</td><td>21:26</td><td>2021</td></tr>
+<tr><td></td><td>Veronika Bumbálková</td><td></td><td>3,9 km</td><td>ženy</td><td>21:26</td><td>2013</td></tr>
+<tr><td></td><td>Míša Švejnohová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>21:30</td><td>2011</td></tr>
+<tr><td></td><td>Teresa Kosek</td><td>Tennis Zalesi</td><td>3,9 km</td><td>žákyně</td><td>21:32</td><td>2018</td></tr>
+<tr><td></td><td>Petr Kosek</td><td>Tennis Rychnov</td><td>3,9 km</td><td>muži 40+</td><td>21:33</td><td>2018</td></tr>
+<tr><td></td><td>Luděk Kučera</td><td>Liberec</td><td>3,9 km</td><td>muži 50+</td><td>21:34</td><td>2019</td></tr>
+<tr><td></td><td>Monika Miartušová</td><td>Beko</td><td>3,9 km</td><td>ženy</td><td>21:35</td><td>2019</td></tr>
+<tr><td></td><td>Martina Drozdová</td><td>Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>21:36</td><td>2023</td></tr>
+<tr><td></td><td>Patrik Drhlík</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>21:40</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Sakmary</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>21:42</td><td>2012</td></tr>
+<tr><td></td><td>Filip Svatoš</td><td>Lioko Liberec Kajak</td><td>3,9 km</td><td>žáci</td><td>21:49</td><td>2022</td></tr>
+<tr><td></td><td>Iva Sakmaryová</td><td></td><td>3,9 km</td><td>ženy</td><td>21:50</td><td>2012</td></tr>
+<tr><td></td><td>Lukáš Svoboda</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>21:51</td><td>2017</td></tr>
+<tr><td></td><td>Romča Kubínová</td><td>Tj Slovan Karlovy Vary</td><td>3,9 km</td><td>ženy</td><td>21:58</td><td>2018</td></tr>
+<tr><td></td><td>Standa Vašátko</td><td>Rugby club Liberec / Horobraní</td><td>3,9 km</td><td>muži</td><td>22:00</td><td>2022</td></tr>
+<tr><td></td><td>Jiří Strašlipka</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>22:02</td><td>2021</td></tr>
+<tr><td></td><td>Klára Hoffmannová</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>ženy</td><td>22:03</td><td>2019</td></tr>
+<tr><td></td><td>Radka Krejcarová</td><td>Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>22:03</td><td>2023</td></tr>
+<tr><td></td><td>Milan Haken</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>22:04</td><td>2019</td></tr>
+<tr><td></td><td>Lucie Šalovská</td><td>Chrastava</td><td>3,9 km</td><td>ženy</td><td>22:06</td><td>2023</td></tr>
+<tr><td></td><td>Nikola Hettfleischová</td><td>Kanoistika Jablonec</td><td>3,9 km</td><td>ženy</td><td>22:09</td><td>2019</td></tr>
+<tr><td></td><td>Petr Lajtkep</td><td>Pomalí Kluci</td><td>3,9 km</td><td>žáci</td><td>22:10</td><td>2018</td></tr>
+<tr><td></td><td>Rozarie Pospíšilová</td><td>Rk Jablonec Nad Nisou</td><td>3,9 km</td><td>žákyně</td><td>22:12</td><td>2022</td></tr>
+<tr><td></td><td>Zbigniew Cikacz</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>22:12</td><td>2019</td></tr>
+<tr><td></td><td>Adéla Králová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>22:15</td><td>2011</td></tr>
+<tr><td></td><td>Nikola Janatová</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>ženy</td><td>22:15</td><td>2011</td></tr>
+<tr><td></td><td>Martin Lenz</td><td>Ck Harmonie</td><td>3,9 km</td><td>muži</td><td>22:17</td><td>2022</td></tr>
+<tr><td></td><td>Andrea Hlavatá</td><td>Ok Chrastava</td><td>3,9 km</td><td>ženy</td><td>22:18</td><td>2012</td></tr>
+<tr><td></td><td>Radka Krejcarová</td><td></td><td>3,9 km</td><td>ženy 40+</td><td>22:27</td><td>2019</td></tr>
+<tr><td></td><td>Karel Šebelka</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži 60+</td><td>22:29</td><td>2016</td></tr>
+<tr><td></td><td>Stanislav Vašátko</td><td>Rugby Club Liberec</td><td>3,9 km</td><td>muži</td><td>22:30</td><td>2019</td></tr>
+<tr><td></td><td>Robert Tišer</td><td>Liberec</td><td>3,9 km</td><td>muži 50+</td><td>22:32</td><td>2015</td></tr>
+<tr><td></td><td>Klára Husáková</td><td>Ac Hranolkáči</td><td>3,9 km</td><td>ženy</td><td>22:34</td><td>2015</td></tr>
+<tr><td></td><td>Tereza Hettfleischová</td><td>Kanoistika Jablonec</td><td>3,9 km</td><td>juniorky</td><td>22:36</td><td>2019</td></tr>
+<tr><td></td><td>Tomáš Málek</td><td>Beko</td><td>3,9 km</td><td>muži</td><td>22:37</td><td>2019</td></tr>
+<tr><td></td><td>Simona Jakimičová</td><td></td><td>3,9 km</td><td>ženy 40+</td><td>22:39</td><td>2019</td></tr>
+<tr><td></td><td>Jozef Nováček</td><td>Runbo Team</td><td>3,9 km</td><td>muži</td><td>22:40</td><td>2023</td></tr>
+<tr><td></td><td>Miroslav Habel</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>22:42</td><td>2021</td></tr>
+<tr><td></td><td>Jan Schulhof</td><td>Oob Tj Turnov</td><td>3,9 km</td><td>muži</td><td>22:43</td><td>2022</td></tr>
+<tr><td></td><td>Tomas Svoboda</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži</td><td>22:45</td><td>2021</td></tr>
+<tr><td></td><td>Jozef Nováček</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži</td><td>22:51</td><td>2019</td></tr>
+<tr><td></td><td>Radka Krejcarová</td><td></td><td>3,9 km</td><td>ženy</td><td>22:51</td><td>2013</td></tr>
+<tr><td></td><td>Dominika Lejsková</td><td>Rekreačníci</td><td>3,9 km</td><td>ženy</td><td>22:54</td><td>2011</td></tr>
+<tr><td></td><td>Šárka Stanovská</td><td>Rekreačníci</td><td>3,9 km</td><td>ženy</td><td>22:54</td><td>2011</td></tr>
+<tr><td></td><td>Alexandr Jakimič</td><td></td><td>3,9 km</td><td>muži</td><td>22:55</td><td>2019</td></tr>
+<tr><td></td><td>Lumir Drhlik</td><td>Rozbéhame Neratovice</td><td>3,9 km</td><td>muži 40+</td><td>22:59</td><td>2021</td></tr>
+<tr><td></td><td>Jakub Habel</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>žáci</td><td>23:01</td><td>2018</td></tr>
+<tr><td></td><td>Veronika Šťastná</td><td>Ekopark Liberec</td><td>3,9 km</td><td>žákyně</td><td>23:04</td><td>2018</td></tr>
+<tr><td></td><td>Stanislav Vašátko</td><td>Rugby Club Liberec</td><td>3,9 km</td><td>muži</td><td>23:08</td><td>2023</td></tr>
+<tr><td></td><td>Zuzana Šťastná</td><td>Biatlon Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>23:10</td><td>2021</td></tr>
+<tr><td></td><td>Ivana Tišerová</td><td>Wolkerovka</td><td>3,9 km</td><td>ženy 50+</td><td>23:25</td><td>2016</td></tr>
+<tr><td></td><td>Miroslav Habel</td><td>Míra Chodec Liberec</td><td>3,9 km</td><td>muži 40+</td><td>23:29</td><td>2023</td></tr>
+<tr><td></td><td>Andrea Rousová</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>23:31</td><td>2018</td></tr>
+<tr><td></td><td>Pavel Cvejn</td><td>Hubertovka</td><td>3,9 km</td><td>muži 40+</td><td>23:33</td><td>2017</td></tr>
+<tr><td></td><td>Andrea Siváková</td><td>Kanoistika Liberec</td><td>3,9 km</td><td>žákyně</td><td>23:36</td><td>2019</td></tr>
+<tr><td></td><td>Ivana Tišerová</td><td>Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>23:37</td><td>2021</td></tr>
+<tr><td></td><td>Lucie Jelínková</td><td>Jablonec Nad Nisou</td><td>3,9 km</td><td>ženy</td><td>23:37</td><td>2023</td></tr>
+<tr><td></td><td>Tereza Šípková</td><td>Biatlon Liberec</td><td>3,9 km</td><td>ženy 40+</td><td>23:44</td><td>2022</td></tr>
+<tr><td></td><td>Anežka Houžvičková</td><td>Jdu To Zkusit</td><td>3,9 km</td><td>ženy</td><td>23:46</td><td>2018</td></tr>
+<tr><td></td><td>Petr Mach</td><td>Beko</td><td>3,9 km</td><td>muži</td><td>23:48</td><td>2019</td></tr>
+<tr><td></td><td>Agáta Neckářová</td><td>Kb Liberec</td><td>3,9 km</td><td>žákyně</td><td>23:53</td><td>2019</td></tr>
+<tr><td></td><td>Tereza Habelová</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>žákyně</td><td>24:00</td><td>2018</td></tr>
+<tr><td></td><td>Filip Adamec</td><td>Jablonec Nad Nisou</td><td>3,9 km</td><td>žáci</td><td>24:03</td><td>2019</td></tr>
+<tr><td></td><td>Julie Drozdová</td><td>Lokomotiva Liberec</td><td>3,9 km</td><td>žákyně</td><td>24:11</td><td>2022</td></tr>
+<tr><td></td><td>Ivana Tišerová</td><td>Wolkerovka</td><td>3,9 km</td><td>ženy 50+</td><td>24:12</td><td>2017</td></tr>
+<tr><td></td><td>Štěpánka Maršíková</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>ženy</td><td>24:12</td><td>2019</td></tr>
+<tr><td></td><td>Václav Havel</td><td>Ac Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>24:18</td><td>2016</td></tr>
+<tr><td></td><td>Milena Jurigová</td><td></td><td>3,9 km</td><td>ženy</td><td>24:20</td><td>2018</td></tr>
+<tr><td></td><td>Míra Habel</td><td>Vratislavice</td><td>3,9 km</td><td>muži 40+</td><td>24:22</td><td>2016</td></tr>
+<tr><td></td><td>Dana Skrbková</td><td></td><td>3,9 km</td><td>ženy 40+</td><td>24:30</td><td>2018</td></tr>
+<tr><td></td><td>Matěj Krůpa</td><td></td><td>3,9 km</td><td>muži</td><td>24:31</td><td>2021</td></tr>
+<tr><td></td><td>Adéla Cvrkalová</td><td></td><td>3,9 km</td><td>ženy</td><td>24:32</td><td>2021</td></tr>
+<tr><td></td><td>Anežka Houžvičková</td><td></td><td>3,9 km</td><td>ženy</td><td>24:32</td><td>2021</td></tr>
+<tr><td></td><td>Radek Horálek</td><td></td><td>3,9 km</td><td>muži</td><td>24:52</td><td>2019</td></tr>
+<tr><td></td><td>Lucie Němečková</td><td>Vratislavice n.N.</td><td>3,9 km</td><td>ženy</td><td>24:57</td><td>2015</td></tr>
+<tr><td></td><td>Stanislav Vašátko</td><td>RC Liberec / AC Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>25:01</td><td>2018</td></tr>
+<tr><td></td><td>Anna Ráchel Breňová</td><td>Rychlostní Kanoistika Rk Jablonec</td><td>3,9 km</td><td>žákyně</td><td>25:02</td><td>2021</td></tr>
+<tr><td></td><td>Nicol Bena</td><td></td><td>3,9 km</td><td>ženy</td><td>25:03</td><td>2021</td></tr>
+<tr><td></td><td>Štěpánka Maršíková</td><td></td><td>3,9 km</td><td>ženy</td><td>25:20</td><td>2018</td></tr>
+<tr><td></td><td>Věra Pospíšilová</td><td>Kanoistika Jablonec</td><td>3,9 km</td><td>ženy 40+</td><td>25:21</td><td>2019</td></tr>
+<tr><td></td><td>Anna Skoupá</td><td>Sama</td><td>3,9 km</td><td>ženy 40+</td><td>25:30</td><td>2018</td></tr>
+<tr><td></td><td>Jan Denton</td><td>Lukov</td><td>3,9 km</td><td>muži 40+</td><td>25:31</td><td>2017</td></tr>
+<tr><td></td><td>Julie Drozdová</td><td>Tj Lokomotiva Liberec</td><td>3,9 km</td><td>žákyně</td><td>25:31</td><td>2023</td></tr>
+<tr><td></td><td>Milena Jurigová</td><td>Ac Hranolkáči</td><td>3,9 km</td><td>ženy</td><td>25:32</td><td>2015</td></tr>
+<tr><td></td><td>Edita Pretorius</td><td></td><td>3,9 km</td><td>ženy</td><td>25:34</td><td>2019</td></tr>
+<tr><td></td><td>Kristýna Stolarzová</td><td></td><td>3,9 km</td><td>žákyně</td><td>25:37</td><td>2019</td></tr>
+<tr><td></td><td>Katerina Kotkova</td><td></td><td>3,9 km</td><td>ženy</td><td>25:49</td><td>2019</td></tr>
+<tr><td></td><td>Lumír Drhlík</td><td></td><td>3,9 km</td><td>muži 40+</td><td>25:54</td><td>2018</td></tr>
+<tr><td></td><td>Lumír Drhlík</td><td>Běžci Neratovice</td><td>3,9 km</td><td>muži 40+</td><td>26:10</td><td>2019</td></tr>
+<tr><td></td><td>Martina Chichimilova</td><td></td><td>3,9 km</td><td>ženy</td><td>26:18</td><td>2012</td></tr>
+<tr><td></td><td>Miroslav Habel</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 50+</td><td>26:19</td><td>2019</td></tr>
+<tr><td></td><td>Miroslav Habel</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>27:03</td><td>2018</td></tr>
+<tr><td></td><td>Lenka Zemachová</td><td>Kanoistika Jablonec</td><td>3,9 km</td><td>ženy 40+</td><td>28:30</td><td>2019</td></tr>
+<tr><td></td><td>Marek Dlouhý</td><td>Ostříží Hlídka</td><td>3,9 km</td><td>muži 40+</td><td>28:41</td><td>2018</td></tr>
+<tr><td></td><td>Hlavatá Petra</td><td>Ac Hranolkáči</td><td>3,9 km</td><td>ženy</td><td>29:34</td><td>2015</td></tr>
+<tr><td></td><td>Lenka Berková</td><td>Rychlostní Kanoistika Rk Jablonec</td><td>3,9 km</td><td>žákyně</td><td>30:03</td><td>2021</td></tr>
+<tr><td></td><td>Martin Vondráček</td><td></td><td>3,9 km</td><td>muži</td><td>30:06</td><td>2021</td></tr>
+<tr><td></td><td>Barbora Slezáková</td><td>Swsl Lučany Nad Nisou</td><td>3,9 km</td><td>žákyně</td><td>30:16</td><td>2021</td></tr>
+<tr><td></td><td>Martina Procházková</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>30:30</td><td>2023</td></tr>
+<tr><td></td><td>Jiří Paulus</td><td>Liberec</td><td>3,9 km</td><td>muži 40+</td><td>32:19</td><td>2023</td></tr>
+<tr><td></td><td>Petra Bartošová</td><td>Já to běžet nechtěl :D</td><td>3,9 km</td><td>ženy</td><td>32:31</td><td>2023</td></tr>
+<tr><td></td><td>Hynek Němec</td><td>Runbo Team Liberec</td><td>3,9 km</td><td>muži 40+</td><td>33:12</td><td>2021</td></tr>
+<tr><td></td><td>Lenka Němcová</td><td></td><td>3,9 km</td><td>ženy</td><td>34:13</td><td>2021</td></tr>
+<tr><td></td><td>Petr Jarabica</td><td>Sám Za Sebe</td><td>3,9 km</td><td>muži 40+</td><td>40:38</td><td>2018</td></tr>
+<tr><td></td><td>Jakub Mládek</td><td>Biatlon Liberec</td><td>3,9 km</td><td>muži 40+</td><td>15:27</td><td>2025</td></tr>
+<tr><td></td><td>Petr Urbánek</td><td>Pomalí kluci</td><td>3,9 km</td><td>muži 40+</td><td>15:47</td><td>2025</td></tr>
+<tr><td></td><td>Lucie Honcová</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>15:52</td><td>2025</td></tr>
+<tr><td></td><td>Matěj Kuc</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>18:37</td><td>2025</td></tr>
+<tr><td></td><td>Vít Pavlišta</td><td>Pomalí kluci</td><td>3,9 km</td><td>muži</td><td>12:46</td><td>2025</td></tr>
+<tr><td></td><td>Matěj Šebelka</td><td>Slavia Liberec orienteering</td><td>3,9 km</td><td>dorostenci</td><td>13:17</td><td>2025</td></tr>
+<tr><td></td><td>Vojta Galáč</td><td>Mílařky Liberec</td><td>3,9 km</td><td>muži</td><td>14:28</td><td>2025</td></tr>
+<tr><td></td><td>Miloslav Petrášek</td><td>Ac Rumburk</td><td>3,9 km</td><td>muži 40+</td><td>14:31</td><td>2025</td></tr>
+<tr><td></td><td>Michal Roštejnský</td><td>Kerda sport Liberec</td><td>3,9 km</td><td>muži 40+</td><td>14:49</td><td>2025</td></tr>
+<tr><td></td><td>Jiří Krejčík</td><td>Smaženky a machři</td><td>3,9 km</td><td>muži 40+</td><td>15:02</td><td>2025</td></tr>
+<tr><td></td><td>Jan Skrbek</td><td>VIF ELEVEN HEAD CYKLOLIVE TEAM</td><td>3,9 km</td><td>muži</td><td>15:08</td><td>2025</td></tr>
+<tr><td></td><td>Anton Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>15:11</td><td>2025</td></tr>
+<tr><td></td><td>Kristýna Zemanová</td><td>Mílařky Liberec</td><td>3,9 km</td><td>žákyně</td><td>15:11</td><td>2025</td></tr>
+<tr><td></td><td>Amelia Dahmani</td><td>Mílařky Liberec</td><td>3,9 km</td><td>dorostenky</td><td>15:15</td><td>2025</td></tr>
+<tr><td></td><td>Václav Kolář</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>muži</td><td>15:46</td><td>2025</td></tr>
+<tr><td></td><td>Zuzana Kocumová</td><td>ED system RSJ team</td><td>3,9 km</td><td>ženy 40+</td><td>15:50</td><td>2025</td></tr>
+<tr><td></td><td>Patrik Drhlík</td><td>Horobraní</td><td>3,9 km</td><td>muži</td><td>16:28</td><td>2025</td></tr>
+<tr><td></td><td>Ruslan Miekhtiiev</td><td>Loko Liberec</td><td>3,9 km</td><td>dorostenci</td><td>16:38</td><td>2025</td></tr>
+<tr><td></td><td>Karel Sejkora</td><td>Atletika Polička</td><td>3,9 km</td><td>muži</td><td>16:53</td><td>2025</td></tr>
+<tr><td></td><td>Jakub Čížek</td><td>Brandýs Nad Labem - Stará Boleslav</td><td>3,9 km</td><td>muži</td><td>16:58</td><td>2025</td></tr>
+<tr><td></td><td>Ina Kajínková</td><td>Mílařky Liberec</td><td>3,9 km</td><td>žákyně</td><td>17:00</td><td>2025</td></tr>
+<tr><td></td><td>Tomáš Daněk</td><td>Liberec</td><td>3,9 km</td><td>muži</td><td>17:23</td><td>2025</td></tr>
+<tr><td></td><td>Vavro Kubišta</td><td>Biatlon Liberec</td><td>3,9 km</td><td>žáci</td><td>17:26</td><td>2025</td></tr>
+<tr><td></td><td>Tomáš Regner</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:42</td><td>2025</td></tr>
+<tr><td></td><td>Jan Louda</td><td></td><td>3,9 km</td><td>muži 40+</td><td>17:58</td><td>2025</td></tr>
+<tr><td></td><td>Eva Kadlas</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>žákyně</td><td>18:07</td><td>2025</td></tr>
+<tr><td></td><td>Bára Jíšová</td><td>Eleven Run Team</td><td>3,9 km</td><td>ženy</td><td>18:20</td><td>2025</td></tr>
+<tr><td></td><td>Štěpánka Nyklová</td><td></td><td>3,9 km</td><td>žákyně</td><td>18:25</td><td>2025</td></tr>
+<tr><td></td><td>Jan Šebelka</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>muži 40+</td><td>19:00</td><td>2025</td></tr>
+<tr><td></td><td>Lucie Brücklerová</td><td>Liberec</td><td>3,9 km</td><td>ženy</td><td>19:05</td><td>2025</td></tr>
+<tr><td></td><td>David Urbanec</td><td></td><td>3,9 km</td><td>muži 40+</td><td>19:25</td><td>2025</td></tr>
+<tr><td></td><td>Denisa Skrbková</td><td>M tým</td><td>3,9 km</td><td>ženy</td><td>19:28</td><td>2025</td></tr>
+<tr><td></td><td>Tom Málek</td><td>Apolova demoliční četa</td><td>3,9 km</td><td>muži 40+</td><td>19:54</td><td>2025</td></tr>
+<tr><td></td><td>Stanislav Vašátko</td><td></td><td>3,9 km</td><td>muži</td><td>21:19</td><td>2025</td></tr>
+<tr><td></td><td>Anežka Žižková</td><td></td><td>3,9 km</td><td>žákyně</td><td>21:48</td><td>2025</td></tr>
+<tr><td></td><td>Simona Šimonová</td><td></td><td>3,9 km</td><td>dorostenky</td><td>21:57</td><td>2025</td></tr>
+<tr><td></td><td>Karolína Regnerová</td><td></td><td>3,9 km</td><td>žákyně</td><td>23:08</td><td>2025</td></tr>
+<tr><td></td><td>Julie Drozdová</td><td>LOKO LIBEREC</td><td>3,9 km</td><td>žákyně</td><td>24:29</td><td>2025</td></tr>
+<tr><td></td><td>Aylin Bekrová</td><td>Liberec</td><td>100 m</td><td>batolata-holky</td><td>0:23</td><td>2025</td></tr>
+<tr><td></td><td>Tomáš Brückler</td><td>Rugby Club Liberec</td><td>100 m</td><td>batolata-kluci</td><td>0:20</td><td>2025</td></tr>
+<tr><td></td><td>Bořivoj Krejčík</td><td>Jablonec Nad Nisou</td><td>100 m</td><td>batolata-kluci</td><td>0:25</td><td>2025</td></tr>
+<tr><td></td><td>Břetislav Kuc</td><td>AC Slovan Liberec</td><td>100 m</td><td>batolata-kluci</td><td>0:30</td><td>2025</td></tr>
+<tr><td></td><td>Tomáš Kuc</td><td>AC Slovan Liberec</td><td>100 m</td><td>batolata-kluci</td><td>0:35</td><td>2025</td></tr>
+<tr><td></td><td>Teodor Lenkvík</td><td>Kvíčata</td><td>100 m</td><td>batolata-kluci</td><td>0:22</td><td>2025</td></tr>
+<tr><td></td><td>Timothy Matzner</td><td>M tým</td><td>100 m</td><td>batolata-kluci</td><td>0:25</td><td>2025</td></tr>
+<tr><td></td><td>Kryštof Staněk</td><td>Liberec</td><td>100 m</td><td>batolata-kluci</td><td>0:35</td><td>2025</td></tr>
+<tr><td></td><td>Jan Fichtner</td><td>Mníšek</td><td>300 m</td><td>prťata-kluci</td><td>1:04</td><td>2025</td></tr>
+<tr><td></td><td>Matyáš Fichtner</td><td>Mníšek</td><td>300 m</td><td>prťata-kluci</td><td>0:56</td><td>2025</td></tr>
+<tr><td></td><td>Tomáš Samuel Jäger</td><td>ED systém Silvini team</td><td>300 m</td><td>prťata-kluci</td><td>0:55</td><td>2025</td></tr>
+<tr><td></td><td>Vojtěch Kolář</td><td>Trojčata Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:03</td><td>2025</td></tr>
+<tr><td></td><td>Anna Kolářová</td><td>Trojčata Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:05</td><td>2025</td></tr>
+<tr><td></td><td>Marie Kolářová</td><td>Trojčata Liberec</td><td>300 m</td><td>prťata-holky</td><td>1:01</td><td>2025</td></tr>
+<tr><td></td><td>Gréta Kubištová</td><td>Biatlon Liberec</td><td>300 m</td><td>prťata-holky</td><td>0:51</td><td>2025</td></tr>
+<tr><td></td><td>Kira Lenkvíková</td><td>Kvíčata</td><td>300 m</td><td>prťata-holky</td><td>1:02</td><td>2025</td></tr>
+<tr><td></td><td>Ina Málková</td><td>Apolova demoliční četa</td><td>300 m</td><td>prťata-holky</td><td>0:50</td><td>2025</td></tr>
+<tr><td></td><td>Barnabáš Matzner</td><td>M tým</td><td>300 m</td><td>prťata-kluci</td><td>0:58</td><td>2025</td></tr>
+<tr><td></td><td>Anežka Mládková</td><td>Dukla Liberec</td><td>300 m</td><td>prťata-holky</td><td>0:46</td><td>2025</td></tr>
+<tr><td></td><td>Jakub Novotný</td><td>Mílařky Liberec</td><td>300 m</td><td>prťata-kluci</td><td>1:00</td><td>2025</td></tr>
+<tr><td></td><td>Michal Novotný</td><td>Dukla Liberec</td><td>300 m</td><td>prťata-kluci</td><td>0:53</td><td>2025</td></tr>
+<tr><td></td><td>Sára Pavlištová</td><td>SK Ještěd</td><td>300 m</td><td>prťata-holky</td><td>0:52</td><td>2025</td></tr>
+<tr><td></td><td>Zuzana Pavlištová</td><td>SK Ještěd</td><td>300 m</td><td>prťata-holky</td><td>0:54</td><td>2025</td></tr>
+<tr><td></td><td>Emílie Staňková</td><td>TJ Sokol Liberec</td><td>300 m</td><td>prťata-holky</td><td>0:59</td><td>2025</td></tr>
+<tr><td></td><td>Eliška Tomášová</td><td>Liberec 5</td><td>300 m</td><td>prťata-holky</td><td>0:53</td><td>2025</td></tr>
+<tr><td></td><td>Honzík Urbánek</td><td>Liberec</td><td>300 m</td><td>prťata-kluci</td><td>0:47</td><td>2025</td></tr>
+<tr><td></td><td>Hynek Alois Javůrek</td><td>AC Slovan Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:22</td><td>2025</td></tr>
+<tr><td></td><td>Vilém Javůrek</td><td>Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:56</td><td>2025</td></tr>
+<tr><td></td><td>Jonatan Málek</td><td>Apolova demoliční četa</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:49</td><td>2025</td></tr>
+<tr><td></td><td>Ondřej Mládek</td><td>Biatlon Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:04</td><td>2025</td></tr>
+<tr><td></td><td>Eliška Pánková</td><td>Mateřská škola Nová Paka</td><td>700 m</td><td>mlaďáci-holky</td><td>2:40</td><td>2025</td></tr>
+<tr><td></td><td>Jan Tomáš</td><td>Dukla Liberec</td><td>700 m</td><td>mlaďáci-kluci</td><td>2:17</td><td>2025</td></tr>
+<tr><td></td><td>Anička Kadlas</td><td></td><td>700 m</td><td>mlaďáci-holky</td><td>2:15</td><td>2025</td></tr>
+<tr><td></td><td>Tea Třešňáková</td><td></td><td>700 m</td><td>mlaďáci-holky</td><td>2:34</td><td>2025</td></tr>
+<tr><td></td><td>Ema Pradeová</td><td>AC Slovan Liberec</td><td>3,9 km</td><td>dorostenky</td><td>17:40</td><td>2025</td></tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+<script src="vysledky.js?v=5" defer></script>
+
+</main>
+  <footer class="paticka">
+    <div class="paticka-vnitrek">
+      <div>
+        <p><b>O Přeborníka Boudy</b> · 13. ročník · sobota 18.&nbsp;10.&nbsp;2025</p>
+        <p>Liberec, Lidové sady — Bouda</p>
+      </div>
+      <div>
+        <p>Pořadatel: Jan Schulhof · <a href="tel:+420739111338">739 111 338</a> · <a href="mailto:jan.schulhof@gmail.com">jan.schulhof@gmail.com</a></p>
+        <p><a class="fb-odkaz" href="https://www.facebook.com/events/980581833179244" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook" loading="lazy"> Událost na Facebooku</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

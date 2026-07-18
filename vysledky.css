@@ -1,0 +1,153 @@
+/* =========================================================================
+   Výsledky závodu – Přeborník Boudy
+   Vyčištěná verze: sloučené duplicitní bloky, styly back-to-top přesunuty
+   sem z JavaScriptu, odstraněny nadbytečné !important.
+   ========================================================================= */
+
+:root {
+  --barva-hlavni: var(--les, rgb(35, 159, 97));
+  --barva-hlavni-hover: var(--les-tmava, rgb(21, 130, 65));
+  --barva-hlavicka-tabulky: var(--les, rgb(35, 159, 97));
+  --barva-radek-sudy: #F4F8F3;
+  --barva-radek-hover: #E3F0E0;
+}
+
+/* --- Filtry --- */
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+#filters .filter-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+#filters select,
+#searchName {
+  padding: 5px;
+  min-width: 120px;
+}
+.search-box { margin-bottom: 10px; }
+
+/* --- Tlačítka --- */
+#export-buttons button,
+#toggleCols {
+  margin: 5px;
+  padding: 8px 16px;
+  font-family: var(--pismo-nadpis, inherit);
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  font-weight: 600;
+  font-size: .95rem;
+  background: var(--les, rgb(35,159,97));
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s ease;
+}
+#export-buttons button:hover,
+#toggleCols:hover { background: var(--les-tmava, rgb(21,130,65)); }
+#export-buttons button:disabled { opacity: .6; cursor: default; }
+#export-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+}
+
+/* --- Tabulka výsledků --- */
+#resultsTable {
+  border-collapse: collapse;
+  margin: auto;
+  width: auto;
+  font-size: 14px;
+}
+th, td {
+  border: 1px solid var(--linka, #ccc);
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+th {
+  background-color: var(--barva-hlavicka-tabulky);
+  color: #fff;
+  font-family: var(--pismo-nadpis, inherit);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: middle;
+  /* sticky hlavička (pod horní lištou) */
+  position: sticky;
+  top: var(--vyska-listky, 0);
+  z-index: 2;
+}
+/* krycí pás nad záhlavím – zakrývá škvírku, ve které při rolování
+   problikává text řádků zajíždějících pod záhlaví */
+#resultsTable thead th::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 24px;
+  background: var(--papir, #F7F6F1);
+}
+td:nth-child(1), td:nth-child(5), td:nth-child(6), td:nth-child(7) { text-align: center; }
+td:nth-child(2), td:nth-child(3), td:nth-child(4) { text-align: left; }
+
+tbody tr:nth-child(even) { background-color: var(--barva-radek-sudy); }
+tbody tr:hover { background-color: var(--barva-radek-hover); }
+
+/* --- Mobilní zobrazení --- */
+.only-mobile { display: none; }
+
+@media (max-width: 800px) {
+  th {
+    font-size: 13px;
+    padding: 6px 4px;
+  }
+}
+
+@media (max-width: 768px) {
+  .only-mobile { display: inline-block; }
+
+  /* Rok na samostatný řádek a vystředit */
+  #filters .filter-year {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #filters .filter-year label { margin-right: 6px; }
+
+  /* Skrytí sloupců Tým (3) a Kategorie (5) */
+  #resultsTable th:nth-child(3),
+  #resultsTable td:nth-child(3),
+  #resultsTable th:nth-child(5),
+  #resultsTable td:nth-child(5) { display: none; }
+  #resultsTable td:nth-child(2) { white-space: normal; }
+  #resultsTable { min-width: auto; }
+
+  /* Režim "Zobrazit všechny sloupce" */
+  body.show-all-cols #resultsTable th,
+  body.show-all-cols #resultsTable td { display: table-cell !important; }
+  body.show-all-cols #resultsTable { min-width: 680px; }
+  body.show-all-cols #resultsWrapper {
+    max-height: 75vh;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  body.show-all-cols #resultsTable { border-collapse: separate; border-spacing: 0; }
+  body.show-all-cols #resultsTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: var(--barva-hlavicka-tabulky);
+  }
+}
+
