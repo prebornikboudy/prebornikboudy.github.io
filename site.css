@@ -140,7 +140,14 @@ h2.s-faborkem::after {
   color: var(--inkoust);
 }
 
-@media (max-width: 900px) {
+/* Mobil na šířku a menší tablety: všechny sekce přímo v liště, jen zhuštěné */
+@media (min-width: 701px) and (max-width: 1000px) {
+  .hlavni-nav { font-size: .85rem; gap: 0; }
+  .hlavni-nav a { padding: 8px 6px; }
+}
+
+/* Mobil na výšku: menu pod tlačítkem, posuvné, aby byly vždy vidět všechny položky */
+@media (max-width: 700px) {
   .nav-prepinac { display: block; }
   .hlavni-nav {
     display: none;
@@ -154,6 +161,9 @@ h2.s-faborkem::after {
     flex-direction: column;
     padding: 8px;
     gap: 0;
+    max-height: calc(100dvh - var(--vyska-listky));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .hlavni-nav.otevrene { display: flex; }
   .hlavni-nav a { padding: 12px 14px; }
