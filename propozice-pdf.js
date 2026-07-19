@@ -131,6 +131,17 @@
       y += 4;
     }
 
+    // Obecné texty odkazů ("zde", "online zde") nahradit jasným popisem podle adresy
+    function popisOdkazu(a) {
+      const txt = cistyText(a);
+      if (/^(zde|online zde|tady|odkaz)$/i.test(txt)) {
+        const href = a.href || '';
+        if (/registrace/i.test(href)) return 'Registrace zde';
+        if (/startovka/i.test(href))  return 'Startovka zde';
+      }
+      return txt;
+    }
+
     function odkazy(sekce) {
       const links = [...sekce.querySelectorAll('a[href^="http"]')];
       if (!links.length) return;
@@ -138,7 +149,7 @@
       for (const a of links) {
         misto(12);
         doc.setTextColor(...LES);
-        doc.textWithLink('→ ' + cistyText(a) + ':  ' + a.href, M + 6, y, { url: a.href });
+        doc.textWithLink('→ ' + popisOdkazu(a) + ':  ' + a.href, M + 6, y, { url: a.href });
         y += 12;
       }
       y += 4;
