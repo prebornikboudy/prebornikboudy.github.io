@@ -224,7 +224,7 @@
       doc.text(`Strana ${i} / ${stran}`, W - M, H - 20, { align: 'right' });
     }
 
-    doc.save(`propozice-prebornik-boudy-${rok}.pdf`);
+    doc.save(`Propozice_Prebornik_Boudy_${rok}.pdf`);
   }
 
   /* ---------- tlačítko ---------- */

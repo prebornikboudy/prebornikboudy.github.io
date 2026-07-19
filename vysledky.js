@@ -384,7 +384,7 @@
     return '\uFEFF' + aoa.map((r) => r.map(esc).join(';')).join('\n'); // BOM + ; kvůli českému Excelu
   }
 
-  async function exportXLSX(baseName = 'vysledky') {
+  async function exportXLSX(baseName = 'Vysledky_Prebornik_Boudy') {
     const data = getVisibleTableData();
     if (data.length <= 1) { alert('Není co exportovat.'); return; }
 
@@ -456,7 +456,7 @@
     return ready();
   }
 
-  async function exportPDF(baseName = 'vysledky') {
+  async function exportPDF(baseName = 'Vysledky_Prebornik_Boudy') {
     const data = getVisibleTableData();
     if (data.length <= 1) { alert('Není co exportovat.'); return; }
 
@@ -474,19 +474,30 @@
     if (window.NOTO_SANS_BASE64) {
       doc.addFileToVFS('NotoSans-Regular-normal.ttf', window.NOTO_SANS_BASE64);
       doc.addFont('NotoSans-Regular-normal.ttf', 'Noto Sans', 'normal');
+      doc.addFont('NotoSans-Regular-normal.ttf', 'Noto Sans', 'bold');
       doc.setFont('Noto Sans', 'normal');
     } else {
       console.warn('Font data (NOTO_SANS_BASE64) nebyla nalezena!');
     }
 
+    // Nadpis dokumentu
+    const W = doc.internal.pageSize.getWidth();
+    doc.setFontSize(17);
+    doc.setTextColor(14, 74, 46);
+    doc.text('Výsledky závodu O Přeborníka Boudy', W / 2, 52, { align: 'center' });
+    doc.setDrawColor(30, 133, 82);
+    doc.setLineWidth(1.2);
+    doc.line(W / 2 - 110, 62, W / 2 + 110, 62);
+
     doc.autoTable({
       head: [data[0]],
       body: data.slice(1),
-      styles:  { font: 'Noto Sans', fontStyle: 'normal', fontSize: 7, cellPadding: 1.5 },
-      headStyles: { font: 'Noto Sans', fillColor: [224, 224, 224], textColor: [0, 0, 0], fontSize: 7 },
-      alternateRowStyles: { fillColor: [242, 242, 242] },
+      startY: 78,
+      styles:  { font: 'Noto Sans', fontStyle: 'normal', fontSize: 8.5, cellPadding: 3 },
+      headStyles: { font: 'Noto Sans', fillColor: [30, 133, 82], textColor: [255, 255, 255], fontSize: 8.5 },
+      alternateRowStyles: { fillColor: [244, 248, 243] },
       tableWidth: 'auto',
-      margin: { left: 5, right: 5, top: 10, bottom: 10 },
+      margin: { left: 42, right: 42, top: 42, bottom: 42 },
     });
 
     doc.save(`${baseName}.pdf`);
