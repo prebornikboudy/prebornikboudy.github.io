@@ -451,6 +451,20 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
   display: block;
   position: relative;
 }
+/* řádky bez fotky: místo náhledu decentní čudlík s hodinami */
+.foto-spoust-bezfoto {
+  width: 64px;
+  height: 46px;
+  border: 1px dashed var(--linka);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--inkoust-2);
+  font-size: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.foto-bunka:hover .foto-spoust-bezfoto { border-color: var(--les); color: var(--les); }
 /* tečka signalizující, že jsou k dispozici další časy */
 .foto-spoust::after {
   content: "+" attr(data-pocet);
@@ -595,6 +609,20 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
 /* --- Video / mapa ------------------------------------------------------ */
 video { width: 100%; border-radius: var(--radius); box-shadow: var(--stin); background: #000; }
 .mapa-obr img { border-radius: var(--radius); box-shadow: var(--stin); }
+
+/* --- Velké logo na úvodní stránce (jen PC) ---------------------------- */
+.logo-pas {
+  text-align: center;
+  padding: 44px 20px 52px;
+}
+.logo-pas img {
+  max-width: 680px;
+  width: 70%;
+  height: auto;
+}
+@media (max-width: 768px) {
+  .logo-pas { display: none; }
+}
 
 /* --- Patička ---------------------------------------------------------- */
 .paticka {
