@@ -511,7 +511,7 @@
       };
     }
     function setIfExists(el, val) {
-      if (!el || !val) return false;
+      if (!el || val === null || val === undefined) return false;
       if (el.tagName === 'SELECT') {
         const opt = Array.from(el.options).find((o) => o.value === val)
                  || Array.from(el.options).find((o) => (o.text || '').trim() === val);
@@ -548,10 +548,12 @@
         url.searchParams.set('autoexport', exportType);
         url.searchParams.delete('autoxls');
         const st = getState();
-        if (st.cat) url.searchParams.set('cat', st.cat);
-        if (st.trk) url.searchParams.set('trk', st.trk);
-        if (st.yr)  url.searchParams.set('yr',  st.yr);
-        if (st.q)   url.searchParams.set('q',   st.q);
+        // přenést VŠECHNY filtry, i prázdné – prázdná hodnota znamená "Vše"
+        // (jinak by se venku místo "Vše" použilo výchozí nastavení stránky)
+        url.searchParams.set('cat', st.cat);
+        url.searchParams.set('trk', st.trk);
+        url.searchParams.set('yr',  st.yr);
+        if (st.q) url.searchParams.set('q', st.q);
 
         if (isAndroid) {
           const intent = 'intent://' + url.href.replace(/^https?:\/\//, '') +
