@@ -4,6 +4,20 @@
   'use strict';
 
   function init() {
+    /* --- Přesná výška lišty do CSS proměnné (kvůli přilepeným záhlavím tabulek).
+       Měří se skutečná výška, takže po jakékoli změně loga/písma sedí záhlaví
+       přesně pod lištu a nevzniká škvírka, ve které by problikával text. --- */
+    const listka = document.querySelector('.listka');
+    function zmerVysku() {
+      if (!listka) return;
+      const v = Math.round(listka.getBoundingClientRect().height);
+      document.documentElement.style.setProperty('--vyska-listky', v + 'px');
+    }
+    zmerVysku();
+    window.addEventListener('resize', zmerVysku, { passive: true });
+    window.addEventListener('orientationchange', () => setTimeout(zmerVysku, 100));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(zmerVysku);
+
     /* --- Back-to-top šipka: jednotná pro celý web (i pro stránku výsledků,
        kde se na mobilu v režimu všech sloupců scrolluje uvnitř tabulky) --- */
     if (!document.getElementById('backToTop')) {

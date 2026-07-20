@@ -85,7 +85,7 @@ th {
   vertical-align: middle;
   /* sticky hlavička (pod horní lištou) */
   position: sticky;
-  top: calc(var(--vyska-listky, 0px) - 2px);
+  top: calc(var(--vyska-listky, 0px) - 3px);
   z-index: 2;
 }
 td:nth-child(1), td:nth-child(5), td:nth-child(6), td:nth-child(7) { text-align: center; }

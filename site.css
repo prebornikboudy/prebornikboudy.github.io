@@ -24,7 +24,7 @@
   --stin: 0 2px 10px rgba(14, 74, 46, .10);
   --stin-velky: 0 10px 30px rgba(14, 74, 46, .18);
   --max-sirka: 1100px;
-  --vyska-listky: 79px;
+  --vyska-listky: 76px;
 }
 
 * { box-sizing: border-box; }
@@ -148,6 +148,11 @@ h2.s-faborkem::after {
   .hlavni-nav { font-size: 1rem; }
   .hlavni-nav a { padding: 8px 7px; }
   .listka-vnitrek { gap: 8px; }
+}
+/* mobil na šířku: logo v liště zabírá místo sekcím a deformuje se – skrýt ho */
+@media (max-width: 950px) and (max-height: 500px) {
+  .listka-logo { display: none; }
+  .hlavni-nav { margin-left: 0; }
 }
 
 /* Mobil na výšku: menu pod tlačítkem, posuvné, aby byly vždy vidět všechny položky */
@@ -405,7 +410,7 @@ button.tl:disabled { opacity: .6; cursor: default; transform: none; box-shadow: 
   font-weight: 600;
   padding: 10px 12px;
   position: sticky;
-  top: calc(var(--vyska-listky) - 2px);  /* 2 px pod lištu, ať nevzniká škvírka */
+  top: calc(var(--vyska-listky) - 3px);  /* pod lištu, ať nevzniká škvírka */
   z-index: 5;
 }
 .zebricek td {
