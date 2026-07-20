@@ -24,7 +24,7 @@
   --stin: 0 2px 10px rgba(14, 74, 46, .10);
   --stin-velky: 0 10px 30px rgba(14, 74, 46, .18);
   --max-sirka: 1100px;
-  --vyska-listky: 69px;
+  --vyska-listky: 79px;
 }
 
 * { box-sizing: border-box; }
@@ -94,12 +94,12 @@ h2.s-faborkem::after {
 .listka-vnitrek {
   max-width: var(--max-sirka);
   margin: 0 auto;
-  padding: 8px 16px;
+  padding: 6px 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
-.listka-logo img { display: block; height: 52px; width: auto; }
+.listka-logo img { display: block; height: 62px; width: auto; }
 
 .hlavni-nav {
   margin-left: auto;
@@ -109,13 +109,16 @@ h2.s-faborkem::after {
   font-family: var(--pismo-nadpis);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.02rem;
-  letter-spacing: .03em;
+  font-size: 1.22rem;
+  letter-spacing: .02em;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 .hlavni-nav a {
   color: var(--inkoust);
   text-decoration: none;
-  padding: 8px 10px;
+  padding: 8px 9px;
+  white-space: nowrap;
   border-radius: 8px;
   white-space: nowrap;
 }
@@ -125,7 +128,7 @@ h2.s-faborkem::after {
   box-shadow: inset 0 -4px 0 var(--faborek);
   border-radius: 8px 8px 0 0;
 }
-.hlavni-nav a.ven::after { content: " ↗"; font-size: .8em; }
+.hlavni-nav a.ven::after { content: " ↗"; font-size: .72em; }
 
 .nav-prepinac {
   display: none;
@@ -141,9 +144,10 @@ h2.s-faborkem::after {
 }
 
 /* Mobil na šířku a menší tablety: všechny sekce přímo v liště, jen zhuštěné */
-@media (min-width: 701px) and (max-width: 1000px) {
-  .hlavni-nav { font-size: .85rem; gap: 0; }
-  .hlavni-nav a { padding: 8px 6px; }
+@media (min-width: 701px) and (max-width: 1150px) {
+  .hlavni-nav { font-size: 1rem; }
+  .hlavni-nav a { padding: 8px 7px; }
+  .listka-vnitrek { gap: 8px; }
 }
 
 /* Mobil na výšku: menu pod tlačítkem, posuvné, aby byly vždy vidět všechny položky */
@@ -623,11 +627,11 @@ video { width: 100%; border-radius: var(--radius); box-shadow: var(--stin); back
 /* --- Velké logo na úvodní stránce (jen PC) ---------------------------- */
 .logo-pas {
   text-align: center;
-  padding: 44px 20px 52px;
+  padding: 6px 20px 14px;
 }
 .logo-pas img {
-  max-width: 680px;
-  width: 70%;
+  max-width: 560px;
+  width: 58%;
   height: auto;
 }
 @media (max-width: 768px) {
