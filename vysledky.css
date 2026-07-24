@@ -121,7 +121,10 @@ tbody tr:hover { background-color: var(--barva-radek-hover); }
   #resultsTable th:nth-child(5),
   #resultsTable td:nth-child(5) { display: none; }
   #resultsTable td:nth-child(2) { white-space: normal; }
-  #resultsTable { min-width: auto; }
+  #resultsTable { min-width: auto; max-width: 100%; }
+  /* nic nepřetéká přes okraj displeje */
+  #resultsTable th, #resultsTable td { overflow-wrap: anywhere; }
+  #resultsWrapper { max-width: 100%; }
 
   /* Režim "Zobrazit všechny sloupce" */
   /* Režim všech sloupců: tabulka se zhustí tak, aby se celá vešla

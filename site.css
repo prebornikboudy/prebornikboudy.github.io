@@ -33,6 +33,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--papir);
   color: var(--inkoust);
   font-family: var(--pismo-text);
@@ -582,8 +583,33 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
     bottom: auto;
     height: 14px;
   }
-  .zebricek thead th { top: calc(var(--vyska-listky) - 2px); font-size: .9rem; padding: 8px 8px; }
+  .zebricek thead th { top: calc(var(--vyska-listky) - 3px); font-size: .9rem; padding: 8px 8px; }
   .zebricek td { padding: 7px 8px; }
+
+  /* Tabulka se přizpůsobí šířce displeje: sloupce mají podíl z šířky,
+     takže na širším telefonu zůstávají v původní velikosti a na užším
+     se zmenší jen o tolik, kolik je potřeba, aby nic nepřetékalo. */
+  .zebricek { width: 100%; table-layout: fixed; }
+  .zebricek th, .zebricek td { overflow-wrap: anywhere; }
+  .zebricek th:nth-child(1), .zebricek td:nth-child(1) { width: 15%; }
+  .zebricek th:nth-child(2), .zebricek td:nth-child(2) { width: 17%; }
+  .zebricek th:nth-child(3), .zebricek td:nth-child(3) { width: 34%; }
+  .zebricek th:nth-child(4), .zebricek td:nth-child(4) { width: 14%; }
+  .zebricek th:nth-child(5), .zebricek td:nth-child(5) { width: 20%; }
+  .bib { min-width: 0; width: 100%; padding: 3px 4px; }
+  .foto-bunka > a img,
+  .foto-bunka > .foto-spoust img,
+  .foto-spoust-bezfoto { width: 100%; max-width: 64px; height: auto; aspect-ratio: 64 / 46; }
+}
+
+/* Užší telefony: zmenšit okraje stránky, ať má tabulka víc místa */
+@media (max-width: 430px) {
+  .obal { padding-left: 12px; padding-right: 12px; }
+  .zebricek thead th { font-size: .84rem; padding: 7px 4px; letter-spacing: 0; }
+  .zebricek td { padding: 6px 4px; }
+  .bib { font-size: .95rem; padding: 3px 2px; }
+  .zebricek .cas-b { font-size: 1rem; }
+  .foto-spoust-bezfoto { font-size: 1rem; }
 }
 
 /* --- Sponzoři --------------------------------------------------------- */
