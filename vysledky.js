@@ -7,7 +7,7 @@
 (function () {
   'use strict';
 
-  const VERZE = 'vysledky.js v7 (vlastní XLSX + logo v PDF)';
+  const VERZE = 'vysledky.js v8 (vlastní XLSX + logo v PDF)';
   console.log('%c' + VERZE, 'background:#1E8552;color:#fff;padding:2px 6px;border-radius:3px');
 
   /* ---------------------------------------------------------------------
@@ -365,6 +365,35 @@
     return rows;
   }
 
+  /* Stažení souboru. Na dotykových zařízeních zkusí systémové sdílení,
+     ale jeho selhání (např. zákaz u file:// nebo odmítnutí uživatelem)
+     nikdy nesmí shodit export – vždy se pak stáhne normálně. */
+  function stahniSoubor(blob, nazev) {
+    const odkazem = () => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = nazev;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 15000);
+    };
+
+    const dotykove = window.matchMedia && window.matchMedia('(hover: none)').matches;
+    if (dotykove && navigator.canShare) {
+      try {
+        const soubor = new File([blob], nazev, { type: blob.type });
+        if (navigator.canShare({ files: [soubor] })) {
+          navigator.share({ files: [soubor], title: nazev })
+            .catch((e) => { console.warn('[export] sdílení selhalo, stahuji přímo', e); odkazem(); });
+          return;
+        }
+      } catch (e) {
+        console.warn('[export] sdílení nedostupné, stahuji přímo', e);
+      }
+    }
+    odkazem();
+  }
+
   function withButtonBusy(btn, busyText, fn) {
     return async () => {
       const original = btn.textContent;
@@ -426,17 +455,7 @@
           sloupecVyplne: SLOUPEC_CAS,
           barvaVyplne: BARVA_CAS,
         });
-        const xFile = new File([xBlob], `${baseName}.xlsx`, { type: xBlob.type });
-        if (navigator.canShare && navigator.canShare({ files: [xFile] })) {
-          await navigator.share({ files: [xFile], title: baseName });
-        } else {
-          const url = URL.createObjectURL(xBlob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${baseName}.xlsx`;
-          document.body.appendChild(a); a.click(); a.remove();
-          setTimeout(() => URL.revokeObjectURL(url), 15000);
-        }
+        stahniSoubor(xBlob, `${baseName}.xlsx`);
         return;
       } catch (e) {
         duvodSelhani = 'Chyba při tvorbě sešitu: ' + (e && e.message ? e.message : e);
