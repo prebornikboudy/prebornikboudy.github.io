@@ -591,11 +591,20 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
      se zmenší jen o tolik, kolik je potřeba, aby nic nepřetékalo. */
   .zebricek { width: 100%; table-layout: fixed; }
   .zebricek th, .zebricek td { overflow-wrap: anywhere; }
-  .zebricek th:nth-child(1), .zebricek td:nth-child(1) { width: 15%; }
-  .zebricek th:nth-child(2), .zebricek td:nth-child(2) { width: 17%; }
-  .zebricek th:nth-child(3), .zebricek td:nth-child(3) { width: 34%; }
+  .zebricek th:nth-child(1), .zebricek td:nth-child(1) { width: 14%; }
+  .zebricek th:nth-child(2), .zebricek td:nth-child(2) { width: 16%; }
+  .zebricek th:nth-child(3), .zebricek td:nth-child(3) { width: 35%; }
   .zebricek th:nth-child(4), .zebricek td:nth-child(4) { width: 14%; }
-  .zebricek th:nth-child(5), .zebricek td:nth-child(5) { width: 20%; }
+  .zebricek th:nth-child(5), .zebricek td:nth-child(5) { width: 21%; }
+  /* pořadí, čas a rok se nikdy nelámou – zalomí se jen jméno */
+  .zebricek td:nth-child(1), .zebricek td:nth-child(2), .zebricek td:nth-child(4),
+  .zebricek th:nth-child(1), .zebricek th:nth-child(2), .zebricek th:nth-child(4) {
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
+  /* místo pro štítek +N, ať nepřetéká přes okraj tabulky */
+  .zebricek td:nth-child(5) { padding-right: 12px; }
+  .foto-spoust::after { right: -4px; }
   .bib { min-width: 0; width: 100%; padding: 3px 4px; }
   .foto-bunka > a img,
   .foto-bunka > .foto-spoust img,
@@ -608,7 +617,8 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
   .zebricek thead th { font-size: .84rem; padding: 7px 4px; letter-spacing: 0; }
   .zebricek td { padding: 6px 4px; }
   .bib { font-size: .95rem; padding: 3px 2px; }
-  .zebricek .cas-b { font-size: 1rem; }
+  .zebricek .cas-b { font-size: .95rem; }
+  .zebricek td:nth-child(4) { font-size: .82rem; }
   .foto-spoust-bezfoto { font-size: 1rem; }
 }
 

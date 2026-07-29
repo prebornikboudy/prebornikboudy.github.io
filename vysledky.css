@@ -155,3 +155,10 @@ tbody tr:hover { background-color: var(--barva-radek-hover); }
   body.show-all-cols #resultsTable td:nth-child(7) { white-space: nowrap; }
 }
 
+
+/* --- Nejužší telefony: víc místa pro tabulku výsledků ----------------- */
+@media (max-width: 430px) {
+  #resultsTable { font-size: 13px; }
+  #resultsTable th { padding: 6px 5px; }
+  #resultsTable td { padding: 6px 5px; }
+}
