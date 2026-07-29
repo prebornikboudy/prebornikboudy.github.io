@@ -7,6 +7,9 @@
 (function () {
   'use strict';
 
+  const VERZE = 'vysledky.js v7 (vlastní XLSX + logo v PDF)';
+  console.log('%c' + VERZE, 'background:#1E8552;color:#fff;padding:2px 6px;border-radius:3px');
+
   /* ---------------------------------------------------------------------
      0) Pomocné funkce (sdílené v celém souboru)
      --------------------------------------------------------------------- */
@@ -54,8 +57,13 @@
       if (document.querySelector(`script[src="${src}"]`)) return resolve(true);
       const s = document.createElement('script');
       s.src = src;
-      s.onload = () => resolve(true);
-      s.onerror = () => reject(new Error('Nepodařilo se načíst: ' + src));
+      let hotovo = false;
+      const dokonci = (fn, arg) => { if (!hotovo) { hotovo = true; clearTimeout(hlidac); fn(arg); } };
+      // pojistka: kdyby prohlížeč neohlásil ani úspěch, ani chybu
+      const hlidac = setTimeout(
+        () => dokonci(reject, new Error('Vypršel čas při načítání: ' + src)), 20000);
+      s.onload = () => dokonci(resolve, true);
+      s.onerror = () => dokonci(reject, new Error('Nepodařilo se načíst: ' + src));
       document.head.appendChild(s);
     });
     return _scriptPromises[src];
@@ -368,13 +376,34 @@
   }
 
   /* ---------------------------------------------------------------------
-     11) Export do Excelu (SheetJS se načítá až při kliknutí)
+     11) Export do Excelu (vlastní zapisovač, žádná externí knihovna)
      --------------------------------------------------------------------- */
+  let duvodSelhani = '';
+
+  const SIRKY = [9.5, 22.25, 35.375, 7.25, 12.5, 6.125, 6.5];
+  const BARVA_HLAVICKY = 'FFFDEADA';
+  const BARVA_CAS = 'FFEBF1DE';
+  const SLOUPEC_CAS = 6;   // F = ČAS
+
   async function ensureXLSX() {
-    if (window.XLSX?.utils && window.XLSX.writeFile) return true;
-    try { await loadScriptOnce('xlsx.full.min.js?v=4'); } catch (e) { console.error(e); }
-    return !!(window.XLSX?.utils && window.XLSX.writeFile);
+    if (window.vytvorXLSX) return true;
+    try {
+      await loadScriptOnce('xlsx-export.js');
+    } catch (e) {
+      duvodSelhani = 'Nepodařilo se načíst xlsx-export.js – musí ležet ve stejné složce jako vysledky.html.';
+      console.error('[export]', duvodSelhani, e);
+      return false;
+    }
+    if (!window.vytvorXLSX) {
+      duvodSelhani = 'Soubor xlsx-export.js se načetl, ale nespustil se.';
+      return false;
+    }
+    return true;
   }
+
+  /* ---------------------------------------------------------------------
+     11) Export do Excelu (vlastní zapisovač, žádná externí knihovna)
+     --------------------------------------------------------------------- */
 
   function aoaToCSV(aoa) {
     const esc = (v) => {
@@ -389,22 +418,14 @@
     if (data.length <= 1) { alert('Není co exportovat.'); return; }
 
     if (await ensureXLSX()) {
-      const ws = XLSX.utils.aoa_to_sheet(data);
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Vysledky');
-
-      // 1) přímé stažení
       try {
-        XLSX.writeFile(wb, `${baseName}.xlsx`, { compression: true });
-        return;
-      } catch (e) {
-        console.warn('[export] writeFile selhal, zkouším sdílení/blob', e);
-      }
-
-      // 2) sdílení (mobily) nebo blob download
-      try {
-        const ab = XLSX.write(wb, { bookType: 'xlsx', type: 'array', compression: true });
-        const xBlob = new Blob([ab], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+        const xBlob = window.vytvorXLSX(data, {
+          nazevListu: 'Vysledky',
+          sirky: SIRKY,
+          barvaHlavicky: BARVA_HLAVICKY,
+          sloupecVyplne: SLOUPEC_CAS,
+          barvaVyplne: BARVA_CAS,
+        });
         const xFile = new File([xBlob], `${baseName}.xlsx`, { type: xBlob.type });
         if (navigator.canShare && navigator.canShare({ files: [xFile] })) {
           await navigator.share({ files: [xFile], title: baseName });
@@ -418,8 +439,14 @@
         }
         return;
       } catch (e) {
-        console.warn('[export] blob export selhal, padám na CSV', e);
+        duvodSelhani = 'Chyba při tvorbě sešitu: ' + (e && e.message ? e.message : e);
+        console.error('[export]', duvodSelhani, e);
       }
+    }
+
+    // Sem se dostaneme jen když se XLSX nepovedlo – řekni uživateli proč.
+    if (duvodSelhani && !isInAppBrowser()) {
+      alert('Excel se nepodařilo vytvořit, stahuji náhradní CSV.\n\nDůvod: ' + duvodSelhani);
     }
 
     // 3) CSV fallback (hlavně in-app prohlížeče)
@@ -480,19 +507,30 @@
       console.warn('Font data (NOTO_SANS_BASE64) nebyla nalezena!');
     }
 
-    // Nadpis dokumentu
+    // Logo vlevo nahoře (jen první strana) – když se nepodaří načíst, jede se bez něj
     const W = doc.internal.pageSize.getWidth();
+    try {
+      const logo = new Image();
+      logo.src = 'logo-velke-zelene.png';
+      await (logo.decode ? logo.decode() : new Promise((res, rej) => { logo.onload = res; logo.onerror = rej; }));
+      const sirkaLoga = 112;
+      doc.addImage(logo, 'PNG', 42, 26, sirkaLoga, sirkaLoga * (logo.naturalHeight / logo.naturalWidth));
+    } catch (e) {
+      console.warn('[export] logo se nepodařilo načíst, pokračuji bez něj', e);
+    }
+
+    // Nadpis dokumentu
     doc.setFontSize(17);
     doc.setTextColor(14, 74, 46);
-    doc.text('Výsledky závodu O Přeborníka Boudy', W / 2, 52, { align: 'center' });
+    doc.text('Výsledky závodu O Přeborníka Boudy', W / 2 + 40, 52, { align: 'center' });
     doc.setDrawColor(30, 133, 82);
     doc.setLineWidth(1.2);
-    doc.line(W / 2 - 110, 62, W / 2 + 110, 62);
+    doc.line(W / 2 - 70, 62, W / 2 + 150, 62);
 
     doc.autoTable({
       head: [data[0]],
       body: data.slice(1),
-      startY: 78,
+      startY: 88,
       styles:  { font: 'Noto Sans', fontStyle: 'normal', fontSize: 8.5, cellPadding: 3 },
       headStyles: { font: 'Noto Sans', fillColor: [30, 133, 82], textColor: [255, 255, 255], fontSize: 8.5 },
       alternateRowStyles: { fillColor: [244, 248, 243] },
