@@ -408,12 +408,20 @@
       const a = document.createElement('a');
       a.href = url;
       a.download = nazev;
+      a.rel = 'noopener';
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 15000);
     };
 
-    const dotykove = window.matchMedia && window.matchMedia('(hover: none)').matches;
-    if (dotykove && navigator.canShare) {
+    // Přímé stažení odkazem se používá VŽDY, když ho prohlížeč umí – jako
+    // jediné totiž spolehlivě zachová název souboru. Systémové sdílení
+    // (navigator.share) název nezaručuje: cíl sdílení si běžně vygeneruje
+    // vlastní jméno (časové razítko, náhodné číslo), takže se používá jen
+    // jako záchrana tam, kde atribut download nefunguje (staré iOS Safari).
+    const umiDownload = 'download' in document.createElement('a');
+    if (umiDownload) { odkazem(); return; }
+
+    if (navigator.canShare) {
       try {
         const soubor = new File([blob], nazev, { type: blob.type });
         if (navigator.canShare({ files: [soubor] })) {
@@ -503,18 +511,18 @@
     }
 
     // 3) CSV fallback (hlavně in-app prohlížeče)
-    const dataUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(aoaToCSV(data));
     if (isInAppBrowser()) {
+      const dataUri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(aoaToCSV(data));
       window.location.href = dataUri;
       setTimeout(() => {
         alert('Pro spolehlivé stažení XLSX otevři stránku v Safari/Chrome přes „Otevřít v prohlížeči“ a export zopakuj.');
       }, 600);
       return;
     }
-    const a = document.createElement('a');
-    a.href = dataUri;
-    a.download = `${baseName}.csv`;
-    document.body.appendChild(a); a.click(); a.remove();
+    // data: URI ignoruje atribut download na řadě mobilních prohlížečů
+    // (soubor se pak uloží pod náhodným jménem) – proto Blob.
+    stahniSoubor(new Blob(['\ufeff' + aoaToCSV(data)],
+      { type: 'text/csv;charset=utf-8' }), `${baseName}.csv`);
   }
 
   /* ---------------------------------------------------------------------
@@ -620,7 +628,10 @@
       margin: { left: 42, right: 42, top: 42, bottom: 42 },
     });
 
-    doc.save(`${baseName}.pdf`);
+    // Stažení jde přes stahniSoubor, aby se název souboru choval stejně
+    // na počítači i na mobilu (doc.save() používá vlastní cestu, která
+    // na některých mobilních prohlížečích název nezachová).
+    stahniSoubor(doc.output('blob'), `${baseName}.pdf`);
   }
 
   /* ---------------------------------------------------------------------
