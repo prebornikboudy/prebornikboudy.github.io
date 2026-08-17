@@ -402,6 +402,52 @@
   /* Stažení souboru. Na dotykových zařízeních zkusí systémové sdílení,
      ale jeho selhání (např. zákaz u file:// nebo odmítnutí uživatelem)
      nikdy nesmí shodit export – vždy se pak stáhne normálně. */
+  /* --- Stahování přes Service Worker -----------------------------------
+     Některé prohlížeče (Seznam Prohlížeč na Androidu) ignorují u blob:
+     adresy atribut download a pojmenují soubor podle UUID v adrese.
+     Worker proto soubor vydá na běžné https adrese, jejíž poslední částí
+     je požadovaný název – prohlížeč tak jméno dostane přímo v cestě.
+     Když worker není k dispozici, použije se klasické blob stažení. */
+  let _swPripraven = null;
+  function pripravSW() {
+    if (_swPripraven) return _swPripraven;
+    if (!('serviceWorker' in navigator) || location.protocol === 'file:') {
+      _swPripraven = Promise.resolve(null);
+      return _swPripraven;
+    }
+    _swPripraven = navigator.serviceWorker
+      .register('stahovaci-sw.js')
+      .then(() => navigator.serviceWorker.ready)
+      .then((reg) => reg.active ? reg : null)
+      .catch((e) => { console.warn('[export] Service Worker nedostupný', e); return null; });
+    return _swPripraven;
+  }
+
+  async function stahniPresSW(blob, nazev) {
+    const reg = await pripravSW();
+    if (!reg || !reg.active) return false;
+
+    const klic = 'f' + Date.now() + Math.random().toString(36).slice(2);
+    const data = await blob.arrayBuffer();
+
+    // Počkat na potvrzení, že worker soubor drží, teprve pak stahovat.
+    const potvrzeno = await new Promise((resolve) => {
+      const kanal = new MessageChannel();
+      const casovac = setTimeout(() => resolve(false), 5000);
+      kanal.port1.onmessage = (e) => { clearTimeout(casovac); resolve(!!e.data?.pripraveno); };
+      reg.active.postMessage(
+        { typZpravy: 'pripravSoubor', klic, data, mime: blob.type },
+        [data, kanal.port2]);
+    });
+    if (!potvrzeno) return false;
+
+    const a = document.createElement('a');
+    a.href = `stahni/${encodeURIComponent(nazev)}?klic=${klic}`;
+    a.download = nazev;
+    document.body.appendChild(a); a.click(); a.remove();
+    return true;
+  }
+
   function stahniSoubor(blob, nazev) {
     const odkazem = () => {
       const url = URL.createObjectURL(blob);
@@ -413,27 +459,10 @@
       setTimeout(() => URL.revokeObjectURL(url), 15000);
     };
 
-    // Přímé stažení odkazem se používá VŽDY, když ho prohlížeč umí – jako
-    // jediné totiž spolehlivě zachová název souboru. Systémové sdílení
-    // (navigator.share) název nezaručuje: cíl sdílení si běžně vygeneruje
-    // vlastní jméno (časové razítko, náhodné číslo), takže se používá jen
-    // jako záchrana tam, kde atribut download nefunguje (staré iOS Safari).
-    const umiDownload = 'download' in document.createElement('a');
-    if (umiDownload) { odkazem(); return; }
-
-    if (navigator.canShare) {
-      try {
-        const soubor = new File([blob], nazev, { type: blob.type });
-        if (navigator.canShare({ files: [soubor] })) {
-          navigator.share({ files: [soubor], title: nazev })
-            .catch((e) => { console.warn('[export] sdílení selhalo, stahuji přímo', e); odkazem(); });
-          return;
-        }
-      } catch (e) {
-        console.warn('[export] sdílení nedostupné, stahuji přímo', e);
-      }
-    }
-    odkazem();
+    // 1) Service Worker – zachová název i v prohlížečích, které blob: ignorují
+    stahniPresSW(blob, nazev)
+      .then((ok) => { if (!ok) odkazem(); })
+      .catch((e) => { console.warn('[export] stažení přes SW selhalo', e); odkazem(); });
   }
 
   function withButtonBusy(btn, busyText, fn) {
