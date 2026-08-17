@@ -415,10 +415,18 @@
       _swPripraven = Promise.resolve(null);
       return _swPripraven;
     }
-    _swPripraven = navigator.serviceWorker
-      .register('stahovaci-sw.js')
-      .then(() => navigator.serviceWorker.ready)
-      .then((reg) => reg.active ? reg : null)
+    // POZOR: navigator.serviceWorker.ready se nikdy neodmítne – když se
+    // worker z jakéhokoli důvodu neaktivuje, čekalo by se donekonečna
+    // a export by tiše nic neudělal. Proto tvrdý časový limit.
+    const limit = (slib, ms) => Promise.race([
+      slib,
+      new Promise((res) => setTimeout(() => res(null), ms)),
+    ]);
+    _swPripraven = limit(
+      navigator.serviceWorker.register('stahovaci-sw.js')
+        .then(() => navigator.serviceWorker.ready)
+        .then((reg) => (reg && reg.active) ? reg : null),
+      3000)
       .catch((e) => { console.warn('[export] Service Worker nedostupný', e); return null; });
     return _swPripraven;
   }
@@ -431,13 +439,23 @@
     const data = await blob.arrayBuffer();
 
     // Počkat na potvrzení, že worker soubor drží, teprve pak stahovat.
+    // Buffer se NEpředává v transfer listu – kdyby cesta přes worker
+    // selhala, musí zůstat použitelný pro záložní blob stažení.
     const potvrzeno = await new Promise((resolve) => {
-      const kanal = new MessageChannel();
-      const casovac = setTimeout(() => resolve(false), 5000);
-      kanal.port1.onmessage = (e) => { clearTimeout(casovac); resolve(!!e.data?.pripraveno); };
-      reg.active.postMessage(
-        { typZpravy: 'pripravSoubor', klic, data, mime: blob.type },
-        [data, kanal.port2]);
+      let vyrizeno = false;
+      const dokonci = (v) => { if (!vyrizeno) { vyrizeno = true; resolve(v); } };
+      const casovac = setTimeout(() => dokonci(false), 2000);
+      try {
+        const kanal = new MessageChannel();
+        kanal.port1.onmessage = (e) => { clearTimeout(casovac); dokonci(!!(e.data && e.data.pripraveno)); };
+        reg.active.postMessage(
+          { typZpravy: 'pripravSoubor', klic, data, mime: blob.type },
+          [kanal.port2]);
+      } catch (e) {
+        clearTimeout(casovac);
+        console.warn('[export] předání souboru workeru selhalo', e);
+        dokonci(false);
+      }
     });
     if (!potvrzeno) return false;
 
@@ -449,7 +467,10 @@
   }
 
   function stahniSoubor(blob, nazev) {
+    let hotovo = false;
     const odkazem = () => {
+      if (hotovo) return;
+      hotovo = true;
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -459,10 +480,21 @@
       setTimeout(() => URL.revokeObjectURL(url), 15000);
     };
 
-    // 1) Service Worker – zachová název i v prohlížečích, které blob: ignorují
+    // Pojistka: ať se cestou přes Service Worker stane cokoli (chyba,
+    // zaseknutí, nepodporovaný prohlížeč), soubor se stáhne vždy.
+    const hlidac = setTimeout(odkazem, 4000);
+
     stahniPresSW(blob, nazev)
-      .then((ok) => { if (!ok) odkazem(); })
-      .catch((e) => { console.warn('[export] stažení přes SW selhalo', e); odkazem(); });
+      .then((ok) => {
+        clearTimeout(hlidac);
+        if (ok) { hotovo = true; return; }
+        odkazem();
+      })
+      .catch((e) => {
+        clearTimeout(hlidac);
+        console.warn('[export] stažení přes SW selhalo, stahuji přímo', e);
+        odkazem();
+      });
   }
 
   function withButtonBusy(btn, busyText, fn) {
@@ -770,6 +802,20 @@
     if (xlsBtn) xlsBtn.addEventListener('click', withButtonBusy(xlsBtn, 'Generuji Excel...', () => exportXLSX()));
     const pdfBtn = $('#exportPdfBtn');
     if (pdfBtn) pdfBtn.addEventListener('click', withButtonBusy(pdfBtn, 'Generuji PDF...', () => exportPDF()));
+
+    // Úklid: kdyby v prohlížeči zůstal viset stahovací Service Worker,
+    // který se nikdy neaktivoval, odregistrovat ho – jinak by se u něj
+    // export pokaždé zbytečně zdržoval o časový limit.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then((regs) => {
+        regs.forEach((reg) => {
+          const url = (reg.active || reg.installing || reg.waiting || {}).scriptURL || '';
+          if (url.includes('stahovaci-sw.js') && !reg.active) {
+            reg.unregister().catch(() => {});
+          }
+        });
+      }).catch(() => {});
+    }
 
     prednactiExportniKnihovny();
 
