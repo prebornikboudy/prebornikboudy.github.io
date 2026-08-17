@@ -49,24 +49,58 @@
     return /FBAN|FBAV|FB_IAB|Instagram|Messenger/i.test(ua);
   }
 
-  // Načtení externího skriptu jen jednou (pro lazy-load exportních knihoven)
+  // Načtení externího skriptu jen jednou (pro lazy-load exportních knihoven).
+  // Neúspěch se NEcachuje – další kliknutí smí zkusit stažení znovu bez reloadu.
   const _scriptPromises = {};
   function loadScriptOnce(src) {
     if (_scriptPromises[src]) return _scriptPromises[src];
-    _scriptPromises[src] = new Promise((resolve, reject) => {
-      if (document.querySelector(`script[src="${src}"]`)) return resolve(true);
+
+    const p = new Promise((resolve, reject) => {
+      // Už existující tag: počkat na jeho dokončení, ne slepě hlásit úspěch.
+      const stary = document.querySelector(`script[src="${src}"]`);
+      if (stary) {
+        if (stary.dataset.nacteno === '1') return resolve(true);
+        stary.addEventListener('load', () => resolve(true), { once: true });
+        stary.addEventListener('error',
+          () => reject(new Error('Nepodařilo se načíst: ' + src)), { once: true });
+        return;
+      }
+
       const s = document.createElement('script');
       s.src = src;
       let hotovo = false;
       const dokonci = (fn, arg) => { if (!hotovo) { hotovo = true; clearTimeout(hlidac); fn(arg); } };
       // pojistka: kdyby prohlížeč neohlásil ani úspěch, ani chybu
+      // (60 s – knihovny pro PDF mají dohromady ~1,2 MB a při první návštěvě
+      //  se stahují souběžně se zbytkem stránky)
       const hlidac = setTimeout(
-        () => dokonci(reject, new Error('Vypršel čas při načítání: ' + src)), 20000);
-      s.onload = () => dokonci(resolve, true);
-      s.onerror = () => dokonci(reject, new Error('Nepodařilo se načíst: ' + src));
+        () => dokonci(reject, new Error('Vypršel čas při načítání: ' + src)), 60000);
+      s.onload = () => { s.dataset.nacteno = '1'; dokonci(resolve, true); };
+      s.onerror = () => { s.remove(); dokonci(reject, new Error('Nepodařilo se načíst: ' + src)); };
       document.head.appendChild(s);
     });
-    return _scriptPromises[src];
+
+    _scriptPromises[src] = p;
+    // KLÍČOVÉ: zapomenout neúspěch, jinak by byl web „rozbitý" až do reloadu
+    p.catch(() => { delete _scriptPromises[src]; });
+    return p;
+  }
+
+  // Přednačtení exportních knihoven na pozadí, jakmile se stránka uklidní.
+  // Uživatel pak při kliknutí na export nečeká na stažení ~1,2 MB.
+  function prednactiExportniKnihovny() {
+    const spust = () => {
+      loadScriptOnce('xlsx-export.js?v=2').catch(() => {});
+      loadScriptOnce('data-fontu.js?v=4').catch(() => {});
+      loadScriptOnce('export-skript.js?v=4')
+        .then(() => loadScriptOnce('export-tabulky.js?v=4'))
+        .catch(() => {});
+    };
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(spust, { timeout: 4000 });
+    } else {
+      setTimeout(spust, 2500);
+    }
   }
 
   /* ---------------------------------------------------------------------
@@ -417,7 +451,7 @@
   async function ensureXLSX() {
     if (window.vytvorXLSX) return true;
     try {
-      await loadScriptOnce('xlsx-export.js');
+      await loadScriptOnce('xlsx-export.js?v=2');
     } catch (e) {
       duvodSelhani = 'Nepodařilo se načíst xlsx-export.js – musí ležet ve stejné složce jako vysledky.html.';
       console.error('[export]', duvodSelhani, e);
@@ -667,6 +701,8 @@
     if (xlsBtn) xlsBtn.addEventListener('click', withButtonBusy(xlsBtn, 'Generuji Excel...', () => exportXLSX()));
     const pdfBtn = $('#exportPdfBtn');
     if (pdfBtn) pdfBtn.addEventListener('click', withButtonBusy(pdfBtn, 'Generuji PDF...', () => exportPDF()));
+
+    prednactiExportniKnihovny();
 
     const runAutoExport = initInAppPatch();
     runAutoExport();
