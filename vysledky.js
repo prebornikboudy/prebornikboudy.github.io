@@ -91,7 +91,7 @@
   function prednactiExportniKnihovny() {
     const spust = () => {
       loadScriptOnce('xlsx-export.js?v=2').catch(() => {});
-      loadScriptOnce('data-fontu.js?v=4').catch(() => {});
+      loadScriptOnce('data-fontu.js?v=5').catch(() => {});
       loadScriptOnce('export-skript.js?v=4')
         .then(() => loadScriptOnce('export-tabulky.js?v=4'))
         .catch(() => {});
@@ -526,7 +526,7 @@
        typeof window.jspdf.jsPDF.prototype?.autoTable === 'function'));
     if (ready()) return true;
     try {
-      await loadScriptOnce('data-fontu.js?v=4');       // NOTO_SANS_BASE64
+      await loadScriptOnce('data-fontu.js?v=5');       // NOTO_SANS_BASE64
       await loadScriptOnce('export-skript.js?v=4');    // jsPDF
       await loadScriptOnce('export-tabulky.js?v=4');   // AutoTable plugin
     } catch (e) {
@@ -549,7 +549,13 @@
       return;
     }
 
-    const doc = new window.jspdf.jsPDF({ orientation: 'portrait', unit: 'pt', format: 'a4' });
+    const doc = new window.jspdf.jsPDF({
+      orientation: 'portrait',
+      unit: 'pt',
+      format: 'a4',
+      compress: true,          // Flate komprese všech streamů (font, obrázky, obsah)
+      putOnlyUsedFonts: true,  // nevkládat 14 standardních fontů, které se nepoužijí
+    });
 
     if (window.NOTO_SANS_BASE64) {
       doc.addFileToVFS('NotoSans-Regular-normal.ttf', window.NOTO_SANS_BASE64);
@@ -560,14 +566,37 @@
       console.warn('Font data (NOTO_SANS_BASE64) nebyla nalezena!');
     }
 
-    // Logo vlevo nahoře (jen první strana) – když se nepodaří načíst, jede se bez něj
+    // Logo vlevo nahoře (jen první strana) – když se nepodaří načíst, jede se bez něj.
+    // Logo se před vložením převzorkuje na tiskové rozlišení 300 dpi,
+    // takže se do PDF nevkládá zbytečně velký originál.
     const W = doc.internal.pageSize.getWidth();
+    const sirkaLoga = 112;
     try {
       const logo = new Image();
       logo.src = 'logo-velke-zelene.png';
       await (logo.decode ? logo.decode() : new Promise((res, rej) => { logo.onload = res; logo.onerror = rej; }));
-      const sirkaLoga = 112;
-      doc.addImage(logo, 'PNG', 42, 26, sirkaLoga, sirkaLoga * (logo.naturalHeight / logo.naturalWidth));
+      const pomer = logo.naturalHeight / logo.naturalWidth;
+      const vyskaLoga = sirkaLoga * pomer;
+
+      // Převzorkování na 300 dpi vůči cílové velikosti v dokumentu.
+      // 112 bodů = 3,95 cm; při 300 dpi to odpovídá ~467 px, což je plná
+      // tisková kvalita – v PDF je logo k nerozeznání od originálu, ale
+      // místo několika MB surových dat zabere desítky kB.
+      const DPI = 300;
+      const cilW = Math.round(sirkaLoga / 72 * DPI);
+      const cilH = Math.round(vyskaLoga / 72 * DPI);
+      let obrazek = logo;
+      if (logo.naturalWidth > cilW) {
+        const platno = document.createElement('canvas');
+        platno.width = cilW;
+        platno.height = cilH;
+        const ctx = platno.getContext('2d');
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(logo, 0, 0, cilW, cilH);   // PNG zachová průhlednost
+        obrazek = platno.toDataURL('image/png');
+      }
+      doc.addImage(obrazek, 'PNG', 42, 26, sirkaLoga, vyskaLoga, 'logo', 'FAST');
     } catch (e) {
       console.warn('[export] logo se nepodařilo načíst, pokračuji bez něj', e);
     }
