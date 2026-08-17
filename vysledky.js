@@ -402,99 +402,20 @@
   /* Stažení souboru. Na dotykových zařízeních zkusí systémové sdílení,
      ale jeho selhání (např. zákaz u file:// nebo odmítnutí uživatelem)
      nikdy nesmí shodit export – vždy se pak stáhne normálně. */
-  /* --- Stahování přes Service Worker -----------------------------------
-     Některé prohlížeče (Seznam Prohlížeč na Androidu) ignorují u blob:
-     adresy atribut download a pojmenují soubor podle UUID v adrese.
-     Worker proto soubor vydá na běžné https adrese, jejíž poslední částí
-     je požadovaný název – prohlížeč tak jméno dostane přímo v cestě.
-     Když worker není k dispozici, použije se klasické blob stažení. */
-  let _swPripraven = null;
-  function pripravSW() {
-    if (_swPripraven) return _swPripraven;
-    if (!('serviceWorker' in navigator) || location.protocol === 'file:') {
-      _swPripraven = Promise.resolve(null);
-      return _swPripraven;
-    }
-    // POZOR: navigator.serviceWorker.ready se nikdy neodmítne – když se
-    // worker z jakéhokoli důvodu neaktivuje, čekalo by se donekonečna
-    // a export by tiše nic neudělal. Proto tvrdý časový limit.
-    const limit = (slib, ms) => Promise.race([
-      slib,
-      new Promise((res) => setTimeout(() => res(null), ms)),
-    ]);
-    _swPripraven = limit(
-      navigator.serviceWorker.register('stahovaci-sw.js')
-        .then(() => navigator.serviceWorker.ready)
-        .then((reg) => (reg && reg.active) ? reg : null),
-      3000)
-      .catch((e) => { console.warn('[export] Service Worker nedostupný', e); return null; });
-    return _swPripraven;
-  }
-
-  async function stahniPresSW(blob, nazev) {
-    const reg = await pripravSW();
-    if (!reg || !reg.active) return false;
-
-    const klic = 'f' + Date.now() + Math.random().toString(36).slice(2);
-    const data = await blob.arrayBuffer();
-
-    // Počkat na potvrzení, že worker soubor drží, teprve pak stahovat.
-    // Buffer se NEpředává v transfer listu – kdyby cesta přes worker
-    // selhala, musí zůstat použitelný pro záložní blob stažení.
-    const potvrzeno = await new Promise((resolve) => {
-      let vyrizeno = false;
-      const dokonci = (v) => { if (!vyrizeno) { vyrizeno = true; resolve(v); } };
-      const casovac = setTimeout(() => dokonci(false), 2000);
-      try {
-        const kanal = new MessageChannel();
-        kanal.port1.onmessage = (e) => { clearTimeout(casovac); dokonci(!!(e.data && e.data.pripraveno)); };
-        reg.active.postMessage(
-          { typZpravy: 'pripravSoubor', klic, data, mime: blob.type },
-          [kanal.port2]);
-      } catch (e) {
-        clearTimeout(casovac);
-        console.warn('[export] předání souboru workeru selhalo', e);
-        dokonci(false);
-      }
-    });
-    if (!potvrzeno) return false;
-
-    const a = document.createElement('a');
-    a.href = `stahni/${encodeURIComponent(nazev)}?klic=${klic}`;
-    a.download = nazev;
-    document.body.appendChild(a); a.click(); a.remove();
-    return true;
-  }
-
+  /* --- Stahování souboru ------------------------------------------------
+     Prosté stažení odkazem s atributem download. Funguje na počítači
+     i na mobilu (Chrome, Firefox, Safari od iOS 13) a zachová název.
+     Výjimkou je Seznam Prohlížeč na Androidu, který u blob: adres název
+     ignoruje a pojmenuje soubor podle vnitřního UUID; obcházet se to dá
+     jen přes Service Worker, což se neosvědčilo jako spolehlivé. */
   function stahniSoubor(blob, nazev) {
-    let hotovo = false;
-    const odkazem = () => {
-      if (hotovo) return;
-      hotovo = true;
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = nazev;
-      a.rel = 'noopener';
-      document.body.appendChild(a); a.click(); a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 15000);
-    };
-
-    // Pojistka: ať se cestou přes Service Worker stane cokoli (chyba,
-    // zaseknutí, nepodporovaný prohlížeč), soubor se stáhne vždy.
-    const hlidac = setTimeout(odkazem, 4000);
-
-    stahniPresSW(blob, nazev)
-      .then((ok) => {
-        clearTimeout(hlidac);
-        if (ok) { hotovo = true; return; }
-        odkazem();
-      })
-      .catch((e) => {
-        clearTimeout(hlidac);
-        console.warn('[export] stažení přes SW selhalo, stahuji přímo', e);
-        odkazem();
-      });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = nazev;
+    a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 15000);
   }
 
   function withButtonBusy(btn, busyText, fn) {
@@ -803,15 +724,18 @@
     const pdfBtn = $('#exportPdfBtn');
     if (pdfBtn) pdfBtn.addEventListener('click', withButtonBusy(pdfBtn, 'Generuji PDF...', () => exportPDF()));
 
-    // Úklid: kdyby v prohlížeči zůstal viset stahovací Service Worker,
-    // který se nikdy neaktivoval, odregistrovat ho – jinak by se u něj
-    // export pokaždé zbytečně zdržoval o časový limit.
+    // Úklid po dřívějším pokusu se stahovacím Service Workerem.
+    // Registrace v prohlížeči přežívá i po smazání souboru ze serveru,
+    // takže ji je potřeba výslovně zrušit – jinak by mohla zachytávat
+    // požadavky a stahování by končilo chybou „soubor není k dispozici“.
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistrations().then((regs) => {
         regs.forEach((reg) => {
           const url = (reg.active || reg.installing || reg.waiting || {}).scriptURL || '';
-          if (url.includes('stahovaci-sw.js') && !reg.active) {
-            reg.unregister().catch(() => {});
+          if (url.includes('stahovaci-sw.js')) {
+            reg.unregister()
+              .then(() => console.info('[export] starý stahovací Service Worker odstraněn'))
+              .catch(() => {});
           }
         });
       }).catch(() => {});
