@@ -482,7 +482,7 @@
 
     if (await ensureXLSX()) {
       try {
-        const xBlob = window.vytvorXLSX(data, {
+        const xBlob = await window.vytvorXLSX(data, {
           nazevListu: 'Vysledky',
           sirky: SIRKY,
           barvaHlavicky: BARVA_HLAVICKY,

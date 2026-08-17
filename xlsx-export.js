@@ -27,8 +27,27 @@
 
   const kodovac = new TextEncoder();
 
-  /* ---------- Minimální ZIP (bez komprese, metoda "store") ---------- */
-  function vytvorZip(soubory) {
+  /* ---------- Minimální ZIP s deflate kompresí ----------
+     XLSX je ZIP plný XML, které se komprimuje zhruba 10:1. Používáme
+     nativní CompressionStream (Chrome 80+, Firefox 113+, Safari 16.4+);
+     ve starých prohlížečích se automaticky uloží nekomprimovaně, takže
+     soubor je vždy platný, jen větší. */
+  const lzeKomprimovat = (typeof CompressionStream === 'function');
+
+  async function deflatuj(data) {
+    if (!lzeKomprimovat) return null;
+    try {
+      const cs = new CompressionStream('deflate-raw');
+      const stream = new Blob([data]).stream().pipeThrough(cs);
+      const buf = await new Response(stream).arrayBuffer();
+      return new Uint8Array(buf);
+    } catch (e) {
+      console.warn('[xlsx] komprese selhala, ukládám nekomprimovaně', e);
+      return null;
+    }
+  }
+
+  async function vytvorZip(soubory) {
     const kusy = [];
     const zaznamy = [];
     let posun = 0;
@@ -39,20 +58,29 @@
     for (const { nazev, obsah } of soubory) {
       const jmenoB = kodovac.encode(nazev);
       const dataB = typeof obsah === 'string' ? kodovac.encode(obsah) : obsah;
-      const crc = crc32(dataB);
+      const crc = crc32(dataB);                 // CRC vždy z PŮVODNÍCH dat
+
+      // Zkusit zkomprimovat; když by výsledek nebyl menší, uložit napřímo.
+      const zkomprimovana = await deflatuj(dataB);
+      const pouzitKompresi = !!zkomprimovana && zkomprimovana.length < dataB.length;
+      const telo = pouzitKompresi ? zkomprimovana : dataB;
+      const metoda = pouzitKompresi ? 8 : 0;    // 8 = deflate, 0 = store
 
       const lokalni = new Uint8Array([
         0x50, 0x4B, 0x03, 0x04,      // podpis
         ...u16(20), ...u16(0x0800),  // verze, příznak UTF-8
-        ...u16(0),                   // metoda: bez komprese
+        ...u16(metoda),
         ...u16(0), ...u16(0),        // čas, datum
-        ...u32(crc), ...u32(dataB.length), ...u32(dataB.length),
+        ...u32(crc), ...u32(telo.length), ...u32(dataB.length),
         ...u16(jmenoB.length), ...u16(0),
       ]);
 
-      kusy.push(lokalni, jmenoB, dataB);
-      zaznamy.push({ nazev: jmenoB, crc, delka: dataB.length, posun });
-      posun += lokalni.length + jmenoB.length + dataB.length;
+      kusy.push(lokalni, jmenoB, telo);
+      zaznamy.push({
+        nazev: jmenoB, crc, metoda,
+        delkaKomp: telo.length, delkaOrig: dataB.length, posun,
+      });
+      posun += lokalni.length + jmenoB.length + telo.length;
     }
 
     const centralniZacatek = posun;
@@ -60,8 +88,8 @@
       const hlavicka = new Uint8Array([
         0x50, 0x4B, 0x01, 0x02,
         ...u16(20), ...u16(20), ...u16(0x0800),
-        ...u16(0), ...u16(0), ...u16(0),
-        ...u32(z.crc), ...u32(z.delka), ...u32(z.delka),
+        ...u16(z.metoda), ...u16(0), ...u16(0),
+        ...u32(z.crc), ...u32(z.delkaKomp), ...u32(z.delkaOrig),
         ...u16(z.nazev.length), ...u16(0), ...u16(0),
         ...u16(0), ...u16(0), ...u32(0),
         ...u32(z.posun),
@@ -101,9 +129,9 @@
   /**
    * @param {Array<Array<string>>} data  první řádek = hlavička
    * @param {Object} nast  { nazevListu, sirky, barvaHlavicky, sloupecVyplne, barvaVyplne }
-   * @returns {Blob} hotový soubor .xlsx
+   * @returns {Promise<Blob>} hotový soubor .xlsx (komprese je asynchronní)
    */
-  function vytvorXLSX(data, nast) {
+  async function vytvorXLSX(data, nast) {
     const o = Object.assign({
       nazevListu: 'List1',
       sirky: [],
@@ -212,7 +240,7 @@
       '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
       '</Relationships>';
 
-    const zip = vytvorZip([
+    const zip = await vytvorZip([
       { nazev: '[Content_Types].xml', obsah: contentTypes },
       { nazev: '_rels/.rels', obsah: rels },
       { nazev: 'xl/workbook.xml', obsah: workbook },
