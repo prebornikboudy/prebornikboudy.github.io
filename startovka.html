@@ -125,7 +125,15 @@
     const zpameti = window.PB_REGISTRACE.zCache();
     if (zpameti && zpameti.length) uloz(zpameti);
 
-    // 2) na pozadí doplníme aktuální stav z Googlu
+    // 2) první návštěva: rychlý zdroj (publikované CSV) vykreslí listinu hned
+    (async () => {
+      try {
+        const rychle = await window.PB_REGISTRACE.nactiCsv();
+        if (!vsichni.length && rychle.length) uloz(rychle);
+      } catch (_) { /* CSV není nastaveno nebo selhalo – nevadí */ }
+    })();
+
+    // 3) na pozadí doplníme aktuální stav z Googlu
     async function nacti() {
       if (vsichni.length) pocet.textContent = `Registrováno: ${vsichni.length} · aktualizuji…`;
       try {

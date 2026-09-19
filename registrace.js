@@ -8,6 +8,9 @@ window.PB_NASTAVENI = {
   // Adresa webové aplikace z Google Apps Script (končí na /exec).
   // Dokud je prázdná, formulář ukáže „registrace se připravuje“.
   URL: 'https://script.google.com/macros/s/AKfycbwiq2uyNMNg_f419EVjhdFxGz9-HPhxbDIAJmSFt89CpGMRfRpPB9kOLSxTdSsEdJtO/exec',
+  // Nepovinné zrychlení prvního načtení: adresa listu „Registrace“ publikovaného
+  // jako CSV (Soubor → Sdílet → Publikovat na webu → list Registrace → CSV).
+  CSV: '',
   ROK: 2026,
   TERMIN: '18. 10.',
   // Po tomto okamžiku se online registrace zavře (zápis na místě pořád jde).
@@ -33,6 +36,44 @@ window.PB_NASTAVENI = {
 
   function doCache(z) {
     try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), z: z })); } catch (_) {}
+  }
+
+  /* ---------- rychlé načtení z publikovaného CSV ---------- */
+  function rozborCsv(text) {
+    const radky = [];
+    let pole = [], bunka = '', vUvozovkach = false;
+    for (let i = 0; i < text.length; i++) {
+      const z = text[i];
+      if (vUvozovkach) {
+        if (z === '"') { if (text[i + 1] === '"') { bunka += '"'; i++; } else vUvozovkach = false; }
+        else bunka += z;
+      } else if (z === '"') vUvozovkach = true;
+      else if (z === ',') { pole.push(bunka); bunka = ''; }
+      else if (z === '\n') { pole.push(bunka); radky.push(pole); pole = []; bunka = ''; }
+      else if (z !== '\r') bunka += z;
+    }
+    if (bunka || pole.length) { pole.push(bunka); radky.push(pole); }
+    return radky;
+  }
+
+  async function nactiCsv() {
+    if (!N.CSV) throw new Error('nenastaveno');
+    const odp = await fetch(`${N.CSV}&t=${Date.now()}`, { cache: 'no-store' });
+    const radky = rozborCsv(await odp.text());
+    if (!radky.length) return [];
+    const hlavicka = radky[0].map((h) => h.trim().toLocaleLowerCase('cs'));
+    const sl = (jm, vychozi) => (hlavicka.indexOf(jm) >= 0 ? hlavicka.indexOf(jm) : vychozi);
+    const iRok = sl('rok závodu', 1), iJm = sl('jméno', 2), iPr = sl('příjmení', 3),
+          iRoc = sl('ročník', 4), iOd = sl('oddíl', 5);
+    return radky.slice(1)
+      .filter((r) => (r[iJm] || '').trim() && (r[iPr] || '').trim())
+      .filter((r) => !String(r[iRok] || '').trim() || String(r[iRok]).trim() === String(N.ROK))
+      .map((r) => ({
+        jmeno: (r[iJm] || '').trim(),
+        prijmeni: (r[iPr] || '').trim(),
+        rocnik: (r[iRoc] || '').trim(),
+        oddil: (r[iOd] || '').trim(),
+      }));
   }
 
   /* ---------- komunikace s Googlem ---------- */
@@ -293,5 +334,5 @@ window.PB_NASTAVENI = {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 
-  window.PB_REGISTRACE = { otevri, nactiSeznam, zCache };
+  window.PB_REGISTRACE = { otevri, nactiSeznam, nactiCsv, zCache };
 })();
