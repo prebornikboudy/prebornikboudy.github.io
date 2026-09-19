@@ -135,7 +135,6 @@
 
     // 3) na pozadí doplníme aktuální stav z Googlu
     async function nacti() {
-      if (vsichni.length) pocet.textContent = `Registrováno: ${vsichni.length} · aktualizuji…`;
       try {
         uloz(await window.PB_REGISTRACE.nactiSeznam());
       } catch (e) {

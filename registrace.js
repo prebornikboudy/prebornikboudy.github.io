@@ -38,6 +38,15 @@ window.PB_NASTAVENI = {
     try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), z: z })); } catch (_) {}
   }
 
+  /* ---------- pomocné ---------- */
+  // když Google neodpoví, dotaz se po chvíli ukončí, ať stránka nečeká donekonečna
+  function casovyLimit(ms) {
+    if (typeof AbortSignal !== 'undefined' && AbortSignal.timeout) return AbortSignal.timeout(ms);
+    const ac = new AbortController();
+    setTimeout(() => ac.abort(), ms);
+    return ac.signal;
+  }
+
   /* ---------- rychlé načtení z publikovaného CSV ---------- */
   function rozborCsv(text) {
     const radky = [];
@@ -58,7 +67,7 @@ window.PB_NASTAVENI = {
 
   async function nactiCsv() {
     if (!N.CSV) throw new Error('nenastaveno');
-    const odp = await fetch(`${N.CSV}&t=${Date.now()}`, { cache: 'no-store' });
+    const odp = await fetch(`${N.CSV}&t=${Date.now()}`, { cache: 'no-store', signal: casovyLimit(12000) });
     const radky = rozborCsv(await odp.text());
     if (!radky.length) return [];
     const hlavicka = radky[0].map((h) => h.trim().toLocaleLowerCase('cs'));
@@ -79,7 +88,7 @@ window.PB_NASTAVENI = {
   /* ---------- komunikace s Googlem ---------- */
   async function nactiSeznam() {
     if (!N.URL) throw new Error('nenastaveno');
-    const odp = await fetch(`${N.URL}?rok=${N.ROK}&t=${Date.now()}`, { cache: 'no-store' });
+    const odp = await fetch(`${N.URL}?rok=${N.ROK}&t=${Date.now()}`, { cache: 'no-store', signal: casovyLimit(15000) });
     const data = await odp.json();
     if (!data.ok) throw new Error(data.chyba || 'Chyba při načítání');
     const z = data.zavodnici || [];
