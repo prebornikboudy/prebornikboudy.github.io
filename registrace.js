@@ -245,7 +245,7 @@ window.PB_NASTAVENI = {
       form.hidden = true;
       const hotovo = dlg.querySelector('.reg-hotovo');
       hotovo.querySelector('.reg-hotovo-text').textContent =
-        `Hotovo! ${zaznam.jmeno} ${zaznam.prijmeni} je ve startovní listině. Uvidíme se ${N.TERMIN} na startu u Boudy.`;
+        `Hotovo! ${zaznam.jmeno} ${zaznam.prijmeni} je ve startovní listině. Uvidíme se ${N.TERMIN} na startu.`;
       hotovo.hidden = false;
       hotovo.querySelector('.reg-dalsi').focus();
       document.dispatchEvent(new CustomEvent('pb:registrovano', { detail: zaznam }));
