@@ -10,7 +10,7 @@ window.PB_NASTAVENI = {
   URL: 'https://script.google.com/macros/s/AKfycbwiq2uyNMNg_f419EVjhdFxGz9-HPhxbDIAJmSFt89CpGMRfRpPB9kOLSxTdSsEdJtO/exec',
   // Nepovinné zrychlení prvního načtení: adresa listu „Registrace“ publikovaného
   // jako CSV (Soubor → Sdílet → Publikovat na webu → list Registrace → CSV).
-  CSV: '',
+  CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRrL8DDiWAMmUvzYW01K-3Mv-nnq5N_Lho1sS_ISNlDr8ScNEN2zkWjCciqKnx36UDM5PmsRDOPZOwm/pub?gid=870969064&single=true&output=csv',
   ROK: 2026,
   TERMIN: '18. 10.',
   // Po tomto okamžiku se online registrace zavře (zápis na místě pořád jde).
