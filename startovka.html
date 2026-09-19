@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Startovní listina — O Přeborníka Boudy 2026</title>
+  <meta name="description" content="Startovní listina 14. ročníku přespolního běhu O Přeborníka Boudy. Neděle 18. 10. 2026, Liberec – Lidové sady. Registrace online.">
+  <link rel="icon" href="logo.png">
+  <link rel="canonical" href="https://prebornikboudy.github.io/startovka.html">
+  <meta property="og:title" content="Startovní listina — O Přeborníka Boudy 2026">
+  <meta property="og:description" content="Startovní listina 14. ročníku přespolního běhu O Přeborníka Boudy. Registrace online.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://prebornikboudy.github.io/start.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=Saira:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=4">
+  <script src="site.js?v=2" defer></script>
+  <script src="registrace.js?v=1" defer></script>
+</head>
+<body>
+  <header class="listka">
+    <div class="listka-vnitrek">
+      <a class="listka-logo" href="index.html" aria-label="Úvodní stránka"><img src="logo.png" alt="O Přeborníka Boudy" height="52"></a>
+      <button class="nav-prepinac" type="button" aria-label="Menu" aria-expanded="false">☰</button>
+      <nav class="hlavni-nav" aria-label="Hlavní navigace">
+      <a href="index.html">Úvod</a>
+      <a href="ozavodu.html">O závodu</a>
+      <a href="startovka.html#registrace" data-registrace>Registrace</a>
+      <a href="startovka.html" class="aktivni">Startovka</a>
+      <a href="propozice.html">Propozice</a>
+      <a href="rekordy.html">Rekordy</a>
+      <a href="vysledky.html">Výsledky</a>
+      <a href="https://www.zonerama.com/OPrebornikaBoudy/624630" class="ven" target="_blank" rel="noopener">Fotky</a>
+      </nav>
+    </div>
+  </header>
+  <main class="obal">
+    <h1>Startovní listina 2026</h1>
+    <p style="font-size:1.1rem;">14. ročník, neděle 18. 10. 2026, hromadný start v 10:00 u Boudy, trať 3,9&nbsp;km.</p>
+
+    <div class="sl-lista">
+      <button class="tl tl-zeleny" type="button" data-registrace>Registrovat se</button>
+      <span class="sl-pocet" id="slPocet"></span>
+      <input class="sl-hledat" id="slHledat" type="search" placeholder="Hledat jméno nebo oddíl" aria-label="Hledat ve startovní listině">
+      <button class="tl tl-sede sl-tisk" id="slTisk" type="button" title="Vytiskne listinu s prázdným sloupcem na zápis časů">🖨️ Arch do cíle</button>
+    </div>
+
+    <div class="sl-obal">
+      <table class="tab sl-tab">
+        <thead><tr><th>#</th><th>Příjmení a jméno</th><th>Ročník</th><th>Oddíl</th><th class="jen-tisk">Čas</th></tr></thead>
+        <tbody id="slTelo"></tbody>
+        <tbody id="slPrazdne" class="jen-tisk"></tbody>
+      </table>
+      <p class="sl-zprava" id="slZprava" role="status">Načítám startovní listinu…</p>
+    </div>
+  </main>
+  <footer class="paticka">
+    <div class="paticka-vnitrek">
+      <div>
+        <p><b>O Přeborníka Boudy</b> · 14. ročník · neděle 18.&nbsp;10.&nbsp;2026</p>
+        <p>Liberec, Lidové sady — Bouda</p>
+      </div>
+      <div>
+        <p>Pořadatel: Jan Schulhof · <a href="tel:+420739111338">739 111 338</a> · <a href="mailto:jan.schulhof@gmail.com">jan.schulhof@gmail.com</a></p>
+        <p><a class="fb-odkaz" href="https://www.facebook.com/events/980581833179244" target="_blank" rel="noopener"><img src="facebook.png" alt="Facebook" loading="lazy"> Událost na Facebooku</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const telo = document.getElementById('slTelo');
+    const zprava = document.getElementById('slZprava');
+    const pocet = document.getElementById('slPocet');
+    const hledat = document.getElementById('slHledat');
+    let vsichni = [];
+
+    const bezDiakritiky = (s) => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+
+    function vykresli() {
+      const q = bezDiakritiky(hledat.value.trim());
+      const zobraz = q
+        ? vsichni.filter((z) => bezDiakritiky(`${z.prijmeni} ${z.jmeno} ${z.jmeno} ${z.oddil} ${z.rocnik}`).includes(q))
+        : vsichni;
+
+      telo.innerHTML = '';
+      zobraz.forEach((z) => {
+        const tr = document.createElement('tr');
+        [z.poradi, `${z.prijmeni} ${z.jmeno}`, z.rocnik, z.oddil || '–', ''].forEach((hodnota, i) => {
+          const td = document.createElement('td');
+          td.textContent = hodnota;
+          if (i === 4) td.className = 'jen-tisk';
+          tr.appendChild(td);
+        });
+        telo.appendChild(tr);
+      });
+
+      pocet.textContent = vsichni.length ? `Registrováno: ${vsichni.length}` : '';
+      if (!vsichni.length) {
+        zprava.textContent = 'Zatím se nikdo neregistroval. Buďte první!';
+        zprava.hidden = false;
+      } else if (!zobraz.length) {
+        zprava.textContent = 'Nikdo neodpovídá hledání.';
+        zprava.hidden = false;
+      } else {
+        zprava.hidden = true;
+      }
+    }
+
+    async function nacti() {
+      try {
+        const seznam = await window.PB_REGISTRACE.nactiSeznam();
+        vsichni = seznam
+          .sort((a, b) => a.prijmeni.localeCompare(b.prijmeni, 'cs') || a.jmeno.localeCompare(b.jmeno, 'cs'))
+          .map((z, i) => ({ ...z, poradi: i + 1 }));
+        vykresli();
+      } catch (e) {
+        zprava.hidden = false;
+        zprava.textContent = e.message === 'nenastaveno'
+          ? 'Startovní listina se právě připravuje.'
+          : 'Startovní listinu se nepodařilo načíst. Zkuste stránku obnovit.';
+      }
+    }
+
+    // prázdné řádky na konci archu pro ty, kdo se zapíšou až na místě
+    const prazdne = document.getElementById('slPrazdne');
+    for (let i = 0; i < 30; i++) {
+      const tr = document.createElement('tr');
+      for (let j = 0; j < 5; j++) tr.appendChild(document.createElement('td'));
+      prazdne.appendChild(tr);
+    }
+
+    hledat.addEventListener('input', vykresli);
+    document.addEventListener('pb:registrovano', nacti);
+    document.getElementById('slTisk').addEventListener('click', () => {
+      hledat.value = '';
+      vykresli();
+      window.print();
+    });
+    nacti();
+  });
+  </script>
+</body>
+</html>
