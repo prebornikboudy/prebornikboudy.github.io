@@ -7,7 +7,7 @@
 window.PB_NASTAVENI = {
   // Adresa webové aplikace z Google Apps Script (končí na /exec).
   // Dokud je prázdná, formulář ukáže „registrace se připravuje“.
-  URL: '',
+  URL: 'https://script.google.com/macros/s/AKfycbw91IvYtabWn2I9sbHVj8aUw874WkCdsJ4rKN5NjiIMrC7dpNp1FRWnV6OGixXVCBFi/exec',
   ROK: 2026,
   TERMIN: '18. 10.',
   // Po tomto okamžiku se online registrace zavře (zápis na místě pořád jde).
