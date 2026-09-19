@@ -7,7 +7,7 @@
 window.PB_NASTAVENI = {
   // Adresa webové aplikace z Google Apps Script (končí na /exec).
   // Dokud je prázdná, formulář ukáže „registrace se připravuje“.
-  URL: 'https://script.google.com/macros/s/AKfycbw91IvYtabWn2I9sbHVj8aUw874WkCdsJ4rKN5NjiIMrC7dpNp1FRWnV6OGixXVCBFi/exec',
+  URL: 'https://script.google.com/macros/s/AKfycbwiq2uyNMNg_f419EVjhdFxGz9-HPhxbDIAJmSFt89CpGMRfRpPB9kOLSxTdSsEdJtO/exec',
   ROK: 2026,
   TERMIN: '18. 10.',
   // Po tomto okamžiku se online registrace zavře (zápis na místě pořád jde).
@@ -21,13 +21,29 @@ window.PB_NASTAVENI = {
   const N = window.PB_NASTAVENI;
   const jeStartovka = /startovka\.html$/i.test(location.pathname);
 
+  /* ---------- místní kopie seznamu (aby se startovka ukázala hned) ---------- */
+  const CACHE = 'pb-startovka-' + N.ROK;
+
+  function zCache() {
+    try {
+      const d = JSON.parse(localStorage.getItem(CACHE));
+      return d && Array.isArray(d.z) ? d.z : null;
+    } catch (_) { return null; }
+  }
+
+  function doCache(z) {
+    try { localStorage.setItem(CACHE, JSON.stringify({ t: Date.now(), z: z })); } catch (_) {}
+  }
+
   /* ---------- komunikace s Googlem ---------- */
   async function nactiSeznam() {
     if (!N.URL) throw new Error('nenastaveno');
     const odp = await fetch(`${N.URL}?rok=${N.ROK}&t=${Date.now()}`, { cache: 'no-store' });
     const data = await odp.json();
     if (!data.ok) throw new Error(data.chyba || 'Chyba při načítání');
-    return data.zavodnici || [];
+    const z = data.zavodnici || [];
+    doCache(z);
+    return z;
   }
 
   // Tělo jako prostý text => žádný CORS preflight, Apps Script ho přijme.
@@ -248,7 +264,10 @@ window.PB_NASTAVENI = {
         `Hotovo! ${zaznam.jmeno} ${zaznam.prijmeni} je ve startovní listině. Uvidíme se ${N.TERMIN} na startu.`;
       hotovo.hidden = false;
       hotovo.querySelector('.reg-dalsi').focus();
-      document.dispatchEvent(new CustomEvent('pb:registrovano', { detail: zaznam }));
+      const novy = { jmeno: zaznam.jmeno, prijmeni: zaznam.prijmeni, rocnik: String(zaznam.rocnik), oddil: zaznam.oddil };
+      const kopie = zCache() || [];
+      if (!kopie.some((z) => klic(z) === klic(novy))) { kopie.push(novy); doCache(kopie); }
+      document.dispatchEvent(new CustomEvent('pb:registrovano', { detail: novy }));
     } else {
       zamkni(false);
       nastavStav((vysledek && vysledek.chyba) || 'Registrace se nezdařila.', 'chyba');
@@ -265,9 +284,14 @@ window.PB_NASTAVENI = {
 
   function init() {
     if (jeStartovka && location.hash === '#registrace') otevri();
+    // na ostatních stránkách si seznam stáhneme dopředu, aby startovka naskočila hned
+    if (!jeStartovka && N.URL) {
+      const c = setTimeout(() => { nactiSeznam().catch(() => {}); }, 1200);
+      window.addEventListener('pagehide', () => clearTimeout(c), { once: true });
+    }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 
-  window.PB_REGISTRACE = { otevri, nactiSeznam };
+  window.PB_REGISTRACE = { otevri, nactiSeznam, zCache };
 })();

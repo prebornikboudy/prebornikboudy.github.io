@@ -107,14 +107,31 @@
       }
     }
 
+    function uloz(seznam) {
+      const videno = new Set();
+      vsichni = seznam
+        .filter((z) => {
+          const k = `${z.jmeno}|${z.prijmeni}|${z.rocnik}`.toLocaleLowerCase('cs');
+          if (videno.has(k)) return false;
+          videno.add(k);
+          return true;
+        })
+        .sort((a, b) => a.prijmeni.localeCompare(b.prijmeni, 'cs') || a.jmeno.localeCompare(b.jmeno, 'cs'))
+        .map((z, i) => ({ ...z, poradi: i + 1 }));
+      vykresli();
+    }
+
+    // 1) hned ukážeme poslední známý seznam z paměti prohlížeče
+    const zpameti = window.PB_REGISTRACE.zCache();
+    if (zpameti && zpameti.length) uloz(zpameti);
+
+    // 2) na pozadí doplníme aktuální stav z Googlu
     async function nacti() {
+      if (vsichni.length) pocet.textContent = `Registrováno: ${vsichni.length} · aktualizuji…`;
       try {
-        const seznam = await window.PB_REGISTRACE.nactiSeznam();
-        vsichni = seznam
-          .sort((a, b) => a.prijmeni.localeCompare(b.prijmeni, 'cs') || a.jmeno.localeCompare(b.jmeno, 'cs'))
-          .map((z, i) => ({ ...z, poradi: i + 1 }));
-        vykresli();
+        uloz(await window.PB_REGISTRACE.nactiSeznam());
       } catch (e) {
+        if (vsichni.length) { vykresli(); return; }   // aspoň to z paměti necháme
         zprava.hidden = false;
         zprava.textContent = e.message === 'nenastaveno'
           ? 'Startovní listina se právě připravuje.'
@@ -131,7 +148,10 @@
     }
 
     hledat.addEventListener('input', vykresli);
-    document.addEventListener('pb:registrovano', nacti);
+    document.addEventListener('pb:registrovano', (e) => {
+      uloz(vsichni.concat([e.detail]));   // nový závodník je v tabulce okamžitě
+      nacti();
+    });
     document.getElementById('slTisk').addEventListener('click', () => {
       hledat.value = '';
       vykresli();
