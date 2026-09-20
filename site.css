@@ -144,6 +144,18 @@ h2.s-faborkem::after {
   color: var(--inkoust);
 }
 
+/* Na širokých displejích jsou sekce uprostřed lišty (logo a prázdné místo vpravo
+   mají stejnou šířku, takže menu sedí přesně na střed stránky) */
+@media (min-width: 1400px) {
+  .listka-vnitrek { max-width: none; padding-left: 28px; padding-right: 28px; position: relative; }
+  .hlavni-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: 0;
+  }
+}
+
 /* Mobil na šířku a menší tablety: všechny sekce přímo v liště, jen zhuštěné */
 @media (min-width: 701px) and (max-width: 1150px) {
   .hlavni-nav { font-size: 1rem; }
@@ -556,7 +568,22 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
   transition: transform .9s ease-in-out;
 }
 .dalsi-casy a:hover img { transform: scale(1.5); }
-.dalsi-casy .dc-cas { font-weight: 600; white-space: nowrap; }
+.dalsi-casy .dc-cas {
+  font-family: var(--pismo-nadpis);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--les-tmava);
+  white-space: nowrap;
+}
+
+/* čas vypsaný uprostřed věty (karty s rekordy) – stejné písmo jako v tabulce */
+.cas-zvyr {
+  font-family: var(--pismo-nadpis);
+  font-weight: 700;
+  font-size: 1.15em;
+  color: var(--les-tmava);
+  white-space: nowrap;
+}
 .dalsi-casy .dc-bezfoto {
   display: inline-block;
   width: 52px;
