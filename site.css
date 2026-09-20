@@ -457,6 +457,7 @@ tr.top-3 .bib { background: #EFC199; border-color: #A05C2C; }
 tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
 
 .zebricek .cas-b {
+  font-variant-numeric: tabular-nums;
   font-family: var(--pismo-nadpis);
   font-weight: 700;
   font-size: 1.15rem;
@@ -578,7 +579,11 @@ tr.top-1 td, tr.top-2 td, tr.top-3 td { font-weight: 600; }
   font-size: 1.05rem;
   color: var(--les-tmava);
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  padding-right: 12px;
 }
+.dalsi-casy .dc-rok { font-variant-numeric: tabular-nums; }
 
 /* čas vypsaný uprostřed věty (karty s rekordy) – stejné písmo jako v tabulce */
 .cas-zvyr {
