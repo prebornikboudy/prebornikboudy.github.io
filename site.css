@@ -146,7 +146,7 @@ h2.s-faborkem::after {
 
 /* Na širokých displejích jsou sekce uprostřed lišty (logo a prázdné místo vpravo
    mají stejnou šířku, takže menu sedí přesně na střed stránky) */
-@media (min-width: 1250px) {
+@media (min-width: 1400px) {
   /* tři sloupce stejné šířky po stranách => menu sedí přesně na střed obrazovky,
      logo je zarovnané k jeho pravému okraji, tedy hned vedle položky ÚVOD */
   .listka-vnitrek {
@@ -165,6 +165,21 @@ h2.s-faborkem::after {
   .hlavni-nav { font-size: 1rem; }
   .hlavni-nav a { padding: 8px 7px; }
   .listka-vnitrek { gap: 8px; }
+}
+
+/* Užší okna: menu i logo o kousek menší, aby se menu pořád vešlo přesně na střed */
+@media (min-width: 1120px) and (max-width: 1399px) {
+  .listka-vnitrek {
+    max-width: none;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+  .listka-logo { justify-self: end; }
+  .listka-logo img { height: 44px; }
+  .hlavni-nav { grid-column: 2; margin-left: 0; font-size: 1rem; }
+  .hlavni-nav a { padding: 8px 8px; }
 }
 /* mobil na šířku: logo v liště zabírá místo sekcím a deformuje se – skrýt ho */
 @media (max-width: 950px) and (max-height: 500px) {
